@@ -15,36 +15,10 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/logo192.png" />
     <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <title>명지병원</title>
   </head>
   <body>
     <noscript>이 앱을 실행하려면 JavaScript를 활성화해야 합니다.</noscript>
     <div id="root"></div>
-    <script>
-      const win = top.window,
-        handleResize = () => {
-          const nav = navigator,
-            agent = nav.userAgent || nav.vendor || win.opera,
-            location = win.location,
-            href = location.href,
-            origin = location.origin,
-            regExp = /Android|BlackBerry|IEMobile|iPad|iPhone|webOS/i,
-            desk = "desktop.html";
-
-          if (regExp.test(agent)) {
-            if (href.indexOf(desk) > -1) {
-              location.replace(origin);
-            }
-          } else {
-            if (href.indexOf(desk) < 0) {
-              location.replace(`${origin}/${desk}`);
-            }
-          }
-        };
-
-      win.onresize = handleResize;
-      new ResizeObserver(handleResize).observe(win.document.body);
-    </script>
   </body>
 </html>
