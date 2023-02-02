@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta http-equiv="pragma" content="no-chche" />
+    <meta http-equiv="subject" content="명지병원" />
+    <meta http-equiv="x-ua-compatible" content="IE-edge" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="명지병원 알림톡 서비스" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/logo192.png" />
+    <link rel="icon" href="%PUBLIC_URL%/images/favicon.ico" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <title>명지병원</title>
+  </head>
+  <body>
+    <noscript>이 앱을 실행하려면 JavaScript를 활성화해야 합니다.</noscript>
+    <div id="root"></div>
+    <script>
+      const win = top.window,
+        handleResize = () => {
+          const nav = navigator,
+            agent = nav.userAgent || nav.vendor || win.opera,
+            location = win.location,
+            href = location.href,
+            origin = location.origin,
+            regExp = /Android|BlackBerry|IEMobile|iPad|iPhone|webOS/i,
+            desk = "desktop.html";
+
+          if (regExp.test(agent)) {
+            if (href.indexOf(desk) > -1) {
+              location.replace(origin);
+            }
+          } else {
+            if (href.indexOf(desk) < 0) {
+              location.replace(`${origin}/${desk}`);
+            }
+          }
+        };
+
+      win.onresize = handleResize;
+      new ResizeObserver(handleResize).observe(win.document.body);
+    </script>
+  </body>
+</html>
