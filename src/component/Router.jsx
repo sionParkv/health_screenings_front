@@ -3,6 +3,12 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 
 import { ArrivalCheckPage, NotFoundPage } from '../page'
 
+/**
+ * URL 기반 브라우저 라우터를 제공하는 컴포넌트.
+ *
+ * @returns {React.BrowserRouter} 브라우저 라우터.
+ */
+
 const Router = () => (
   <BrowserRouter>
     <Routes>
