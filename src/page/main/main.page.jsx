@@ -1,8 +1,9 @@
 import React from 'react'
-import { Container, Typography as T } from '@mui/material'
+import { Box, Container, Typography as T } from '@mui/material'
+
 import classNames from 'classnames'
 
-import { Header } from '../../component'
+import { CheckField, Header } from '../../component'
 
 const ArrivalCheckPage = () => {
   const clsContainer = classNames('Pages PatientCheckPage ArrivalCheckPage')
@@ -16,9 +17,20 @@ const ArrivalCheckPage = () => {
     ),
   }
 
+  const propsBirthField = {
+    id: 'birth',
+    label: '생년월일',
+    maxLength: 6,
+    placeholder: '예) 701221',
+    type: 'number',
+  }
+
   return (
     <Container className={clsContainer}>
       <Header {...propsHeader} />
+      <Box className="CheckForm">
+        <CheckField {...propsBirthField} />
+      </Box>
     </Container>
   )
 }

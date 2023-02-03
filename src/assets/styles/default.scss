@@ -17,7 +17,7 @@ body {
 }
 
 .Pages {
-  padding: 0 dp(16) !important;
+  padding: 0 dp(16);
 }
 
 .Header {
@@ -30,6 +30,7 @@ body {
     font-weight: 900;
     font-size: sp(24);
     line-height: sp(30);
+    font-family: $font-family-default;
 
     &::before {
       display: block;

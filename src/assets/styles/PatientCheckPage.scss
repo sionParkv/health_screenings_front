@@ -1,0 +1,46 @@
+@import 'common';
+
+.PatientCheckPage {
+  .CheckForm {
+    .CheckField {
+      .MuiFormControlLabel-root {
+        margin: 0;
+
+        .MuiInput-underline {
+          &::before {
+            border-bottom: $border-input;
+          }
+
+          &::after {
+            border-bottom: $border-input-active;
+          }
+        }
+
+        .MuiInput-input {
+          padding: dp(8) 0 dp(8) 3em;
+          color: $color-em;
+          font-weight: 500;
+          font-size: sp(26);
+          line-height: sp(30);
+          font-family: $font-family-default;
+          text-align: right;
+
+          &::placeholder {
+            color: $color-78;
+          }
+        }
+
+        .MuiFormControlLabel-label {
+          position: absolute;
+          top: dp(10);
+          left: 0;
+          color: $color-4c;
+          font-weight: 500;
+          font-size: sp(20);
+          line-height: sp(30);
+          font-family: $font-family-default;
+        }
+      }
+    }
+  }
+}
