@@ -13,7 +13,7 @@ import { Header, PatientCheckFormControl } from '../../component'
 
 const ArrivalCheckPage = () => {
   const clsContainer = classNames('Pages PatientCheckPage ArrivalCheckPage')
-  // 헤더 컴포넌트(<Header />)에 전달할 Props.
+  // 헤더 컴포넌트(<Header />) 속성
   const propsHeader = {
     title: <T variant="span">정보 확인</T>,
     subtitle: (
@@ -29,6 +29,7 @@ const ArrivalCheckPage = () => {
       <Header {...propsHeader} />
       <Box className="PatientCheckForm">
         <PatientCheckFormControl type="birth" />
+        <T className="IsNotSaved">* 입력하신 정보는 저장되지 않습니다.</T>
       </Box>
     </Container>
   )

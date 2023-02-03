@@ -2,6 +2,8 @@
 
 .PatientCheckPage {
   .PatientCheckForm {
+    margin-top: 40%;
+
     .PatientCheckFormControl {
       .MuiFormControlLabel-root {
         margin: 0;
@@ -41,6 +43,14 @@
           font-family: $font-family-default;
         }
       }
+    }
+
+    .IsNotSaved {
+      padding-top: dp(15);
+      font-size: sp(14);
+      line-height: sp(22);
+      font-family: $font-family-default;
+      text-align: right;
     }
   }
 }
