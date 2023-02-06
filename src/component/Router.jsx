@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 
 import { ArrivalCheckPage, NotFoundPage } from '../page'
+import { LoginPgae } from '../page/login'
 
 /**
  * URL 기반 브라우저 라우터를 제공하는 컴포넌트.
@@ -12,8 +13,8 @@ import { ArrivalCheckPage, NotFoundPage } from '../page'
 const Router = () => (
   <BrowserRouter>
     <Routes>
-      {/* TODO: 기본 페이지 추가 */}
       {/* 도착확인 라우팅 */}
+      <Route path="/" element={<LoginPgae />}></Route>
       <Route element={<ArrivalCheckPage />} path="/arrival">
         <Route element={<ArrivalCheckPage />} path="/arrival/check" />
       </Route>

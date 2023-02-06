@@ -1,2 +1,2 @@
 import './default.scss'
-import './PatientCheckPage.scss'
+import './LoginPage.scss'
