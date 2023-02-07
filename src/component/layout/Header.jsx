@@ -1,5 +1,6 @@
-import { Box, Typography as T } from '@mui/material'
+import { Container, Typography as T } from '@mui/material'
 import React from 'react'
+import { MultipleSelectPlaceholder } from '../../component'
 
 /**
  * 페이지 헤더 영역을 제공하는 컴포넌트.
@@ -11,15 +12,13 @@ import React from 'react'
  */
 
 const Header = (props) => {
-  const { title, subtitle } = props
+  const { title } = props
 
   return (
-    <Box className="Header" component="header">
-      <T variant="h1">{title}</T>
-      <T variant="subtitle" component="p">
-        {subtitle}
-      </T>
-    </Box>
+    <Container className="Pages Header">
+      <T className="test">{title}</T>
+      <MultipleSelectPlaceholder />
+    </Container>
   )
 }
 

@@ -1,10 +1,10 @@
 @import 'common';
 
-html {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
+// html {
+//   margin: 0;
+//   padding: 0;
+//   overflow: hidden;
+// }
 
 body {
   margin: 0;
@@ -14,43 +14,4 @@ body {
   background-color: $bgcolor;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.Pages {
-  padding: 0 dp(16);
-}
-
-.Header {
-  padding: dp(49.5) 0;
-
-  .MuiTypography-h1 {
-    height: dp(45.5);
-    margin: 0;
-    color: $color-h1;
-    font-weight: 900;
-    font-size: sp(24);
-    line-height: sp(30);
-    font-family: $font-family-default;
-
-    &::before {
-      display: block;
-      width: dp(19);
-      height: dp(1);
-      margin-bottom: dp(9.5);
-      content: '';
-      background-color: $bullet-h1;
-    }
-  }
-
-  .MuiTypography-subtitle {
-    color: $color-3;
-    font-size: sp(14);
-    line-height: sp(20);
-    letter-spacing: sp(-0.84);
-
-    .MuiTypography-em {
-      color: $color-em;
-      font-weight: 700;
-    }
-  }
 }
