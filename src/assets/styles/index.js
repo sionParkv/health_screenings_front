@@ -1,2 +1,2 @@
-import './default.scss'
+import './MainPage.scss'
 import './LoginPage.scss'

@@ -16,18 +16,7 @@ const MenuProps = {
   },
 }
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-]
+const names = ['전체', '종합검진접수', '일반건진접수']
 
 function getStyles(name, personName, theme) {
   return {
@@ -63,7 +52,7 @@ const MultipleSelectPlaceholder = () => {
           input={<OutlinedInput />}
           renderValue={(selected) => {
             if (selected.length === 0) {
-              return <em>Placeholder</em>
+              return <em>전체</em>
             }
 
             return selected.join(', ')
@@ -72,7 +61,7 @@ const MultipleSelectPlaceholder = () => {
           inputProps={{ 'aria-label': 'Without label' }}
         >
           <MenuItem disabled value="">
-            <em>Placeholder</em>
+            <em></em>
           </MenuItem>
           {names.map((name) => (
             <MenuItem

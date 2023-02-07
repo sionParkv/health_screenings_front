@@ -12,7 +12,7 @@ import KeyIcon from '@mui/icons-material/Key'
 
 const LoginPgae = () => {
   return (
-    <Container className="Pages LoginPage">
+    <Container className="LoginPage">
       <Box className="MainImage" />
       <Container className="LoginForm">
         <TextField

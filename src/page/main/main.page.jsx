@@ -1,19 +1,22 @@
 import React from 'react'
-import { Container, Typography as T } from '@mui/material'
+import { Container } from '@mui/material'
 
 import { Header } from '../../component'
 
-const ArrivalCheckPage = () => {
+const MainPage = () => {
   // 헤더 컴포넌트(<Header />) 속성
-  const propsHeader = {
-    title: <T variant="span">명지병원 | 종합검진센터</T>,
-  }
-
   return (
-    <Container>
-      <Header {...propsHeader} />
+    <Container className="MainPage">
+      <div>
+        <Header />
+      </div>
+      <div className="Main">
+        <div className="MainItem">등원체크</div>
+        <div className="MainItem">수진자조회</div>
+        <div className="MainItem">검사현황조회</div>
+      </div>
     </Container>
   )
 }
 
-export { ArrivalCheckPage }
+export { MainPage }
