@@ -1,7 +1,13 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 
-import { MainPage, NotFoundPage } from '../page'
+import {
+  MainPage,
+  NotFoundPage,
+  InspectionPage,
+  VisitPage,
+  PatientPage,
+} from '../page'
 import { LoginPgae } from '../page/login'
 
 /**
@@ -15,9 +21,12 @@ const Router = () => (
     <Routes>
       {/* 도착확인 라우팅 */}
       <Route path="/" element={<LoginPgae />}></Route>
-      <Route element={<MainPage />} path="/arrival">
-        <Route element={<MainPage />} path="/arrival/check" />
+      <Route element={<MainPage />} path="/main">
+        <Route element={<MainPage />} path="/main/check" />
       </Route>
+      <Route element={<InspectionPage />} path="/inspection/check" />
+      <Route element={<VisitPage />} path="/visit" />
+      <Route element={<PatientPage />} path="/patient/check" />
       {/* 공통 라우팅 */}
       <Route element={<Navigate to="/404" />} path="*" />
       <Route element={<NotFoundPage />} path="/404" />

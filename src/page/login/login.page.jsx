@@ -36,7 +36,7 @@ const LoginPgae = () => {
           variant="standard"
         />
         <Button
-          href="/arrival"
+          href="/main"
           variant="contained"
           endIcon={<ArrowForwardIosIcon />}
         >
