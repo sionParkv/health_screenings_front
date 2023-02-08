@@ -17,7 +17,7 @@ const MainPage = () => {
       href: '/visit',
       title: '등원체크',
       subtitle: '등원체크',
-      src: images.iconButton1,
+      src: images.icon2,
     },
     {
       action: (index) => {
@@ -27,7 +27,7 @@ const MainPage = () => {
       href: '/inspection',
       title: '검사실행',
       subtitle: '수진자조회',
-      src: images.iconButton1,
+      src: images.icon1,
     },
     {
       action: (index) => {
@@ -37,7 +37,7 @@ const MainPage = () => {
       href: '/patient',
       title: '수진자별',
       subtitle: '검사현황조회',
-      src: images.iconButton1,
+      src: images.icon3,
     },
   ]
 
