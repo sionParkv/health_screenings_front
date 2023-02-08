@@ -1,5 +1,5 @@
-import { Container, Typography as T } from '@mui/material'
-import React from 'react'
+import { AppBar, Box, Container, Typography as T, Toolbar } from '@mui/material'
+import React, { Fragment } from 'react'
 import { ControlledOpenSelect } from '../../component'
 
 /**
@@ -10,12 +10,20 @@ import { ControlledOpenSelect } from '../../component'
 
 const Header = () => {
   return (
-    <Container className="Header">
-      <T className="test">명지병원 | 건강검진서비스</T>
+    <Fragment>
+      <Box className="Header">
+        <AppBar>
+          <Toolbar>
+            <ControlledOpenSelect />
+            <ControlledOpenSelect />
+          </Toolbar>
+        </AppBar>
+      </Box>
+      {/* <T className="test">명지병원 | 건강검진서비스</T>
       <ControlledOpenSelect className="Multiple" />
       <ControlledOpenSelect />
-      <div className="exit">종료</div>
-    </Container>
+      <div className="exit">종료</div> */}
+    </Fragment>
   )
 }
 

@@ -4,7 +4,7 @@ import { Container } from '@mui/material'
 
 const VisitPage = () => {
   return (
-    <Container className="MainPage">
+    <Container className="VisitPage Pages">
       <Header />
       <CustomPaginationActionsTable />
     </Container>

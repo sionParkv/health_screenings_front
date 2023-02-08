@@ -1,0 +1,28 @@
+@import 'common';
+
+.MainHeader {
+  .MuiPaper-root {
+    .MuiToolbar-root {
+      background-image: url('../images/title2.png');
+      background-size: cover;
+    }
+  }
+}
+.Header {
+  .MuiPaper-root {
+    .MuiToolbar-root {
+      display: flex !important;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100;
+      height: dp(133);
+      background-image: url('../images/title2.png');
+      background-size: cover;
+    }
+  }
+}
+.Pages {
+  background-color: red;
+  width: dp(1200);
+  height: 100%;
+}

@@ -1,9 +1,8 @@
 import { Box, Button, Container, Typography as T } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import { Header } from '../../component'
 import { images } from '../../assets/images'
+import { MainHeader } from '../../component/layout/MainHeader'
 
 const MainPage = () => {
   const navigate = useNavigate()
@@ -17,7 +16,7 @@ const MainPage = () => {
       href: '/visit',
       title: '등원체크',
       subtitle: '등원체크',
-      src: images.icon2,
+      src: images.icon3,
     },
     {
       action: (index) => {
@@ -37,20 +36,19 @@ const MainPage = () => {
       href: '/patient',
       title: '수진자별',
       subtitle: '검사현황조회',
-      src: images.icon3,
+      src: images.icon2,
     },
   ]
 
   // 헤더 컴포넌트(<Header />) 속성
   return (
-    <Container className="MainPage">
-      <Header />
-      <Container className="Main">
+    <Container className="MainPage Pages">
+      <MainHeader />
+      <Box className="Main">
         {buttons.map((button, b) => (
           <Button
             key={b}
             onClick={(eve) => {
-              console.log(eve)
               button.action(b)
             }}
           >
@@ -61,28 +59,7 @@ const MainPage = () => {
             </Box>
           </Button>
         ))}
-        {/* <Button>
-          <Box component="img" src={images.iconButton1} />
-          <Box>
-            <T>등원체크</T>
-            <T>등원체크</T>
-          </Box>
-        </Button>
-        <Button>
-          <Box component="img" src={images.iconButton1} />
-          <Box>
-            <T>등원체크</T>
-            <T>등원체크</T>
-          </Box>
-        </Button>
-        <Button>
-          <Box component="img" src={images.iconButton1} />
-          <Box>
-            <T>등원체크</T>
-            <T>등원체크</T>
-          </Box>
-        </Button> */}
-      </Container>
+      </Box>
     </Container>
   )
 }
