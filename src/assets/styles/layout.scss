@@ -3,6 +3,10 @@
 .MainHeader {
   .MuiPaper-root {
     .MuiToolbar-root {
+      display: flex;
+      justify-content: end;
+      max-width: dp(1200);
+      height: dp(133);
       background-image: url('../images/title2.png');
       background-size: cover;
     }
@@ -19,10 +23,10 @@
       background-image: url('../images/title2.png');
       background-size: cover;
       .Home {
-        height: 100%;
-        border-right: 1px solid white;
         display: flex;
         align-items: center;
+        height: 100%;
+        border-right: 1px solid white;
         img {
           width: dp(68);
           height: dp(59);
@@ -49,23 +53,22 @@
           }
         }
         .ImgBox {
-          height: 100%;
-          border-left: 1px solid white;
           display: flex;
           align-items: center;
+          height: 100%;
+          border-left: 1px solid white;
         }
         img {
-          padding-left: dp(38);
-          padding-right: dp(15);
           width: dp(33);
           height: dp(59);
+          padding-right: dp(15);
+          padding-left: dp(38);
         }
       }
     }
   }
 }
 .Pages {
-  background-color: red;
   width: dp(1200);
   height: 100%;
 }

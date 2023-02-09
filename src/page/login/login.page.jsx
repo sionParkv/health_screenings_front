@@ -43,7 +43,7 @@ const LoginPgae = () => {
             variant="standard"
           />
         </Box>
-        <Button className="LoginBtn" href="/main" variant="contained" sty>
+        <Button className="LoginBtn" href="/main" variant="contained">
           {/* <Box component="img" src={img}></Box> */}
         </Button>
       </Container>
