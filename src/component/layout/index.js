@@ -1,4 +1,5 @@
 export * from './Header'
-export * from './select'
+export * from './SelectCheckUp'
+export * from './SelectSort'
 export * from './VisitTable'
 export * from './MainHeader'

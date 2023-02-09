@@ -3,31 +3,64 @@
 .LoginPage {
   display: flex !important;
   flex-direction: column;
-  height: 100vh;
-
-  .MainImage {
-    height: 100%;
-    background-image: url('https://t1.daumcdn.net/cfile/tistory/24283C3858F778CA2E');
-    background-size: contain;
-  }
+  align-items: center;
+  justify-content: center;
+  padding: dp(100);
+  background-color: #f3f2f2;
 
   .LoginForm {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    align-items: center;
     justify-content: center;
-    padding: 0 20%;
+    width: dp(800);
+    height: dp(530);
+    padding: 0;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    background-color: white;
 
-    .MuiFormControl-root {
-      margin-top: 20px;
+    .TextBox {
+      padding-top: dp(80);
     }
 
-    button {
-      width: 50%;
-      margin: 20px auto;
-      box-shadow: none !important;
-      background-color: #cc6600;
-      border-radius: 50px;
+    .LoginBtn {
+      width: 30%;
+      height: 10%;
+      margin-bottom: dp(50);
+      padding-top: dp(20);
+      padding-bottom: dp(50);
+      border-radius: dp(60);
+      background-color: orange;
+      background-image: url(../../assets/images/btnStart2.png);
+      background-size: cover;
+    }
+
+    .MainImage {
+      width: dp(800);
+      height: dp(242);
+    }
+
+    .MuiFormControl-root {
+      padding-bottom: dp(30);
+      ::placeholder {
+        padding-left: dp(16);
+        font-size: dp(26);
+        font-weight: 400;
+        font-style: italic;
+        color: rgb(0, 0, 0);
+      }
+
+      .MuiInputBase-root {
+        .MuiInput-input,
+        .MuiInputAdornment-root {
+          padding-bottom: dp(10);
+        }
+        &::before {
+          padding: dp(20);
+          border-bottom: 3px solid #d8d8d8;
+        }
+      }
     }
   }
 }

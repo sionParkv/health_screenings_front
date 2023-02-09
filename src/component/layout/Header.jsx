@@ -1,6 +1,8 @@
-import { AppBar, Box, Container, Typography as T, Toolbar } from '@mui/material'
+import { AppBar, Box, Toolbar } from '@mui/material'
 import React, { Fragment } from 'react'
-import { ControlledOpenSelect } from '../../component'
+import { ControlledOpenSelect, SelctSort } from '../../component'
+import { images } from '../../assets/images'
+import { Link } from 'react-router-dom'
 
 /**
  * 페이지 헤더 영역을 제공하는 컴포넌트.
@@ -9,20 +11,30 @@ import { ControlledOpenSelect } from '../../component'
  */
 
 const Header = () => {
+  const imgExit = images.btnExit
+  const imgHome = images.btnHome
   return (
     <Fragment>
       <Box className="Header">
         <AppBar>
           <Toolbar>
-            <ControlledOpenSelect />
-            <ControlledOpenSelect />
+            <Box className="Home">
+              <Link to="/main">
+                <Box component="img" src={imgHome} href="/main"></Box>
+              </Link>
+            </Box>
+            <Box className="SecondBox">
+              <Box className="SelectBox">
+                <ControlledOpenSelect />
+                <SelctSort />
+              </Box>
+              <Box className="ImgBox">
+                <Box component="img" src={imgExit}></Box>
+              </Box>
+            </Box>
           </Toolbar>
         </AppBar>
       </Box>
-      {/* <T className="test">명지병원 | 건강검진서비스</T>
-      <ControlledOpenSelect className="Multiple" />
-      <ControlledOpenSelect />
-      <div className="exit">종료</div> */}
     </Fragment>
   )
 }
