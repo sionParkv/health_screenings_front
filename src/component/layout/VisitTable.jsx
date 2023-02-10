@@ -1,4 +1,5 @@
 import * as React from 'react'
+import axios from 'axios'
 import PropTypes from 'prop-types'
 import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
@@ -107,7 +108,13 @@ function createData(
     ticket,
   }
 }
-
+axios({
+  method: 'POST',
+  url: 'https://a52d984b-178c-409d-b64f-5e4e8cd159a0.mock.pstmn.io/api/visit',
+  data: {},
+}).then((result) => {
+  console.log(result.data)
+})
 const rows = [
   createData(
     'VR',

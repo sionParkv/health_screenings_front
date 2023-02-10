@@ -21,7 +21,7 @@ const MainPage = () => {
     {
       action: (index) => {
         // window.location.href = buttons.href
-        console.log(buttons[index]?.href)
+        navigate(buttons[index]?.href)
       },
       href: '/inspection',
       title: '검사실행',
@@ -31,7 +31,7 @@ const MainPage = () => {
     {
       action: (index) => {
         // window.location.href = buttons.href
-        console.log(buttons[index]?.href)
+        navigate(buttons[index]?.href)
       },
       href: '/patient',
       title: '수진자별',
@@ -48,7 +48,7 @@ const MainPage = () => {
         {buttons.map((button, b) => (
           <Button
             key={b}
-            onClick={(eve) => {
+            onClick={() => {
               button.action(b)
             }}
           >

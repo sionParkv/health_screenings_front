@@ -24,9 +24,9 @@ const Router = () => (
       <Route element={<MainPage />} path="/main">
         <Route element={<MainPage />} path="/main/check" />
       </Route>
-      <Route element={<InspectionPage />} path="/inspection/check" />
+      <Route element={<InspectionPage />} path="/inspection" />
       <Route element={<VisitPage />} path="/visit" />
-      <Route element={<PatientPage />} path="/patient/check" />
+      <Route element={<PatientPage />} path="/patient" />
       {/* 공통 라우팅 */}
       <Route element={<Navigate to="/404" />} path="*" />
       <Route element={<NotFoundPage />} path="/404" />

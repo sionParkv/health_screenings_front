@@ -1,6 +1,14 @@
+import { Container } from '@mui/material'
+
 import React from 'react'
+import { Header } from '../../component'
 
 const PatientPage = () => {
-  return <>여기는 patient 페이지이이이이</>
+  return (
+    <Container className="InspenrtionPage">
+      <Header />
+    </Container>
+  )
 }
+
 export { PatientPage }

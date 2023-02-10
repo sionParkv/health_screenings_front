@@ -1,9 +1,17 @@
-import { Container } from '@mui/material'
+import { Container, Box } from '@mui/material'
 
 import React from 'react'
+import { Header, RowAndColumnSpacing } from '../../component'
 
 const InspectionPage = () => {
-  return <Container>여기는 inspection 페이지!!</Container>
+  return (
+    <Container className="InspectionPage">
+      <Header />
+      <Box>
+        <RowAndColumnSpacing />
+      </Box>
+    </Container>
+  )
 }
 
 export { InspectionPage }
