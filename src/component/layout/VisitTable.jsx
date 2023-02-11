@@ -114,6 +114,10 @@ axios({
   data: {},
 }).then((result) => {
   console.log(result.data)
+  console.log(result.data.data[0])
+  result.data.data.map((res) => {
+    console.log(res.test)
+  })
 })
 const rows = [
   createData(

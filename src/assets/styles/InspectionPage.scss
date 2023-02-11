@@ -1,0 +1,35 @@
+@import 'common';
+
+.InspectionLeft {
+  display: flex;
+  flex-direction: column;
+
+  .state {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .room {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+.InspectionRight {
+  display: flex;
+  flex-direction: column;
+  .InfoTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .infoBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

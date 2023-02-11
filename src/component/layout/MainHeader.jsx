@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import Button from '@mui/material/Button'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import DialogContentText from '@mui/material/DialogContentText'
 
 const MainHeader = () => {
   const exit = images.btnExit
@@ -39,19 +38,12 @@ const MainHeader = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
+        <DialogTitle id="alert-dialog-title">{'종료하시겠습니까?'}</DialogTitle>
+        <DialogContent></DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Disagree</Button>
+          <Button onClick={handleClose}>종료</Button>
           <Button onClick={handleClose} autoFocus>
-            Agree
+            취소
           </Button>
         </DialogActions>
       </Dialog>

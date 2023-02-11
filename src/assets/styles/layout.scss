@@ -14,9 +14,8 @@
 }
 .Header {
   .MuiPaper-root {
-    width: 100%;
     .MuiToolbar-root {
-      display: flex !important;
+      display: flex;
       align-items: center;
       justify-content: space-between;
       height: dp(133);
