@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles'
 import Grid from '@mui/material/Unstable_Grid2'
 import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
+import axios from 'axios'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -12,11 +13,21 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
+const data = axios({
+  method: 'POST',
+  url: 'https://a52d984b-178c-409d-b64f-5e4e8cd159a0.mock.pstmn.io/api/inspection/left',
+  data: {},
+}).then((result) => {
+  console.log(result.data)
+  console.log(result.data.data[0])
+  result.data.data.map((res) => console.log(res.test))
+})
+
 const InspectionLeft = () => {
   return (
     <Grid xs={4} className="InspectionLeft">
       <Item className="room">
-        <Box>종합</Box>
+        <Box>{data.data}</Box>
         <Box>골밀도 검사실</Box>
       </Item>
       <Item className="state">

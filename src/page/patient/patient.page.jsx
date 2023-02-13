@@ -5,7 +5,7 @@ import { Header } from '../../component'
 
 const PatientPage = () => {
   return (
-    <Container className="InspenrtionPage">
+    <Container className="PatientPage">
       <Header />
     </Container>
   )

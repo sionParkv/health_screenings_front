@@ -113,11 +113,9 @@ axios({
   url: 'https://a52d984b-178c-409d-b64f-5e4e8cd159a0.mock.pstmn.io/api/visit',
   data: {},
 }).then((result) => {
-  console.log(result.data)
-  console.log(result.data.data[0])
-  result.data.data.map((res) => {
-    console.log(res.test)
-  })
+  // console.log(result.data)
+  // console.log(result.data.data[0])
+  // result.data.data.map((res) => console.log(res.test))
 })
 const rows = [
   createData(

@@ -4,7 +4,7 @@
   .MuiPaper-root {
     .MuiToolbar-root {
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
       max-width: dp(1200);
       height: dp(133);
       background-image: url('../images/title2.png');
