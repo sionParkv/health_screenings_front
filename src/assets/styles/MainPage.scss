@@ -10,14 +10,14 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    justify-content: space-around;
+    justify-content: space-evenly;
 
     button {
       width: 100%;
       display: flex;
       margin: 0 auto;
       padding: dp(32);
-      justify-content: space-around;
+      justify-content: space-evenly;
 
       &:hover {
         background-color: rgba($color: #cc6600, $alpha: 0.05);

@@ -13,22 +13,25 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }))
 
-const data = axios({
-  method: 'POST',
-  url: 'https://a52d984b-178c-409d-b64f-5e4e8cd159a0.mock.pstmn.io/api/inspection/left',
-  data: {},
-}).then((result) => {
-  console.log(result.data)
-  console.log(result.data.data[0])
-  result.data.data.map((res) => console.log(res.test))
-})
+const url =
+  'https://a52d984b-178c-409d-b64f-5e4e8cd159a0.mock.pstmn.io/api/inspection/left'
 
 const InspectionLeft = () => {
+  axios.post(url).then((response) => {
+    console.log(response.data.data[0])
+  })
+
+  const [data] = React.useState([])
+
   return (
     <Grid xs={4} className="InspectionLeft">
       <Item className="room">
-        <Box>{data.data}</Box>
-        <Box>골밀도 검사실</Box>
+        {data.map((el) => (
+          <Box key={el.current}>
+            <Box>{el.gum}</Box>
+            <Box>{el.current}</Box>
+          </Box>
+        ))}
       </Item>
       <Item className="state">
         <Box>진행</Box>

@@ -21,6 +21,7 @@
       height: dp(133);
       background-image: url('../images/title2.png');
       background-size: cover;
+
       .Home {
         display: flex;
         align-items: center;
@@ -47,6 +48,7 @@
           .CheckUp {
             background-color: white;
             border-radius: dp(10);
+            width: 12em;
           }
           .Sort {
             background-color: white;

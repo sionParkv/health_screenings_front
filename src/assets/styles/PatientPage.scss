@@ -1,1 +1,56 @@
 @import 'common';
+
+.MuiGrid2-root {
+  flex-wrap: nowrap !important;
+  padding-top: dp(10);
+
+  .PatientLeft {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .state {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .room {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+  .PatientRight {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .infoFirst {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      width: dp(150);
+    }
+    .infoSecond {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      width: dp(150);
+    }
+    .infoThird {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      width: dp(150);
+    }
+    .button {
+      width: dp(150);
+    }
+  }
+}
