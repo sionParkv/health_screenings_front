@@ -21,20 +21,14 @@ const InspectionLeft = () => {
     console.log(response.data.data[0])
   })
 
-  const [data] = React.useState([])
-
   return (
-    <Grid xs={4} className="InspectionLeft">
+    <Grid xs={3} className="InspectionLeft">
       <Item className="room">
-        {data.map((el) => (
-          <Box key={el.current}>
-            <Box>{el.gum}</Box>
-            <Box>{el.current}</Box>
-          </Box>
-        ))}
+        <Box>종합</Box>
+        <Box>골밀도 검사실</Box>
       </Item>
       <Item className="state">
-        <Box>진행</Box>
+        <Box>진행 : 0</Box>
         <Box>대기</Box>
         <Box>미실행</Box>
         <Box>완료</Box>

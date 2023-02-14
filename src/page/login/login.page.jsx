@@ -31,6 +31,8 @@ const LoginPgae = () => {
             variant="standard"
           />
           <TextField
+            input
+            type="password"
             fullWidth
             placeholder="Password"
             InputProps={{

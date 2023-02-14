@@ -9,6 +9,11 @@
       height: dp(133);
       background-image: url('../images/title2.png');
       background-size: cover;
+
+      .Exit {
+        padding-right: dp(20);
+        padding-top: dp(10);
+      }
     }
   }
 }

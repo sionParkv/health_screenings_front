@@ -1,8 +1,15 @@
 @import 'common';
 
+.MuiGrid2-root {
+  flex-wrap: nowrap;
+  padding-top: dp(10);
+  width: 100% !important;
+}
+
 .InspectionLeft {
   display: flex;
   flex-direction: column;
+  width: 50% !important;
 
   .state {
     display: flex;
@@ -13,18 +20,21 @@
   .room {
     display: flex;
     flex-direction: row;
-    align-items: center;
+
     justify-content: space-around;
   }
 }
 .InspectionRight {
   display: flex;
   flex-direction: column;
+  width: 100% !important;
+
   .InfoTop {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    padding: dp(0);
   }
   .infoBottom {
     display: flex;
