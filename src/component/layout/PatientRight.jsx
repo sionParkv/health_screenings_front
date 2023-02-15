@@ -43,7 +43,7 @@ const PatientRight = () => {
           </Grid>
         ))
       ) : (
-        <ListItem>{'no data'}</ListItem>
+        <ListItem>{''}</ListItem>
       )}
     </Container>
   )

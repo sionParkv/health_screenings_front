@@ -313,7 +313,7 @@ const CustomPaginationActionsTable = () => {
                 {row.register}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
-                <Button>dd</Button>
+                <Button>번호표 발행</Button>
               </TableCell>
             </TableRow>
           ))}
