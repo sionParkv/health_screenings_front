@@ -1,45 +1,57 @@
 @import 'common';
 
-.MuiGrid2-root {
-  flex-wrap: nowrap;
-  padding-top: dp(10);
-  width: 100% !important;
+.MuiButtonBase-root {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 .InspectionLeft {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
-  width: 50% !important;
-
-  .state {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .room {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-around;
-  }
-}
-.InspectionRight {
-  display: flex;
-  flex-direction: column;
-  width: 100% !important;
-
+  color: black;
+  padding-top: dp(10);
+  padding-bottom: dp(10);
+  border-bottom: 1px solid black;
   .InfoTop {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    padding: dp(0);
+    justify-content: space-evenly;
+    padding-bottom: dp(10);
+
+    #room {
+      font-size: dp(20);
+    }
   }
-  .infoBottom {
+  .InfoBottom {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
   }
+}
+
+.MuiTabs-root {
+  width: 50%;
+  height: dp(700);
+  padding-top: dp(19);
+  align-items: center;
+  .MuiTabs-indicator {
+    background-color: white;
+  }
+  .MuiButtonBase-root {
+    width: dp(600);
+  }
+}
+
+.MuiTableBody {
+  .MuiTableRow-root {
+    display: flex !important;
+    .InspectionRight {
+      width: 50%;
+    }
+  }
+}
+
+.MuiSelect-select {
+  width: dp(100) !important;
+  height: dp(20);
 }

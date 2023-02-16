@@ -37,12 +37,12 @@ const SelctSort = () => {
           <MenuItem value="">
             <em>전체</em>
           </MenuItem>
-          <MenuItem value={10}>이름</MenuItem>
-          <MenuItem value={20}>이름</MenuItem>
-          <MenuItem value={30}>번호</MenuItem>
-          <MenuItem value={30}>번호</MenuItem>
-          <MenuItem value={30}>대기</MenuItem>
-          <MenuItem value={30}>대기</MenuItem>
+          <MenuItem value={10}>이름▼</MenuItem>
+          <MenuItem value={20}>이름▲</MenuItem>
+          <MenuItem value={30}>번호▼</MenuItem>
+          <MenuItem value={30}>번호▲</MenuItem>
+          <MenuItem value={30}>대기▼</MenuItem>
+          <MenuItem value={30}>대기▲</MenuItem>
         </Select>
       </FormControl>
     </div>
