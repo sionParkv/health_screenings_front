@@ -17,37 +17,40 @@ const LoginPgae = () => {
     <Container className="LoginPage">
       <Container className="LoginForm">
         <Box className="MainImage" component="img" src={loginImg} />
-        <Box className="TextBox">
-          <TextField
-            fullWidth
-            placeholder="Username"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Box component="img" src={profile} />
-                </InputAdornment>
-              ),
-            }}
-            variant="standard"
-          />
-          <TextField
-            input
-            type="password"
-            fullWidth
-            placeholder="Password"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Box component="img" src={key} />
-                </InputAdornment>
-              ),
-            }}
-            variant="standard"
-          />
+        <Box className="InfoBottom">
+          <Box className="TextBox">
+            <TextField
+              id="id"
+              fullWidth
+              placeholder="Username"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Box component="img" src={profile} />
+                  </InputAdornment>
+                ),
+              }}
+              variant="standard"
+            />
+            <TextField
+              id="password"
+              type="password"
+              fullWidth
+              placeholder="Password"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Box component="img" src={key} />
+                  </InputAdornment>
+                ),
+              }}
+              variant="standard"
+            />
+          </Box>
+          <Button className="LoginBtn" href="/main" variant="contained">
+            {/* <Box component="img" src={img}></Box> */}
+          </Button>
         </Box>
-        <Button className="LoginBtn" href="/main" variant="contained">
-          {/* <Box component="img" src={img}></Box> */}
-        </Button>
       </Container>
     </Container>
   )

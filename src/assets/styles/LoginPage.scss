@@ -1,10 +1,6 @@
 @import 'common';
 
 .LoginPage {
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: dp(100);
   background-color: #f3f2f2;
 
@@ -14,53 +10,59 @@
     align-items: center;
     justify-content: center;
     width: dp(800);
-    height: dp(530);
+    height: dp(550);
     padding: 0;
     border: 1px solid #d8d8d8;
     border-radius: 10px;
     background-color: white;
 
-    .TextBox {
-      padding-top: dp(80);
-    }
+    .InfoBottom {
+      width: dp(800);
+      height: dp(530);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-    .LoginBtn {
-      width: 30%;
-      height: 10%;
-      margin-bottom: dp(50);
-      padding-top: dp(20);
-      padding-bottom: dp(50);
-      border-radius: dp(60);
-      background-color: orange;
-      background-image: url(../../assets/images/btnStart2.png);
-      background-size: cover;
+      .TextBox {
+        padding-top: dp(80);
+      }
+      .LoginBtn {
+        width: dp(200);
+        height: dp(60);
+        border-radius: dp(60);
+        background-image: url(../../assets/images/btnStart2.png);
+        background-size: cover;
+      }
+
+      .MuiFormControl-root {
+        width: dp(500);
+        padding-bottom: dp(30);
+        display: flex;
+        flex-direction: column;
+
+        .MuiInputBase-root {
+          .MuiInput-input {
+            font-size: dp(20);
+            padding-bottom: dp(10);
+          }
+          &::before {
+            border-bottom: 3px solid #d8d8d8;
+          }
+        }
+
+        ::placeholder {
+          padding-left: dp(16);
+          font-size: dp(26);
+          font-weight: 400;
+          font-style: italic;
+          color: rgb(0, 0, 0);
+        }
+      }
     }
 
     .MainImage {
       width: dp(800);
-      height: dp(242);
-    }
-
-    .MuiFormControl-root {
-      padding-bottom: dp(30);
-      ::placeholder {
-        padding-left: dp(16);
-        font-size: dp(26);
-        font-weight: 400;
-        font-style: italic;
-        color: rgb(0, 0, 0);
-      }
-
-      .MuiInputBase-root {
-        .MuiInput-input,
-        .MuiInputAdornment-root {
-          padding-bottom: dp(10);
-        }
-        &::before {
-          padding: dp(20);
-          border-bottom: 3px solid #d8d8d8;
-        }
-      }
+      height: fit-content;
     }
   }
 }
