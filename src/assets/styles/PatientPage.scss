@@ -1,56 +1,47 @@
 @import 'common';
 
-.MuiGrid2-root {
-  flex-wrap: nowrap !important;
-  padding-top: dp(10);
+.MuiButtonBase-root {
+  padding: 0 !important;
+  margin: 0 !important;
+}
 
-  .PatientLeft {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
-    .state {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-around;
-    }
-
-    .room {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-around;
-    }
-  }
-  .PatientRight {
+.PatientLeft {
+  display: flex !important;
+  flex-direction: column;
+  .InfoTop {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    justify-content: space-between;
+  }
+  .InfoBottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
 
-    .infoFirst {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      width: dp(150);
-    }
-    .infoSecond {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      width: dp(150);
-    }
-    .infoThird {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      width: dp(150);
-    }
-    .button {
-      width: dp(150);
+.MuiTabs-root {
+  width: 50%;
+  height: dp(700);
+  padding-top: dp(19);
+  align-items: center;
+  .MuiTabs-indicator {
+    background-color: white;
+  }
+  .MuiButtonBase-root {
+    width: dp(600);
+  }
+}
+
+.MuiTableBody {
+  .MuiTableRow-root {
+    display: flex !important;
+    .PatientRight {
+      width: 50%;
     }
   }
+}
+
+.MuiTableContainer-root {
+  height: fit-content;
 }

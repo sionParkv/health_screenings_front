@@ -1,0 +1,8 @@
+-- 로그인 시 사용하는 쿼리문
+SELECT
+    ACCOUNT_AUTH,
+    ACCOUNT_NAME
+FROM HCAV_ACCOUNT
+WHERE
+    ACCOUNT_ID = 'admin'
+    AND ACCOUNT_PASS = '1234'

@@ -11,6 +11,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }))
+
 const PatientLeft = () => {
   return (
     <Grid xs={5} className="PatientLeft">
