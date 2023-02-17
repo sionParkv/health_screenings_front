@@ -74,7 +74,7 @@ const VisitTable = (props) => {
         <TableBody>
           {data.map((row, index) => (
             <TableRow key={index}>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" id="test">
                 {row.test}
               </TableCell>
               <TableCell style={{ width: 160 }} align="center">

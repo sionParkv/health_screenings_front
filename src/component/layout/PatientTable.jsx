@@ -25,7 +25,7 @@ function a11yProps(index) {
 
 const PatientTable = () => {
   const [rightData, setRightData] = useState([])
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = useState(0)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -33,7 +33,7 @@ const PatientTable = () => {
 
   const handleNameClick = () => {
     const url =
-      'https://a52d984b-178c-409d-b64f-5e4e8cd159a0.mock.pstmn.io/api/patient/right'
+      'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/patient/right'
 
     axios.post(url).then((response) => {
       setRightData(response.data.data)
@@ -66,7 +66,7 @@ const PatientTable = () => {
     setPersonName(event.target.value)
   }
 
-  const names = ['Oliver Hansen', 'Van Henry', 'April Tucker']
+  const names = ['미실행', '대기', '완료', '검사중']
   return (
     <Box
       sx={{
@@ -88,24 +88,50 @@ const PatientTable = () => {
           label={
             <TabItem
               sort="1"
-              patientNumber="019272729"
-              name="홍길동"
-              age="M/29"
-              birth="080222"
+              patientNumber="8755499"
+              name="반광범"
+              age="F/81"
+              birth="440724"
+              vr="VR"
+              package="패키지P"
+              type="종합검진접수"
+            />
+          }
+          {...a11yProps(0)}
+          onClick={handleNameClick}
+        />
+        <Tab
+          label={
+            <TabItem
+              sort="2"
+              patientNumber="9761282"
+              name="신휴심"
+              age="M/41"
+              birth="680922"
               vr="V"
               package="패키지Z"
+              type="종합검진접수"
+            />
+          }
+          {...a11yProps(0)}
+          onClick={handleNameClick}
+        />
+        <Tab
+          label={
+            <TabItem
+              sort="3"
+              patientNumber="9162836"
+              name="육손연"
+              age="M/29"
+              birth="981220"
+              vr="V"
+              package="패키지X"
               type="일반검진접수"
             />
           }
           {...a11yProps(0)}
           onClick={handleNameClick}
         />
-        <Tab label="반광범" {...a11yProps(1)} />
-        <Tab label="신휴심" {...a11yProps(2)} />
-        <Tab label="육손연" {...a11yProps(3)} />
-        <Tab label="채석자" {...a11yProps(4)} />
-        <Tab label="표약흠" {...a11yProps(5)} />
-        <Tab label="한이철" {...a11yProps(6)} />
       </Tabs>
       <TableContainer>
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
@@ -129,11 +155,11 @@ const PatientTable = () => {
                         onChange={handleSelectChange}
                       >
                         <MenuItem value="">
-                          <em>Placeholder</em>
+                          <em>선택하세요</em>
                         </MenuItem>
                         {names.map((name) => (
                           <MenuItem key={name} value={name}>
-                            {name}
+                            {row.state}
                           </MenuItem>
                         ))}
                       </Select>

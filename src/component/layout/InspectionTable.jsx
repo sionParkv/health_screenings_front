@@ -33,7 +33,7 @@ const InspectionTable = () => {
 
   const handleNameClick = () => {
     const url =
-      'https://a52d984b-178c-409d-b64f-5e4e8cd159a0.mock.pstmn.io/api/inspection/right'
+      'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/inspection/right'
 
     axios.post(url).then((response) => {
       setRightData(response.data.data)
@@ -48,10 +48,10 @@ const InspectionTable = () => {
           <Box id="room">{props.room}</Box>
         </Box>
         <Box className="InfoBottom">
-          <Box>진행{props.current}</Box>
-          <Box>대기{props.wait}</Box>
-          <Box>미실행{props.none}</Box>
-          <Box>완료{props.success}</Box>
+          <Box>진행 {props.current}</Box>
+          <Box>대기 {props.wait}</Box>
+          <Box>미실행 {props.none}</Box>
+          <Box>완료 {props.success}</Box>
         </Box>
       </Container>
     )
@@ -86,11 +86,11 @@ const InspectionTable = () => {
           label={
             <TabItem
               type="종합"
-              room="골밀도검사실"
+              room="기초검사실"
               current="1"
               wait="2"
-              none="3"
-              success="2"
+              none="0"
+              success="4"
             />
           }
           {...a11yProps(0)}
@@ -100,10 +100,10 @@ const InspectionTable = () => {
           label={
             <TabItem
               type="종합"
-              room="골밀도검사실"
+              room="내시경검사실"
               current="1"
-              wait="2"
-              none="3"
+              wait="0"
+              none="2"
               success="2"
             />
           }

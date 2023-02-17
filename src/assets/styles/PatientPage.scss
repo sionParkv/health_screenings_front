@@ -8,10 +8,15 @@
 .PatientLeft {
   display: flex !important;
   flex-direction: column;
+  color: black;
+  padding-top: dp(10);
+  padding-bottom: dp(10);
+  border-bottom: 1px solid black;
   .InfoTop {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-bottom: dp(10);
   }
   .InfoBottom {
     display: flex;

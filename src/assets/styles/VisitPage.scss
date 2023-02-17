@@ -1,4 +1,11 @@
 @import 'common';
 
-.VistPage {
+.VisitPage {
+  width: 100% !important;
+
+  .MuiTableRow-root {
+    #id {
+      color: orange;
+    }
+  }
 }

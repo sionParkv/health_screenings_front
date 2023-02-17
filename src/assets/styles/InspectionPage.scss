@@ -1,10 +1,5 @@
 @import 'common';
 
-.MuiButtonBase-root {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
 .InspectionLeft {
   display: flex !important;
   flex-direction: column;
@@ -42,13 +37,8 @@
   }
 }
 
-.MuiTableBody {
-  .MuiTableRow-root {
-    display: flex !important;
-    .InspectionRight {
-      width: 50%;
-    }
-  }
+.MuiTableContainer-root {
+  width: 70% !important;
 }
 
 .MuiSelect-select {
