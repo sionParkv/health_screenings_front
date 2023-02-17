@@ -1,22 +1,44 @@
-import { AppBar, Box, Dialog, DialogTitle, Toolbar } from '@mui/material'
-import React, { Fragment } from 'react'
+import { AppBar, Box, Toolbar } from '@mui/material'
+import React, { Fragment, useState } from 'react'
 import { images } from '../../assets/images'
 import { Link } from 'react-router-dom'
-import Button from '@mui/material/Button'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
+import { ConfirmDialog } from './ConfirmDialog'
 
 const MainHeader = () => {
   const exit = images.btnExit
-  const [open, setOpen] = React.useState(false)
+  // const [open, setOpen] = React.useState(false)
+
+  const [propsDialog, setPropsDialog] = useState({
+    content: '',
+    isOpen: false,
+    ok: { action: () => closeDialog(), label: '' },
+    title: '',
+  })
+  const closeDialog = () => setPropsDialog({ ...propsDialog, isOpen: false })
 
   const handleClickOpen = () => {
-    setOpen(true)
+    // setOpen(true)
+    setPropsDialog({
+      ...propsDialog,
+      title: '메인',
+      content: '종료하시겠습니까?',
+      isOpen: true,
+      ok: {
+        label: '확인',
+        action: () => {
+          // TODO 프로그램 종료 액션
+          closeDialog()
+        },
+      },
+      cancel: {
+        label: '취소',
+        action: () => {
+          closeDialog()
+        },
+      },
+    })
   }
 
-  const handleClose = () => {
-    setOpen(false)
-  }
   return (
     <Fragment>
       <Box className="MainHeader">
@@ -32,21 +54,7 @@ const MainHeader = () => {
       </Box>
       <Toolbar></Toolbar>
       <Toolbar></Toolbar>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{'종료하시겠습니까?'}</DialogTitle>
-        <DialogContent></DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>종료</Button>
-          <Button onClick={handleClose} autoFocus>
-            취소
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <ConfirmDialog {...propsDialog} />
     </Fragment>
   )
 }

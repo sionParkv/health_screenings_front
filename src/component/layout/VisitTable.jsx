@@ -1,319 +1,105 @@
-import * as React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
-import { useTheme } from '@mui/material/styles'
-import Box from '@mui/material/Box'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import IconButton from '@mui/material/IconButton'
-import FirstPageIcon from '@mui/icons-material/FirstPage'
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
-import LastPageIcon from '@mui/icons-material/LastPage'
 import { Button } from '@mui/material'
+import { ConfirmDialog } from './ConfirmDialog'
 
-function TablePaginationActions(props) {
-  const theme = useTheme()
-  const { count, page, rowsPerPage, onPageChange } = props
+const url =
+  'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/visit'
 
-  const handleFirstPageButtonClick = (event) => {
-    onPageChange(event, 0)
+const VisitTable = (props) => {
+  const [page] = useState(0)
+  const [rowsPerPage] = useState(5)
+  const [data, setData] = useState([])
+
+  const loadData = () => {
+    axios.post(url).then((response) => {
+      const res = response?.data?.data || []
+      setData(res)
+    })
   }
 
-  const handleBackButtonClick = (event) => {
-    onPageChange(event, page - 1)
-  }
+  useEffect(() => {
+    loadData()
+  }, [page])
 
-  const handleNextButtonClick = (event) => {
-    onPageChange(event, page + 1)
-  }
-
-  const handleLastPageButtonClick = (event) => {
-    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1))
-  }
-
-  return (
-    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
-      <IconButton
-        onClick={handleFirstPageButtonClick}
-        disabled={page === 0}
-        aria-label="first page"
-      >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-      </IconButton>
-      <IconButton
-        onClick={handleBackButtonClick}
-        disabled={page === 0}
-        aria-label="previous page"
-      >
-        {theme.direction === 'rtl' ? (
-          <KeyboardArrowRight />
-        ) : (
-          <KeyboardArrowLeft />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleNextButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="next page"
-      >
-        {theme.direction === 'rtl' ? (
-          <KeyboardArrowLeft />
-        ) : (
-          <KeyboardArrowRight />
-        )}
-      </IconButton>
-      <IconButton
-        onClick={handleLastPageButtonClick}
-        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-        aria-label="last page"
-      >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-      </IconButton>
-    </Box>
-  )
-}
-
-TablePaginationActions.propTypes = {
-  count: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-}
-
-function createData(
-  code,
-  number,
-  patientNumber,
-  name,
-  personal,
-  birth,
-  packet,
-  register,
-  ticket
-) {
-  return {
-    code,
-    number,
-    patientNumber,
-    name,
-    personal,
-    birth,
-    packet,
-    register,
-    ticket,
-  }
-}
-axios({
-  method: 'POST',
-  url: 'https://a52d984b-178c-409d-b64f-5e4e8cd159a0.mock.pstmn.io/api/visit',
-  data: {},
-}).then((result) => {
-  // console.log(result.data)
-  // console.log(result.data.data[0])
-  // result.data.data.map((res) => console.log(res.test))
-})
-const rows = [
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    'dd'
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-  createData(
-    'VR',
-    1,
-    3.7,
-    '박시온',
-    'M/26',
-    '960623',
-    '패키지',
-    '종합검진검수',
-    Button
-  ),
-].sort((a, b) => (a.calories < b.calories ? -1 : 1))
-
-const CustomPaginationActionsTable = () => {
-  const [page] = React.useState(0)
-  const [rowsPerPage] = React.useState(5)
-
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - props.length) : 0
+
+  const [propsDialog, setPropsDialog] = useState({
+    content: '',
+    isOpen: false,
+    ok: { action: () => closeDialog(), label: '' },
+    title: '',
+  })
+  const closeDialog = () => setPropsDialog({ ...propsDialog, isOpen: false })
+
+  const handleClickOpen = () => {
+    // setOpen(true)
+    setPropsDialog({
+      ...propsDialog,
+      title: (
+        <>
+          <strong>대기번호</strong> <br />
+          <div className="WaitNum">003</div>
+        </>
+      ),
+      className: 'Ticket-dialog',
+      content: (
+        <>
+          <strong className="WaitPerson">대기인수 : 03 명</strong>
+          <br />
+          2023년 2월 17일 10시 10분
+        </>
+      ),
+      isOpen: true,
+      ok: {
+        label: '확인',
+        action: () => {
+          // TODO 프로그램 종료 액션
+          closeDialog()
+        },
+      },
+    })
+  }
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} className="VisitPage">
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
-          {rows.map((row, index) => (
+          {data.map((row, index) => (
             <TableRow key={index}>
               <TableCell component="th" scope="row">
-                {row.code}
+                {row.test}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.number}
+              <TableCell style={{ width: 160 }} align="center">
+                {row.id}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.patientNumber}
+              <TableCell style={{ width: 160 }} align="center">
+                {row.patno}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell style={{ width: 160 }} align="center">
                 {row.name}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.personal}
+              <TableCell style={{ width: 160 }} align="center">
+                {row.patinfo}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.birth}
+              <TableCell style={{ width: 160 }} align="center">
+                {row.rrn}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.packet}
+              <TableCell style={{ width: 160 }} align="center">
+                {row.package}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {row.register}
+              <TableCell style={{ width: 160 }} align="center">
+                {row.test2}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                <Button>번호표 발행</Button>
+              <TableCell style={{ width: 160 }} align="center">
+                <Button onClick={handleClickOpen}>번호표발행</Button>
               </TableCell>
             </TableRow>
           ))}
@@ -325,7 +111,8 @@ const CustomPaginationActionsTable = () => {
           )}
         </TableBody>
       </Table>
+      <ConfirmDialog {...propsDialog} />
     </TableContainer>
   )
 }
-export { CustomPaginationActionsTable }
+export { VisitTable }

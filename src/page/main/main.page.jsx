@@ -10,7 +10,6 @@ const MainPage = () => {
   const buttons = [
     {
       action: (index) => {
-        // window.location.href = buttons[n].href
         navigate(buttons[index]?.href)
       },
       href: '/visit',
@@ -20,7 +19,6 @@ const MainPage = () => {
     },
     {
       action: (index) => {
-        // window.location.href = buttons.href
         navigate(buttons[index]?.href)
       },
       href: '/inspection',
@@ -30,7 +28,6 @@ const MainPage = () => {
     },
     {
       action: (index) => {
-        // window.location.href = buttons.href
         navigate(buttons[index]?.href)
       },
       href: '/patient',

@@ -1,12 +1,12 @@
 import React from 'react'
-import { Header, CustomPaginationActionsTable } from '../../component'
+import { Header, VisitTable } from '../../component'
 import { Container } from '@mui/material'
 
 const VisitPage = () => {
   return (
-    <Container className="VisitPage Pages">
+    <Container className="VisitPage">
       <Header />
-      <CustomPaginationActionsTable />
+      <VisitTable />
     </Container>
   )
 }
