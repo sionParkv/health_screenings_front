@@ -1,5 +1,9 @@
 @import 'common';
 
+.MuiBox-root {
+  display: flex;
+}
+
 .MuiButtonBase-root {
   padding: 0 !important;
   margin: 0 !important;

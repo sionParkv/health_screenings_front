@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import {
@@ -41,6 +41,22 @@ const PatientTable = () => {
   }
 
   const TabItem = (props) => {
+    const [page] = useState(0)
+    const [data, setData] = useState([])
+
+    const url =
+      'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/patient/left'
+
+    const loadData = () => {
+      axios.post(url).then((response) => {
+        const res = response?.data?.data || []
+        setData(res)
+      })
+    }
+
+    useEffect(() => {
+      loadData()
+    }, [page])
     return (
       <Container className="PatientLeft">
         <Box className="InfoTop">
@@ -68,21 +84,12 @@ const PatientTable = () => {
 
   const names = ['미실행', '대기', '완료', '검사중']
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        bgcolor: 'background.paper',
-        display: 'flex',
-        height: 224,
-      }}
-    >
+    <Box>
       <Tabs
         orientation="vertical"
         variant="scrollable"
         value={value}
         onChange={handleChange}
-        // aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
       >
         <Tab
           label={
@@ -95,38 +102,6 @@ const PatientTable = () => {
               vr="VR"
               package="패키지P"
               type="종합검진접수"
-            />
-          }
-          {...a11yProps(0)}
-          onClick={handleNameClick}
-        />
-        <Tab
-          label={
-            <TabItem
-              sort="2"
-              patientNumber="9761282"
-              name="신휴심"
-              age="M/41"
-              birth="680922"
-              vr="V"
-              package="패키지Z"
-              type="종합검진접수"
-            />
-          }
-          {...a11yProps(0)}
-          onClick={handleNameClick}
-        />
-        <Tab
-          label={
-            <TabItem
-              sort="3"
-              patientNumber="9162836"
-              name="육손연"
-              age="M/29"
-              birth="981220"
-              vr="V"
-              package="패키지X"
-              type="일반검진접수"
             />
           }
           {...a11yProps(0)}

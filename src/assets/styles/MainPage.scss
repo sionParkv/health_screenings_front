@@ -6,6 +6,12 @@
   background-color: #f3f2f2;
   height: 100%;
 
+  .MuiBox-root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly !important;
+  }
+
   .Main {
     display: flex;
     flex-direction: column;
