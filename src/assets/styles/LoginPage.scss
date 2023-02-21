@@ -16,6 +16,11 @@
     border-radius: 10px;
     background-color: white;
 
+    .MuiBox-root {
+      display: flex;
+      flex-direction: column;
+    }
+
     .InfoBottom {
       width: dp(800);
       height: dp(530);

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Container,
   Box,
@@ -14,13 +14,40 @@ const LoginPgae = () => {
   const loginImg = images.pic
   const profile = images.pofile
   const key = images.key
-  const url = 'http://localhost:4000/api/test'
 
-  const loadData = () => {
-    axios.get(url).then((response) => {
-      console.log(response?.data?.data)
-      const res = response?.data?.data || []
-    })
+  const [id, setId] = useState('')
+  const [pwd, setPwd] = useState('')
+
+  const [loginStatus, setLoginStatus] = useState('')
+
+  const handlerLogin = (e) => {
+    e.preventDefault()
+    login()
+  }
+
+  const login = async () => {
+    try {
+      // In the port of the server obviously
+      const res = await axios({
+        method: 'GET',
+        url: 'http://localhost:4000/api/login',
+        data: {
+          username: id,
+          password: pwd,
+        },
+      })
+
+      console.log(res.data)
+      if (res.data.status === 'success') {
+        console.log('Logged succesfully!')
+        setLoginStatus(
+          `Logged succesfully! Welcome back ${res.data.data.username}`
+        )
+      }
+    } catch (err) {
+      console.log(`⛔⛔⛔: ${err.response.data.message}`)
+      setLoginStatus(err.response.data.message)
+    }
   }
 
   return (
@@ -30,8 +57,9 @@ const LoginPgae = () => {
         <Box className="InfoBottom">
           <Box className="TextBox">
             <TextField
-              id="id"
-              fullWidth
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              name="input_id"
               placeholder="Username"
               InputProps={{
                 startAdornment: (
@@ -43,9 +71,10 @@ const LoginPgae = () => {
               variant="standard"
             />
             <TextField
-              id="password"
+              value={pwd}
+              onChange={(e) => setPwd(e.target.value)}
+              name="input_pwd"
               type="password"
-              fullWidth
               placeholder="Password"
               InputProps={{
                 startAdornment: (
@@ -57,13 +86,15 @@ const LoginPgae = () => {
               variant="standard"
             />
           </Box>
-          <Button className="LoginBtn" href="/main" variant="contained">
-            {/* <Box component="img" src={img}></Box> */}
-          </Button>
+          <Button
+            className="LoginBtn"
+            href="/main"
+            variant="contained"
+            onClick={handlerLogin}
+          ></Button>
         </Box>
       </Container>
     </Container>
   )
 }
-
 export { LoginPgae }
