@@ -25,11 +25,28 @@ function a11yProps(index) {
 
 const InspectionTable = () => {
   const [rightData, setRightData] = React.useState([])
+  const [leftData, setLeftData] = React.useState([])
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
+
+  const url =
+    'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/inspection/left'
+
+  const loadData = () => {
+    axios.post(url).then((response) => {
+      console.log(response?.data?.data)
+      const res = response?.data?.data || []
+      setLeftData(res)
+    })
+  }
+  console.log(leftData, '@@@@@')
+
+  React.useEffect(() => {
+    loadData()
+  }, [])
 
   const handleNameClick = () => {
     const url =
@@ -37,21 +54,33 @@ const InspectionTable = () => {
 
     axios.post(url).then((response) => {
       setRightData(response.data.data)
+      console.log(response.data.data)
     })
   }
 
+  // const handleNameClick2 = () => {
+  //   const url =
+  //     'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/inspection/right2'
+
+  //   axios.post(url).then((response) => {
+  //     setRightData(response.data.data)
+  //     console.log(response.data.data)
+  //   })
+  // }
+
   const TabItem = (props) => {
+    const { oi, gum, current, wait, not, complete } = props
     return (
       <Container className="InspectionLeft">
         <Box className="InfoTop">
-          <Box>{props.type}</Box>
-          <Box id="room">{props.room}</Box>
+          <Box>{oi}</Box>
+          <Box id="room">{gum}</Box>
         </Box>
         <Box className="InfoBottom">
-          <Box>진행 {props.current}</Box>
-          <Box>대기 {props.wait}</Box>
-          <Box>미실행 {props.none}</Box>
-          <Box>완료 {props.success}</Box>
+          <Box>진행 {current}</Box>
+          <Box>대기 {wait}</Box>
+          <Box>미실행 {not}</Box>
+          <Box>완료 {complete}</Box>
         </Box>
       </Container>
     )
@@ -82,48 +111,14 @@ const InspectionTable = () => {
         // aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
-        <Tab
-          label={
-            <TabItem
-              type="종합"
-              room="기초검사실"
-              current="1"
-              wait="2"
-              none="0"
-              success="4"
-            />
-          }
-          {...a11yProps(0)}
-          onClick={handleNameClick}
-        />
-        <Tab
-          label={
-            <TabItem
-              type="종합"
-              room="내시경검사실"
-              current="1"
-              wait="0"
-              none="2"
-              success="2"
-            />
-          }
-          {...a11yProps(0)}
-          onClick={handleNameClick}
-        />
-        <Tab
-          label={
-            <TabItem
-              type="종합"
-              room="골밀도검사실"
-              current="1"
-              wait="2"
-              none="3"
-              success="2"
-            />
-          }
-          {...a11yProps(0)}
-          onClick={handleNameClick}
-        />
+        {leftData.map((row, index) => (
+          <Tab
+            key={index}
+            label={<TabItem {...row} />}
+            {...a11yProps(0)}
+            onClick={handleNameClick}
+          />
+        ))}
       </Tabs>
       <TableContainer>
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">

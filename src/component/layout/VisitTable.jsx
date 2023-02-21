@@ -6,11 +6,12 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { Button } from '@mui/material'
+import { Button, TableHead } from '@mui/material'
 import { ConfirmDialog } from './ConfirmDialog'
 
-//const url = 'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/visit'
-const url = 'http://localhost:4000/api/test'
+const url =
+  'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/visit'
+// const url = 'http://localhost:4000/api/test'
 
 const VisitTable = (props) => {
   const [page] = useState(0)
@@ -18,7 +19,7 @@ const VisitTable = (props) => {
   const [data, setData] = useState([])
 
   const loadData = () => {
-    axios.get(url).then((response) => {
+    axios.post(url).then((response) => {
       console.log(response?.data?.data)
       const res = response?.data?.data || []
       setData(res)
@@ -70,7 +71,11 @@ const VisitTable = (props) => {
   }
 
   return (
-    <TableContainer component={Paper} className="VisitPage">
+    <TableContainer
+      component={Paper}
+      sx={{ maxHeight: 960 }}
+      className="VisitPage"
+    >
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
           {data.map((row, index) => (

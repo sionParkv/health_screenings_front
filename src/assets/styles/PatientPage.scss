@@ -52,5 +52,6 @@
 }
 
 .MuiTableContainer-root {
-  height: fit-content;
+  // height: fit-content;
+  max-height: none !important;
 }

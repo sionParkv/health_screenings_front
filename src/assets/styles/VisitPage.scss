@@ -2,6 +2,8 @@
 
 .VisitPage {
   width: 100% !important;
+  max-width: inherit !important;
+  padding: 0 !important;
 
   .MuiTableRow-root {
     #id {

@@ -57,8 +57,8 @@ const Header = () => {
             </Box>
             <Box className="SecondBox">
               <Box className="SelectBox">
-                <ControlledOpenSelect />
                 <SelctSort />
+                <ControlledOpenSelect />
               </Box>
               <Box className="ImgBox">
                 <Box
@@ -71,7 +71,6 @@ const Header = () => {
           </Toolbar>
         </AppBar>
       </Box>
-      <Toolbar></Toolbar>
       <Toolbar></Toolbar>
       <ConfirmDialog {...propsDialog} />
     </Fragment>

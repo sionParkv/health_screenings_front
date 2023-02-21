@@ -3,8 +3,9 @@
 .MainPage {
   display: flex !important;
   flex-direction: column;
-  background-color: #f3f2f2;
+  max-width: inherit !important;
   height: 100%;
+  background-color: #f3f2f2;
 
   .MuiBox-root {
     display: flex;
@@ -15,15 +16,15 @@
   .Main {
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: space-around;
+    height: 100%;
 
     button {
-      width: 100%;
       display: flex;
+      justify-content: space-evenly;
+      width: 100%;
       margin: 0 auto;
       padding: dp(32);
-      justify-content: space-evenly;
 
       img {
         width: 100px;

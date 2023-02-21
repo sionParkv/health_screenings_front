@@ -4,7 +4,6 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: transparent;
   background-repeat: no-repeat;
   background-size: cover;
@@ -27,6 +26,19 @@ body {
   -webkit-user-select: none;
 }
 
+td,
+th,
+button {
+  font-size: 1.125rem !important;
+}
+
 #root {
   height: 100%;
+}
+
+.MuiMenu-list {
+  li {
+    font-size: 1.125rem;
+    padding: dp(5) dp(10) !important;
+  }
 }

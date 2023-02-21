@@ -1,6 +1,8 @@
 @import 'common';
 
 .LoginPage {
+  max-width: inherit !important;
+  min-height: 100%;
   padding: dp(100);
   background-color: #f3f2f2;
 
@@ -22,11 +24,11 @@
     }
 
     .InfoBottom {
-      width: dp(800);
-      height: dp(530);
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: dp(800);
+      height: dp(530);
 
       .TextBox {
         padding-top: dp(80);
@@ -40,15 +42,15 @@
       }
 
       .MuiFormControl-root {
-        width: dp(500);
-        padding-bottom: dp(30);
         display: flex;
         flex-direction: column;
+        width: dp(500);
+        padding-bottom: dp(30);
 
         .MuiInputBase-root {
           .MuiInput-input {
-            font-size: dp(20);
             padding-bottom: dp(10);
+            font-size: dp(20);
           }
           &::before {
             border-bottom: 3px solid #d8d8d8;

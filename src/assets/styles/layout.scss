@@ -1,13 +1,16 @@
 @import 'common';
 
+.MuiToolbar-root {
+  height: dp(133);
+}
+
 .MainHeader {
   .MuiPaper-root {
-    background-color: #e9852c;
+    background-color: #e9852c !important;
     .MuiToolbar-root {
       display: flex;
       justify-content: flex-end;
       max-width: dp(1200);
-      height: dp(133);
       background-image: url('../images/title_2.png');
       background-size: cover;
 
@@ -21,11 +24,12 @@
 
 .Header {
   .MuiPaper-root {
+    background-color: #e9852c !important;
+
     .MuiToolbar-root {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: dp(133);
       background-image: url('../images/title_2.png');
       background-size: cover;
 
@@ -40,25 +44,34 @@
           padding-right: dp(20);
         }
       }
+
       .SecondBox {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 30%;
+        width: 35%;
         height: 100%;
         .SelectBox {
           display: flex;
           justify-content: center;
           width: dp(120);
+          padding-left: dp(30);
 
-          .CheckUp {
+          .MuiFormControl-root {
+            min-width: dp(100);
             background-color: white;
             border-radius: dp(10);
-          }
-          .Sort {
-            background-color: white;
-            border-radius: dp(10);
-            width: 30%;
+
+            em {
+              color: #e9852c;
+              font-size: dp(18);
+              font-weight: bold;
+              font-style: normal;
+            }
+
+            svg {
+              color: #e9852c;
+            }
           }
         }
         .ImgBox {

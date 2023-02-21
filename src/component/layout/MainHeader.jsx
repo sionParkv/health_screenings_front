@@ -53,7 +53,6 @@ const MainHeader = () => {
         </AppBar>
       </Box>
       <Toolbar></Toolbar>
-      <Toolbar></Toolbar>
       <ConfirmDialog {...propsDialog} />
     </Fragment>
   )

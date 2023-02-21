@@ -1,5 +1,5 @@
 {
-  "author": "Aiden <bokjaeoh@gmail.com>",
+  "author": "",
   "background_color": "#ffffff",
   "default_locale": "ko",
   "display": "standalone",
@@ -23,7 +23,7 @@
   "manifest_version": 2,
   "name": "명지병원",
   "short_name": "명지병원",
-  "start_url": ".",
+  "start_url": "http://192.168.1.13:3000/main",
   "theme_color": "#ffffff",
   "version": "0.0.1",
   "version_name": "0.0.1"

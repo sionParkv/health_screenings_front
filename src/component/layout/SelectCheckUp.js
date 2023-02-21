@@ -1,11 +1,10 @@
 import * as React from 'react'
-import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
 const ControlledOpenSelect = () => {
-  const [age, setAge] = React.useState('')
+  const [age, setAge] = React.useState('none')
   const [open, setOpen] = React.useState(false)
 
   const handleChange = (event) => {
@@ -21,26 +20,25 @@ const ControlledOpenSelect = () => {
   }
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 120 }} className="CheckUp">
-      <InputLabel id="demo-controlled-open-select-label">
-        검진구문선택
-      </InputLabel>
+    <FormControl sx={{ m: 1 }}>
+      {/* <InputLabel>검진구문선택</InputLabel> */}
       <Select
-        labelId="demo-controlled-open-select-label"
-        id="demo-controlled-open-select"
         open={open}
         onClose={handleClose}
         onOpen={handleOpen}
-        value={age}
-        label="검진구문선택"
+        // label="검진구문선택"
+
         onChange={handleChange}
+        defaultValue={age}
       >
-        <MenuItem value="">
+        <MenuItem value="none" disabled>
           <em>전체</em>
         </MenuItem>
-        <MenuItem value={10}>종합검진검수</MenuItem>
-        <MenuItem value={20}>일반검진검수</MenuItem>
-        <MenuItem value={30}>외부검진</MenuItem>
+        <MenuItem value="">전체</MenuItem>
+        <MenuItem value={10}>이름▼</MenuItem>
+        <MenuItem value={20}>이름▲</MenuItem>
+        <MenuItem value={30}>번호▼</MenuItem>
+        <MenuItem value={30}>번호▲</MenuItem>
       </Select>
     </FormControl>
   )
