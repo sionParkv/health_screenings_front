@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
-import { Button, TableHead } from '@mui/material'
+import { Button } from '@mui/material'
 import { ConfirmDialog } from './ConfirmDialog'
 
 const url =
@@ -17,10 +17,8 @@ const VisitTable = (props) => {
   const [page] = useState(0)
   const [rowsPerPage] = useState(5)
   const [data, setData] = useState([])
-
   const loadData = () => {
     axios.post(url).then((response) => {
-      console.log(response?.data?.data)
       const res = response?.data?.data || []
       setData(res)
     })
@@ -69,6 +67,32 @@ const VisitTable = (props) => {
       },
     })
   }
+  let nameResult = []
+  let ageResult = []
+  let resultSearch = []
+
+  resultSearch = data?.filter((row) => {
+    let ok = true
+
+    ok = row?.test2.includes(props.value)
+
+    return ok
+  })
+  nameResult = data.sort(function (a, b) {
+    let x = a.name.toLowerCase()
+    let y = b.name.toLowerCase()
+    if (x < y) {
+      return -1
+    }
+    if (x > y) {
+      return 0
+    }
+  })
+  console.log(nameResult)
+
+  ageResult = data.sort(function (a, b) {
+    return a.patno - b.patno
+  })
 
   return (
     <TableContainer
@@ -78,7 +102,7 @@ const VisitTable = (props) => {
     >
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
-          {data.map((row, index) => (
+          {resultSearch.map((row, index) => (
             <TableRow key={index}>
               <TableCell component="th" scope="row" id="test">
                 {row.test}

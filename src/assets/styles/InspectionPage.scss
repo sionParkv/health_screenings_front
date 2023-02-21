@@ -25,9 +25,13 @@
 }
 
 .MuiTabs-root {
-  width: 40% !important;
+  width: 50% !important;
   height: dp(700);
   align-items: center;
+  padding: 0 !important;
+  > .MuiButtonBase-root {
+    display: none;
+  }
   .MuiTabs-indicator {
     background-color: white;
   }

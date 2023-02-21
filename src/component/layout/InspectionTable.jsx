@@ -95,14 +95,7 @@ const InspectionTable = () => {
   const names = ['진행중', '대기', '미실행', '거부', '완료']
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        bgcolor: 'background.paper',
-        display: 'flex',
-        height: 224,
-      }}
-    >
+    <Box>
       <Tabs
         orientation="vertical"
         variant="scrollable"

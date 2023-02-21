@@ -10,10 +10,9 @@ import { Link } from 'react-router-dom'
  * @returns {React.Component} 페이지 헤더 영역 컴포넌트.
  */
 
-const Header = () => {
+const Header = (props) => {
   const imgExit = images.btnExit
   const imgHome = images.btnHome
-
   const [propsDialog, setPropsDialog] = useState({
     content: '',
     isOpen: false,
@@ -45,6 +44,14 @@ const Header = () => {
     })
   }
 
+  const propsSelectSort = {
+    handleChange: props.handleChange,
+    value: props.value,
+  }
+  const propsSort = {
+    handleChange: props.handleChange,
+    value: props.value,
+  }
   return (
     <Fragment>
       <Box className="Header">
@@ -57,8 +64,8 @@ const Header = () => {
             </Box>
             <Box className="SecondBox">
               <Box className="SelectBox">
-                <SelctSort />
-                <ControlledOpenSelect />
+                <SelctSort {...propsSelectSort} />
+                <ControlledOpenSelect {...propsSort} />
               </Box>
               <Box className="ImgBox">
                 <Box
