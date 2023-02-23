@@ -13,7 +13,7 @@ import { selectors } from '../../data/selectors'
 
 // const url =
 //   'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/visit'
-const url = 'http://localhost:4000/api/visit'
+const url = 'http://192.168.1.13:4000/api/visit'
 
 const VisitTable = (props) => {
   const { sort, type } = props

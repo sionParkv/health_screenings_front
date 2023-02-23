@@ -1,10 +1,11 @@
 import { AppBar, Box, Toolbar } from '@mui/material'
 import React, { Fragment, useState } from 'react'
 import { images } from '../../assets/images'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useHref, useNavigate } from 'react-router-dom'
 import { ConfirmDialog } from './ConfirmDialog'
 
 const MainHeader = () => {
+  const navigate = useNavigate()
   const exit = images.btnExit
   // const [open, setOpen] = React.useState(false)
 
@@ -25,10 +26,10 @@ const MainHeader = () => {
       isOpen: true,
       ok: {
         label: '확인',
-        action: () => {
-          // TODO 프로그램 종료 액션
-          closeDialog()
+        action: (index) => {
+          navigate(handleClickOpen[index]?.href)
         },
+        href: '/',
       },
       cancel: {
         label: '취소',

@@ -22,8 +22,8 @@ const MainPage = () => {
         navigate(buttons[index]?.href)
       },
       href: '/inspection',
-      title: '검사실행',
-      subtitle: '수진자조회',
+      title: '수진자조회',
+      subtitle: '검사실별',
       src: images.icon1,
     },
     {
@@ -31,8 +31,8 @@ const MainPage = () => {
         navigate(buttons[index]?.href)
       },
       href: '/patient',
-      title: '수진자별',
-      subtitle: '검사현황조회',
+      title: '검사현황조회',
+      subtitle: '수진자별',
       src: images.icon2,
     },
   ]

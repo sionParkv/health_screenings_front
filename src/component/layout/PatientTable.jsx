@@ -16,6 +16,9 @@ import {
 import { Container } from '@mui/system'
 import axios from 'axios'
 
+import { selectors } from '../../data/selectors'
+import { useLayoutEffect } from 'react'
+
 function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
@@ -23,9 +26,12 @@ function a11yProps(index) {
   }
 }
 
-const PatientTable = () => {
+const PatientTable = (props) => {
+  const { sort, type } = props
+  const { sorts, types } = selectors
+  const [loadedData, setLoadedData] = useState([])
+  const [sortedData, setSortedData] = useState([])
   const [rightData, setRightData] = useState([])
-  const [leftData, setLeftData] = useState([])
   const [value, setValue] = useState(0)
 
   const handleChange = (event, newValue) => {
@@ -33,14 +39,70 @@ const PatientTable = () => {
   }
 
   const loadData = () => {
-    const url = 'https://localhost:4000/api/patient'
+    const url = 'http://192.168.1.13:4000/api/patient'
     axios.get(url).then((response) => {
-      console.log(response?.data?.data)
-      const res = response?.data?.data || []
-      setLeftData(res)
+      let resultData = response?.data?.data || []
+      setLoadedData(resultData)
+      resultData = setDataType(resultData)
+      setDataSort(resultData)
     })
   }
-  React.useEffect(() => {
+
+  const setDataType = (data) => {
+    let selectedType = types.find((item) =>
+      item.where === type ? true : false
+    )
+    // console.log('selected type: ', selectedType)
+
+    if (selectedType.where === 'All') {
+      return data
+    }
+
+    return data.filter((item) => {
+      return selectedType.label.includes(item.PKFGNAME) ? true : false
+    })
+  }
+
+  // 오른쪽 셀렉트 필터
+  const setDataSort = (data) => {
+    let selectedSort = sorts.find((item) =>
+      item.order === sort ? true : false
+    )
+    // console.log('selected sort: ', selectedSort, sort)
+
+    let dataSort = []
+    const orders = selectedSort.order.split('_')
+    if (orders[0].includes('NAME')) {
+      dataSort = data.sort((a, b) => {
+        if (a.PTNTINFO_NAME < b.PTNTINFO_NAME) {
+          return orders[1] === 'ASC' ? -1 : 1
+        } else if (a.PTNTINFO_NAME > b.PTNTINFO_NAME) {
+          return orders[1] === 'ASC' ? 1 : -1
+        } else {
+          return 0
+        }
+      })
+    } else if (orders[0].includes('NUMBER')) {
+      dataSort = data.sort((a, b) => {
+        if (a.PTNTINFO_IDNO < b.PTNTINFO_IDNO) {
+          return orders[1] === 'ASC' ? -1 : 1
+        } else if (a.PTNTINFO_IDNO > b.PTNTINFO_IDNO) {
+          return orders[1] === 'ASC' ? 1 : -1
+        } else {
+          return 0
+        }
+      })
+    }
+    setSortedData(dataSort)
+  }
+
+  useEffect(() => loadData(), [])
+  useLayoutEffect(() => {
+    let resultData = setDataType(loadedData)
+    setDataSort(resultData)
+  }, [sort, type])
+
+  useEffect(() => {
     loadData()
   }, [])
 
@@ -90,14 +152,15 @@ const PatientTable = () => {
         value={value}
         onChange={handleChange}
       >
-        {leftData.map((row, index) => (
-          <Tab
-            key={index}
-            label={<TabItem {...row} />}
-            {...a11yProps(0)}
-            onClick={handleNameClick}
-          />
-        ))}
+        {!!sortedData?.length &&
+          sortedData.map((row, index) => (
+            <Tab
+              key={index}
+              label={<TabItem {...row} />}
+              {...a11yProps(0)}
+              onClick={handleNameClick}
+            />
+          ))}
       </Tabs>
       <TableContainer>
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">

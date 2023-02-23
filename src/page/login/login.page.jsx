@@ -30,7 +30,7 @@ const LoginPgae = () => {
       // In the port of the server obviously
       const res = await axios({
         method: 'GET',
-        url: 'http://localhost:4000/api/login',
+        url: 'http://192.168.1.13:4000/api/login',
         data: {
           username: id,
           password: pwd,
@@ -90,7 +90,7 @@ const LoginPgae = () => {
             className="LoginBtn"
             href="/main"
             variant="contained"
-            onClick={handlerLogin}
+            // onClick={handlerLogin}
           ></Button>
         </Box>
       </Container>
