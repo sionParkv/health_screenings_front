@@ -2,12 +2,24 @@
 
 .VisitPage {
   width: 100% !important;
-  max-width: inherit !important;
+  // max-width: inherit !important;
   padding: 0 !important;
+
+  .MuiToolbar-root {
+    height: dp(100);
+  }
 
   .MuiTableRow-root {
     #id {
       color: orange;
     }
+  }
+
+  .MuiButtonBase-root {
+    background-color: #8bbded;
+    color: white;
+    width: dp(100);
+    height: dp(40);
+    border-radius: dp(5);
   }
 }

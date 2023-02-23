@@ -2,6 +2,9 @@
 
 .MuiBox-root {
   display: flex;
+  .MuiToolbar-root {
+    height: dp(100);
+  }
 }
 
 .MuiButtonBase-root {

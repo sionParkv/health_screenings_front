@@ -49,6 +49,7 @@ const InspectionTable = (props) => {
       setLoadedData(resultData)
       resultData = setDataType(resultData)
       setDataSort(resultData)
+      console.log(resultData[0])
     })
   }
 
@@ -102,7 +103,7 @@ const InspectionTable = (props) => {
 
   useEffect(() => loadData(), [])
   useLayoutEffect(() => {
-    let resultData = setDataType(loadedData)
+    let resultData = [...setDataType(loadedData)]
     setDataSort(resultData)
   }, [sort, type])
 
@@ -130,18 +131,18 @@ const InspectionTable = (props) => {
   // }
 
   const TabItem = (props) => {
-    const { oi, gum, current, wait, not, complete } = props
+    const { PKFGNAME, EXAMRMNM, P_CNT, W_CNT, N_CNT, F_CNT } = props
     return (
       <Container className="InspectionLeft">
         <Box className="InfoTop">
-          <Box>{oi}</Box>
-          <Box id="room">{gum}</Box>
+          <Box>{PKFGNAME}</Box>
+          <Box id="room">{EXAMRMNM}</Box>
         </Box>
         <Box className="InfoBottom">
-          <Box>진행 {current}</Box>
-          <Box>대기 {wait}</Box>
-          <Box>미실행 {not}</Box>
-          <Box>완료 {complete}</Box>
+          <Box>진행 {P_CNT}</Box>
+          <Box>대기 {W_CNT}</Box>
+          <Box>미실행 {N_CNT}</Box>
+          <Box>완료 {F_CNT}</Box>
         </Box>
       </Container>
     )

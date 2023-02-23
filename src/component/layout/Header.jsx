@@ -30,10 +30,7 @@ const Header = (props) => {
       isOpen: true,
       ok: {
         label: '확인',
-        action: () => {
-          // TODO 프로그램 종료 액션
-          closeDialog()
-        },
+        action: () => {},
       },
       cancel: {
         label: '취소',

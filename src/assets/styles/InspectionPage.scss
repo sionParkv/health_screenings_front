@@ -1,5 +1,9 @@
 @import 'common';
 
+.MuiToolbar-root {
+  height: dp(100);
+}
+
 .InspectionLeft {
   display: flex !important;
   flex-direction: column;

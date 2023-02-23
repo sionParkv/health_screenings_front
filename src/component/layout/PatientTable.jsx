@@ -45,6 +45,7 @@ const PatientTable = (props) => {
       setLoadedData(resultData)
       resultData = setDataType(resultData)
       setDataSort(resultData)
+      console.log(resultData[0])
     })
   }
 
@@ -98,7 +99,7 @@ const PatientTable = (props) => {
 
   useEffect(() => loadData(), [])
   useLayoutEffect(() => {
-    let resultData = setDataType(loadedData)
+    let resultData = [...setDataType(loadedData)]
     setDataSort(resultData)
   }, [sort, type])
 
@@ -116,28 +117,38 @@ const PatientTable = (props) => {
   }
 
   const TabItem = (props) => {
-    const { sort, patinetNum, name, age, birth, test, test2 } = props
+    const {
+      index,
+      PTNTINFO_IDNO,
+      name,
+      PTNTINFO_SEX,
+      PTNTINFO_AGE,
+      PTNTINFO_BITH,
+      PTNTINFO_PKFG,
+    } = props
 
     return (
       <Container className="PatientLeft">
         <Box className="InfoTop">
-          <Box>{sort}</Box>
-          <Box>{patinetNum}</Box>
+          <Box>{index}</Box>
+          <Box>{PTNTINFO_IDNO}</Box>
           <Box>{name}</Box>
-          <Box>{age}</Box>
-          <Box>{birth}</Box>
+          <Box>
+            {PTNTINFO_SEX}/{PTNTINFO_AGE}
+          </Box>
+          <Box>{PTNTINFO_BITH}</Box>
         </Box>
         <Box className="InfoBottom">
-          <Box id="vr">{test}</Box>
-          <Box>{}</Box>
+          <Box id="vr">V</Box>
           <Box></Box>
           <Box></Box>
-          <Box>{test2}</Box>
+          <Box></Box>
+          <Box>{PTNTINFO_PKFG}</Box>
         </Box>
       </Container>
     )
   }
-  const [personName, setPersonName] = React.useState([])
+  const [personName, setPersonName] = useState([])
 
   const handleSelectChange = (event) => {
     setPersonName(event.target.value)

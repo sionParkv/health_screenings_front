@@ -79,7 +79,7 @@ const VisitTable = (props) => {
 
   useEffect(() => loadData(), [])
   useLayoutEffect(() => {
-    let resultData = setDataType(loadedData)
+    let resultData = [...setDataType(loadedData)]
     setDataSort(resultData)
   }, [sort, type])
 
@@ -136,7 +136,7 @@ const VisitTable = (props) => {
                   V
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center">
-                  1
+                  {index}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center">
                   {row.PTNTINFO_NAME}
