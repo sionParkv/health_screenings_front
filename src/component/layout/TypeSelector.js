@@ -3,8 +3,10 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 
-const SelctSort = (props) => {
-  const { handleChange, value } = props
+import { selectors } from '../../data/selectors'
+
+const TypeSelector = (props) => {
+  const { handleTypeChange, type } = props
   const [open, setOpen] = React.useState(false)
   const handleClose = () => {
     setOpen(false)
@@ -18,24 +20,25 @@ const SelctSort = (props) => {
     <div>
       <FormControl sx={{ m: 1 }}>
         <Select
+          defaultValue={type}
           id="formId"
-          open={open}
+          onChange={handleTypeChange}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={value || '전체'}
-          onChange={handleChange}
-          defaultValue={value || '전체'}
+          open={open}
+          value={type}
         >
           <MenuItem value="" disabled>
             <em>검진구문선택</em>
           </MenuItem>
-          <MenuItem value="전체">전체</MenuItem>
-          <MenuItem value="종합건진접수">종합건진접수</MenuItem>
-          <MenuItem value="일반건진접수">일반건진접수</MenuItem>
-          <MenuItem value="외부검진">외부검진</MenuItem>
+          {selectors.types.map((t, i) => (
+            <MenuItem key={i} value={t.where}>
+              {t.label}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </div>
   )
 }
-export { SelctSort }
+export { TypeSelector }

@@ -25,11 +25,24 @@ function a11yProps(index) {
 
 const PatientTable = () => {
   const [rightData, setRightData] = useState([])
+  const [leftData, setLeftData] = useState([])
   const [value, setValue] = useState(0)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
+
+  const loadData = () => {
+    const url = 'https://localhost:4000/api/patient'
+    axios.get(url).then((response) => {
+      console.log(response?.data?.data)
+      const res = response?.data?.data || []
+      setLeftData(res)
+    })
+  }
+  React.useEffect(() => {
+    loadData()
+  }, [])
 
   const handleNameClick = () => {
     const url =
@@ -41,37 +54,23 @@ const PatientTable = () => {
   }
 
   const TabItem = (props) => {
-    const [page] = useState(0)
-    const [data, setData] = useState([])
+    const { sort, patinetNum, name, age, birth, test, test2 } = props
 
-    const url =
-      'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/patient/left'
-
-    const loadData = () => {
-      axios.post(url).then((response) => {
-        const res = response?.data?.data || []
-        setData(res)
-      })
-    }
-
-    useEffect(() => {
-      loadData()
-    }, [page])
     return (
       <Container className="PatientLeft">
         <Box className="InfoTop">
-          <Box>{props.sort}</Box>
-          <Box>{props.patientNumber}</Box>
-          <Box>{props.name}</Box>
-          <Box>{props.age}</Box>
-          <Box>{props.birth}</Box>
+          <Box>{sort}</Box>
+          <Box>{patinetNum}</Box>
+          <Box>{name}</Box>
+          <Box>{age}</Box>
+          <Box>{birth}</Box>
         </Box>
         <Box className="InfoBottom">
-          <Box id="vr">{props.vr}</Box>
-          <Box>{props.package}</Box>
+          <Box id="vr">{test}</Box>
+          <Box>{}</Box>
           <Box></Box>
           <Box></Box>
-          <Box>{props.type}</Box>
+          <Box>{test2}</Box>
         </Box>
       </Container>
     )
@@ -91,22 +90,14 @@ const PatientTable = () => {
         value={value}
         onChange={handleChange}
       >
-        <Tab
-          label={
-            <TabItem
-              sort="1"
-              patientNumber="8755499"
-              name="반광범"
-              age="F/81"
-              birth="440724"
-              vr="VR"
-              package="패키지P"
-              type="종합검진접수"
-            />
-          }
-          {...a11yProps(0)}
-          onClick={handleNameClick}
-        />
+        {leftData.map((row, index) => (
+          <Tab
+            key={index}
+            label={<TabItem {...row} />}
+            {...a11yProps(0)}
+            onClick={handleNameClick}
+          />
+        ))}
       </Tabs>
       <TableContainer>
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">

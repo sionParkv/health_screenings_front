@@ -1,6 +1,6 @@
 import { AppBar, Box, Toolbar } from '@mui/material'
 import React, { Fragment, useState } from 'react'
-import { ConfirmDialog, ControlledOpenSelect, SelctSort } from '../../component'
+import { ConfirmDialog, SortSelector, TypeSelector } from '../../component'
 import { images } from '../../assets/images'
 import { Link } from 'react-router-dom'
 
@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom'
  *
  * @returns {React.Component} 페이지 헤더 영역 컴포넌트.
  */
-
 const Header = (props) => {
   const imgExit = images.btnExit
   const imgHome = images.btnHome
+
   const [propsDialog, setPropsDialog] = useState({
     content: '',
     isOpen: false,
@@ -44,14 +44,6 @@ const Header = (props) => {
     })
   }
 
-  const propsSelectSort = {
-    handleChange: props.handleChange,
-    value: props.value,
-  }
-  const propsSort = {
-    handleChange: props.handleChange,
-    value: props.value,
-  }
   return (
     <Fragment>
       <Box className="Header">
@@ -64,8 +56,8 @@ const Header = (props) => {
             </Box>
             <Box className="SecondBox">
               <Box className="SelectBox">
-                <SelctSort {...propsSelectSort} />
-                <ControlledOpenSelect {...propsSort} />
+                <TypeSelector {...props} />
+                <SortSelector {...props} />
               </Box>
               <Box className="ImgBox">
                 <Box

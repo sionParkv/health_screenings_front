@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import axios from 'axios'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -7,29 +7,81 @@ import TableContainer from '@mui/material/TableContainer'
 import TableRow from '@mui/material/TableRow'
 import Paper from '@mui/material/Paper'
 import { Button } from '@mui/material'
-import { ConfirmDialog } from './ConfirmDialog'
 
-const url =
-  'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/visit'
-// const url = 'http://localhost:4000/api/test'
+import { ConfirmDialog } from './ConfirmDialog'
+import { selectors } from '../../data/selectors'
+
+// const url =
+//   'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/visit'
+const url = 'http://localhost:4000/api/visit'
 
 const VisitTable = (props) => {
-  const [page] = useState(0)
-  const [rowsPerPage] = useState(5)
-  const [data, setData] = useState([])
+  const { sort, type } = props
+  const { sorts, types } = selectors
+  const [loadedData, setLoadedData] = useState([])
+  const [sortedData, setSortedData] = useState([])
+
   const loadData = () => {
-    axios.post(url).then((response) => {
-      const res = response?.data?.data || []
-      setData(res)
+    axios.get(url).then((response) => {
+      let resultData = response?.data?.data || []
+      setLoadedData(resultData)
+      resultData = setDataType(resultData)
+      setDataSort(resultData)
     })
   }
 
-  useEffect(() => {
-    loadData()
-  }, [page])
+  const setDataType = (data) => {
+    let selectedType = types.find((item) =>
+      item.where === type ? true : false
+    )
+    // console.log('selected type: ', selectedType)
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - props.length) : 0
+    if (selectedType.where === 'All') {
+      return data
+    }
+
+    return data.filter((item) => {
+      return selectedType.label.includes(item.PKFGNAME) ? true : false
+    })
+  }
+
+  const setDataSort = (data) => {
+    let selectedSort = sorts.find((item) =>
+      item.order === sort ? true : false
+    )
+    // console.log('selected sort: ', selectedSort, sort)
+
+    let dataSort = []
+    const orders = selectedSort.order.split('_')
+    if (orders[0].includes('NAME')) {
+      dataSort = data.sort((a, b) => {
+        if (a.PTNTINFO_NAME < b.PTNTINFO_NAME) {
+          return orders[1] === 'ASC' ? -1 : 1
+        } else if (a.PTNTINFO_NAME > b.PTNTINFO_NAME) {
+          return orders[1] === 'ASC' ? 1 : -1
+        } else {
+          return 0
+        }
+      })
+    } else if (orders[0].includes('NUMBER')) {
+      dataSort = data.sort((a, b) => {
+        if (a.PTNTINFO_IDNO < b.PTNTINFO_IDNO) {
+          return orders[1] === 'ASC' ? -1 : 1
+        } else if (a.PTNTINFO_IDNO > b.PTNTINFO_IDNO) {
+          return orders[1] === 'ASC' ? 1 : -1
+        } else {
+          return 0
+        }
+      })
+    }
+    setSortedData(dataSort)
+  }
+
+  useEffect(() => loadData(), [])
+  useLayoutEffect(() => {
+    let resultData = setDataType(loadedData)
+    setDataSort(resultData)
+  }, [sort, type])
 
   const [propsDialog, setPropsDialog] = useState({
     content: '',
@@ -67,33 +119,8 @@ const VisitTable = (props) => {
       },
     })
   }
-  let nameResult = []
-  let ageResult = []
-  let resultSearch = []
 
-  resultSearch = data?.filter((row) => {
-    let ok = true
-
-    ok = row?.test2.includes(props.value)
-
-    return ok
-  })
-  nameResult = data.sort(function (a, b) {
-    let x = a.name.toLowerCase()
-    let y = b.name.toLowerCase()
-    if (x < y) {
-      return -1
-    }
-    if (x > y) {
-      return 0
-    }
-  })
-  console.log(nameResult)
-
-  ageResult = data.sort(function (a, b) {
-    return a.patno - b.patno
-  })
-
+  console.log('@@@@@ ', sortedData)
   return (
     <TableContainer
       component={Paper}
@@ -102,41 +129,37 @@ const VisitTable = (props) => {
     >
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
-          {resultSearch.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell component="th" scope="row" id="test">
-                {row.test}
+          {!!sortedData?.length &&
+            sortedData?.map((row, index) => (
+              <TableRow key={index}>
+                <TableCell component="th" scope="row" id="test">
+                  V
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  1
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.PTNTINFO_NAME}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.PTNTINFO_BITH}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  {row.PKFGNAME}
+                </TableCell>
+                <TableCell style={{ width: 160 }} align="center">
+                  <Button onClick={handleClickOpen}>번호표발행</Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          {!sortedData?.length && (
+            <TableRow>
+              <TableCell className="NoData">
+                로드된 데이터가 없습니다.
               </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.id}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.patno}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.name}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.patinfo}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.rrn}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.package}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                {row.test2}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="center">
-                <Button onClick={handleClickOpen}>번호표발행</Button>
-              </TableCell>
-            </TableRow>
-          ))}
-
-          {emptyRows > 0 && (
-            <TableRow style={{ height: 53 * emptyRows }}>
-              <TableCell colSpan={6} />
             </TableRow>
           )}
         </TableBody>

@@ -1,30 +1,34 @@
-import React from 'react'
-import { Header, VisitTable } from '../../component'
 import { Container } from '@mui/material'
+import React, { useState } from 'react'
+
+import { Header, VisitTable } from '../../component'
+import { selectors } from '../../data/selectors'
 
 const VisitPage = () => {
-  const [value, setValue] = React.useState('')
-  const [sortValue, setSortValue] = React.useState('')
+  const { types, sorts } = selectors
+  const [type, setType] = useState(types[0].where)
+  const [sort, setSort] = useState(sorts[0].order)
 
-  const handleChange = (event) => {
-    setValue(event.target.value === '전체' ? '' : event.target.value)
-    setSortValue(
-      event.target.SortValue === '전체' ? '' : event.target.SortValue
-    )
-    console.log(event)
+  const handleTypeChange = (event) => {
+    const eleSelector = event?.target
+    if (!eleSelector) return
+
+    setType(eleSelector.value)
   }
 
-  const propsHeader = {
-    handleChange: handleChange,
-    value: value,
-    sortValue: sortValue,
+  const handleSortChange = (event) => {
+    const eleSelector = event?.target
+    if (!eleSelector) return
+
+    setSort(eleSelector.value)
   }
-  console.log('11111', value)
-  console.log('22222', propsHeader)
+
+  const propsSelectors = { handleSortChange, handleTypeChange, type, sort }
+
   return (
     <Container className="VisitPage">
-      <Header {...propsHeader} />
-      <VisitTable {...propsHeader} />
+      <Header {...propsSelectors} />
+      <VisitTable {...propsSelectors} />
     </Container>
   )
 }

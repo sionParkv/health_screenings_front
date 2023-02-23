@@ -42,7 +42,6 @@ const InspectionTable = () => {
       setLeftData(res)
     })
   }
-  console.log(leftData, '@@@@@')
 
   React.useEffect(() => {
     loadData()
