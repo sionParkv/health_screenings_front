@@ -39,7 +39,7 @@ const PatientTable = (props) => {
   }
 
   const loadData = () => {
-    const url = 'http://192.168.1.13:4000/api/patient'
+    const url = 'http://192.168.1.85:4000/api/patient'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -107,13 +107,18 @@ const PatientTable = (props) => {
     loadData()
   }, [])
 
-  const handleNameClick = () => {
-    const url =
-      'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/patient/right'
+  const handleNameClick = (patno) => {
+    const url = 'http://192.168.1.85:4000/api/patient/click'
 
-    axios.post(url).then((response) => {
-      setRightData(response.data.data)
-    })
+    axios
+      .post(url, { patno: patno })
+      .then((response) => {
+        setRightData(response.data.data)
+        console.log(response.data.data[0])
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
   }
 
   const TabItem = (props) => {
@@ -169,21 +174,21 @@ const PatientTable = (props) => {
               key={index}
               label={<TabItem {...row} />}
               {...a11yProps(0)}
-              onClick={handleNameClick}
+              onClick={() => handleNameClick(row.PTNTINFO_IDNO)}
             />
           ))}
       </Tabs>
       <TableContainer>
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+        <Table>
           <TableBody>
-            {rightData.map((row, index) => (
+            {rightData?.map((row, index) => (
               <TableRow key={index} className="PatientRight">
                 <TableCell component="th" scope="row">
-                  <T>{row.gumsa}</T>
-                  <T>{row.name}</T>
+                  <T>{row.PTNTEXAM_RMCD}</T>
+                  <T>{row.PTNTINFO_NAME}</T>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <T>{row.gumsaName}</T>
+                  <T>{row.PTNTEXAM_RMNM}</T>
                   <T>{row.time}</T>
                 </TableCell>
                 <TableCell component="th" scope="row">

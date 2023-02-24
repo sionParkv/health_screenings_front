@@ -43,7 +43,7 @@ const InspectionTable = (props) => {
 
   // 탭 데이터 리스트 가져오기
   const loadData = () => {
-    const url = 'http://192.168.1.13:4000/api/inspection'
+    const url = 'http://192.168.1.85:4000/api/inspection'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -111,13 +111,18 @@ const InspectionTable = (props) => {
     loadData()
   }, [])
 
-  const handleNameClick = () => {
-    const url =
-      'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/inspection/right'
+  const handleNameClick = (room) => {
+    const url = 'http://192.168.1.85:4000/api/inspection/click'
 
-    axios.post(url).then((response) => {
-      setRightData(response.data.data)
-    })
+    axios
+      .post(url, { room: room })
+      .then((response) => {
+        setRightData(response.data.data)
+        console.log(response.data.data[0])
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
   }
 
   // const handleNameClick2 = () => {
@@ -163,16 +168,14 @@ const InspectionTable = (props) => {
         variant="scrollable"
         value={value}
         onChange={handleChange}
-        // aria-label="Vertical tabs example"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
       >
         {!!sortedData?.length &&
-          sortedData.map((row, index) => (
+          sortedData?.map((row, index) => (
             <Tab
               key={index}
               label={<TabItem {...row} />}
               {...a11yProps(0)}
-              onClick={handleNameClick}
+              onClick={() => handleNameClick(row.PTNTEXAM_RMCD)}
             />
           ))}
       </Tabs>
@@ -182,24 +185,26 @@ const InspectionTable = (props) => {
             {rightData.map((row, index) => (
               <TableRow key={index} className="InspectionRight">
                 <TableCell component="th" scope="row">
-                  <T>{row.sort}</T>
-                  <T>{row.test}</T>
+                  <T>{index}</T>
+                  <T>V</T>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <T>{row.patientNum}</T>
-                  <T>{row.package}</T>
+                  <T>{row.PTNTEXAM_IDNO}</T>
+                  <T></T>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <T>{row.test2}</T>
+                  <T>{row.PTNTINFO_NAME}</T>
                   <Box></Box>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <T>{row.name}</T>
-                  <T>{row.age}</T>
+                  <T>
+                    {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
+                  </T>
+                  <T></T>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <T>{row.birth}</T>
-                  <T>{row.time}</T>
+                  <T>{row.PTNTINFO_BITH}</T>
+                  <T></T>
                 </TableCell>
                 <TableCell component="th" scope="row">
                   <Box>
