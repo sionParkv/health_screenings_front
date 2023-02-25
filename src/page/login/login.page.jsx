@@ -29,24 +29,28 @@ const LoginPgae = () => {
     try {
       // In the port of the server obviously
       const res = await axios({
-        method: 'GET',
+        method: 'post',
         url: 'http://192.168.1.13:4000/api/login',
         data: {
-          username: id,
-          password: pwd,
+          account_id: id,
+          account_pass: pwd,
         },
       })
 
       console.log(res.data)
-      if (res.data.status === 'success') {
+      console.log(res.data?.code)
+      if (res.data?.code === 'OK') {
         console.log('Logged succesfully!')
         setLoginStatus(
           `Logged succesfully! Welcome back ${res.data.data.username}`
         )
+        window.location.replace('/main')
+      } else {
+        alert('아이디 혹은 비밀번호를 잘못 입력 하였습니다.')
       }
     } catch (err) {
-      console.log(`⛔⛔⛔: ${err.response.data.message}`)
-      setLoginStatus(err.response.data.message)
+      console.log(`⛔⛔⛔: ${err.message}`)
+      setLoginStatus(err.message)
     }
   }
 
@@ -88,9 +92,8 @@ const LoginPgae = () => {
           </Box>
           <Button
             className="LoginBtn"
-            href="/main"
             variant="contained"
-            // onClick={handlerLogin}
+            onClick={handlerLogin}
           ></Button>
         </Box>
       </Container>

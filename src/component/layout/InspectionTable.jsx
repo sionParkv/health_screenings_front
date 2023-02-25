@@ -43,7 +43,7 @@ const InspectionTable = (props) => {
 
   // 탭 데이터 리스트 가져오기
   const loadData = () => {
-    const url = 'http://192.168.1.85:4000/api/inspection'
+    const url = 'http://192.168.1.13:4000/api/inspection'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -89,9 +89,9 @@ const InspectionTable = (props) => {
       })
     } else if (orders[0].includes('NUMBER')) {
       dataSort = data.sort((a, b) => {
-        if (a.PTNTINFO_IDNO < b.PTNTINFO_IDNO) {
+        if (a.PTNTEXAM_IDNO < b.PTNTEXAM_IDNO) {
           return orders[1] === 'ASC' ? -1 : 1
-        } else if (a.PTNTINFO_IDNO > b.PTNTINFO_IDNO) {
+        } else if (a.PTNTEXAM_IDNO > b.PTNTEXAM_IDNO) {
           return orders[1] === 'ASC' ? 1 : -1
         } else {
           return 0
@@ -112,7 +112,7 @@ const InspectionTable = (props) => {
   }, [])
 
   const handleNameClick = (room) => {
-    const url = 'http://192.168.1.85:4000/api/inspection/click'
+    const url = 'http://192.168.1.13:4000/api/inspection/click'
 
     axios
       .post(url, { room: room })
@@ -124,16 +124,6 @@ const InspectionTable = (props) => {
         console.log(error.message)
       })
   }
-
-  // const handleNameClick2 = () => {
-  //   const url =
-  //     'https://d0b6cdf5-44e7-4257-9b15-0215601c9566.mock.pstmn.io/api/inspection/right2'
-
-  //   axios.post(url).then((response) => {
-  //     setRightData(response.data.data)
-  //     console.log(response.data.data)
-  //   })
-  // }
 
   const TabItem = (props) => {
     const { PKFGNAME, EXAMRMNM, P_CNT, W_CNT, N_CNT, F_CNT } = props
@@ -179,34 +169,31 @@ const InspectionTable = (props) => {
             />
           ))}
       </Tabs>
-      <TableContainer>
-        <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <TableContainer className="InspectionRight">
+        <Table sx={{ minWidth: 600 }}>
           <TableBody>
             {rightData.map((row, index) => (
-              <TableRow key={index} className="InspectionRight">
+              <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  <T>{index}</T>
-                  <T>V</T>
+                  <T id="index">{index + 1}</T>
+                  <T id="test">V</T>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <T>{row.PTNTEXAM_IDNO}</T>
-                  <T></T>
+                  <T id="idno">{row.PTNTEXAM_IDNO}</T>
+                  <Box>{}</Box>
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" id="name">
                   <T>{row.PTNTINFO_NAME}</T>
-                  <Box></Box>
-                </TableCell>
-                <TableCell component="th" scope="row">
                   <T>
                     {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
                   </T>
-                  <T></T>
                 </TableCell>
+
                 <TableCell component="th" scope="row">
-                  <T>{row.PTNTINFO_BITH}</T>
-                  <T></T>
+                  <T id="birth">{row.PTNTINFO_BITH}</T>
+                  <Box></Box>
                 </TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell component="th" scope="row" className="select">
                   <Box>
                     <FormControl>
                       <Select
@@ -233,12 +220,6 @@ const InspectionTable = (props) => {
         </Table>
       </TableContainer>
     </Box>
-    // <Box sx={{ width: '100%' }}>
-    //   <Grid container rowSpacing={1}>
-    //     <InspectionLeft />
-    //     <InspectionRight />
-    //   </Grid>
-    // </Box>
   )
 }
 

@@ -3,7 +3,8 @@
 .LoginPage {
   max-width: inherit !important;
   min-height: 100%;
-  padding: dp(100);
+  padding-top: dp(300);
+  padding-left: 0 !important;
   background-color: #f3f2f2;
 
   .LoginForm {

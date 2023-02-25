@@ -1,22 +1,22 @@
 @import 'common';
 
-.MuiToolbar-root {
-  height: dp(133);
-}
-
 .MainHeader {
   .MuiPaper-root {
     background-color: #e9852c !important;
     .MuiToolbar-root {
       display: flex;
+      height: dp(100);
       justify-content: flex-end;
       max-width: dp(1200);
       background-image: url('../images/title_2.png');
       background-size: cover;
 
       .Exit {
-        padding-right: dp(20);
+        padding-right: dp(10);
         padding-top: dp(10);
+        img {
+          width: dp(35);
+        }
       }
     }
   }
@@ -28,7 +28,7 @@
 
     .MuiToolbar-root {
       display: flex;
-      width: dp(750);
+      width: dp(700);
       height: dp(100);
       align-items: center;
       justify-content: space-between;
@@ -58,7 +58,7 @@
         .SelectBox {
           display: flex;
           justify-content: center;
-          width: dp(30);
+          width: dp(70);
           padding-left: dp(30);
 
           .MuiFormControl-root {
@@ -85,13 +85,14 @@
         .ImgBox {
           display: flex;
           align-items: center;
+          width: dp(20);
           height: 100%;
           border-left: 1px solid white;
         }
         img {
           width: dp(33);
-          height: dp(40);
-          padding-left: dp(28);
+          height: dp(53);
+          padding-left: dp(33);
         }
       }
     }

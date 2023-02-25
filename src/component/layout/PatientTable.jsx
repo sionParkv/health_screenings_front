@@ -39,7 +39,7 @@ const PatientTable = (props) => {
   }
 
   const loadData = () => {
-    const url = 'http://192.168.1.85:4000/api/patient'
+    const url = 'http://192.168.1.13:4000/api/patient'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -60,7 +60,7 @@ const PatientTable = (props) => {
     }
 
     return data.filter((item) => {
-      return selectedType.label.includes(item.PKFGNAME) ? true : false
+      return selectedType.label.includes(item.PTNTINFO_PKFG) ? true : false
     })
   }
 
@@ -108,7 +108,7 @@ const PatientTable = (props) => {
   }, [])
 
   const handleNameClick = (patno) => {
-    const url = 'http://192.168.1.85:4000/api/patient/click'
+    const url = 'http://192.168.1.13:4000/api/patient/click'
 
     axios
       .post(url, { patno: patno })
@@ -123,9 +123,9 @@ const PatientTable = (props) => {
 
   const TabItem = (props) => {
     const {
-      index,
+      key,
       PTNTINFO_IDNO,
-      name,
+      PTNTINFO_NAME,
       PTNTINFO_SEX,
       PTNTINFO_AGE,
       PTNTINFO_BITH,
@@ -135,9 +135,9 @@ const PatientTable = (props) => {
     return (
       <Container className="PatientLeft">
         <Box className="InfoTop">
-          <Box>{index}</Box>
+          <Box>{key}</Box>
           <Box>{PTNTINFO_IDNO}</Box>
-          <Box>{name}</Box>
+          <Box>{PTNTINFO_NAME}</Box>
           <Box>
             {PTNTINFO_SEX}/{PTNTINFO_AGE}
           </Box>
@@ -179,13 +179,13 @@ const PatientTable = (props) => {
           ))}
       </Tabs>
       <TableContainer>
-        <Table>
+        <Table className="PatientRight">
           <TableBody>
             {rightData?.map((row, index) => (
-              <TableRow key={index} className="PatientRight">
+              <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  <T>{row.PTNTEXAM_RMCD}</T>
-                  <T>{row.PTNTINFO_NAME}</T>
+                  <T id="room">{row.PTNTEXAM_RMCD}</T>
+                  <T id="name">{row.PTNTINFO_NAME}</T>
                 </TableCell>
                 <TableCell component="th" scope="row">
                   <T>{row.PTNTEXAM_RMNM}</T>
@@ -204,7 +204,7 @@ const PatientTable = (props) => {
                         </MenuItem>
                         {names.map((name) => (
                           <MenuItem key={name} value={name}>
-                            {row.state}
+                            {name}
                           </MenuItem>
                         ))}
                       </Select>

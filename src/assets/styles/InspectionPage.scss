@@ -1,54 +1,80 @@
 @import 'common';
 
-.MuiToolbar-root {
-  height: dp(100);
-}
+.InspectionPage {
+  padding: 0 !important;
 
-.InspectionLeft {
-  display: flex !important;
-  flex-direction: column;
-  color: black;
-  padding-top: dp(10);
-  padding-bottom: dp(10);
-  border-bottom: 1px solid black;
-  .InfoTop {
+  .MuiToolbar-root {
+    height: dp(100);
+  }
+  .MuiBox-root {
     display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    padding-bottom: dp(10);
+  }
 
-    #room {
-      font-size: dp(20);
+  .MuiTabs-hideScrollbar {
+    width: 100%;
+  }
+
+  .InspectionLeft {
+    color: black;
+    padding-bottom: dp(10);
+    border-bottom: 1px solid black;
+
+    .InfoTop {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      padding-bottom: dp(10);
+
+      :nth-child(1) {
+        color: #e9852b;
+      }
+
+      #room {
+        font-size: dp(18);
+      }
+    }
+    .InfoBottom {
+      display: flex;
+      flex-direction: row;
+      font-size: dp(13);
+      justify-content: space-between;
     }
   }
-  .InfoBottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-}
 
-.MuiTabs-root {
-  width: 50% !important;
-  height: dp(700);
-  align-items: center;
-  padding: 0 !important;
-  > .MuiButtonBase-root {
-    display: none;
+  .InspectionRight {
+    background-color: #e2e2e2;
+    .MuiTableRow-root {
+      height: dp(70);
+    }
+    th {
+      padding: 0;
+    }
+    #index {
+      font-weight: bold;
+      padding-left: dp(15);
+    }
+    #name {
+      width: dp(50);
+    }
+    #idno {
+      width: dp(40);
+    }
+    #birth {
+      width: dp(30);
+      padding-left: dp(30);
+    }
+    #test {
+      color: #e9852b;
+      font-weight: bold;
+      padding-left: dp(15);
+    }
   }
-  .MuiTabs-indicator {
-    background-color: white;
-  }
-  .MuiButtonBase-root {
-    width: dp(600);
-  }
-}
 
-.MuiTableContainer-root {
-  width: 70% !important;
-}
-
-.MuiSelect-select {
-  width: dp(100) !important;
-  height: dp(20);
+  .MuiTabs-root {
+    width: 70% !important;
+    height: 100%;
+    .MuiTabs-indicator {
+      background-color: white;
+    }
+  }
 }
