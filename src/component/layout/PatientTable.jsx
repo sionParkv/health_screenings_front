@@ -183,11 +183,11 @@ const PatientTable = (props) => {
             {rightData?.map((row, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
-                  <T id="room">{row.PTNTEXAM_RMCD}</T>
+                  <T id="roomNum">{row.PTNTEXAM_RMCD}</T>
                   <T id="name">{row.PTNTINFO_NAME}</T>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                  <T>{row.PTNTEXAM_RMNM}</T>
+                  <T id="room">{row.PTNTEXAM_RMNM}</T>
                   <T>{row.time}</T>
                 </TableCell>
                 <TableCell component="th" scope="row">

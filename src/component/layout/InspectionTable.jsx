@@ -147,7 +147,7 @@ const InspectionTable = (props) => {
 
   const handleSelectChange = (event) => {
     setPersonName(event.target.value)
-    console.log(event.target.value)
+    console.log(setPersonName)
   }
 
   const names = ['진행중', '대기', '미실행', '거부', '완료']

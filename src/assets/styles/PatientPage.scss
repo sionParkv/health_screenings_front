@@ -56,11 +56,15 @@
   .PatientRight {
     height: calc(100vh - 100px);
     overflow-y: scroll;
-    #room {
+    #roomNum {
       font-weight: bold;
     }
     #name {
       font-size: dp(15);
+    }
+    #room {
+      width: dp(100);
+      padding-right: dp(80);
     }
   }
 
