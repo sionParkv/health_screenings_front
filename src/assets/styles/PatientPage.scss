@@ -3,6 +3,11 @@
 .PatientPage {
   padding: 0 !important;
 
+  .MuiTabs-vertical {
+    max-height: calc(100vh - 100px);
+    overflow-y: scroll;
+  }
+
   .MuiToolbar-root {
     height: dp(100);
   }
@@ -16,6 +21,7 @@
     padding-bottom: dp(10);
     border-bottom: 1px solid black;
     background-color: #e2e2e2;
+
     width: 90% !important;
 
     .InfoTop {
@@ -48,6 +54,8 @@
   }
 
   .PatientRight {
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
     #room {
       font-weight: bold;
     }

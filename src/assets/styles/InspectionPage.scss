@@ -3,6 +3,11 @@
 .InspectionPage {
   padding: 0 !important;
 
+  .MuiTabs-vertical {
+    max-height: calc(100vh - 100px);
+    overflow-y: scroll;
+  }
+
   .MuiToolbar-root {
     height: dp(100);
   }
@@ -42,12 +47,22 @@
   }
 
   .InspectionRight {
+    width: 500px;
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
     background-color: #e2e2e2;
     .MuiTableRow-root {
       height: dp(70);
     }
+    table {
+      min-width: 100%;
+    }
     th {
       padding: 0;
+
+      &:nth-child(5) {
+        width: 130px;
+      }
     }
     #index {
       font-weight: bold;
@@ -71,7 +86,8 @@
   }
 
   .MuiTabs-root {
-    width: 70% !important;
+    // width: 70% !important;
+    width: 300px;
     height: 100%;
     .MuiTabs-indicator {
       background-color: white;

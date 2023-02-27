@@ -45,7 +45,6 @@ const PatientTable = (props) => {
       setLoadedData(resultData)
       resultData = setDataType(resultData)
       setDataSort(resultData)
-      console.log(resultData[0])
     })
   }
 
@@ -114,7 +113,7 @@ const PatientTable = (props) => {
       .post(url, { patno: patno })
       .then((response) => {
         setRightData(response.data.data)
-        console.log(response.data.data[0])
+        console.log(response.data.data)
       })
       .catch((error) => {
         console.log(error.message)
@@ -178,8 +177,8 @@ const PatientTable = (props) => {
             />
           ))}
       </Tabs>
-      <TableContainer>
-        <Table className="PatientRight">
+      <TableContainer className="PatientRight">
+        <Table>
           <TableBody>
             {rightData?.map((row, index) => (
               <TableRow key={index}>

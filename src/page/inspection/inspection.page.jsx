@@ -28,9 +28,7 @@ const InspectionPage = () => {
   return (
     <Container className="InspectionPage">
       <Header {...propsSelectors} />
-      <Box>
-        <InspectionTable {...propsSelectors} />
-      </Box>
+      <InspectionTable {...propsSelectors} />
     </Container>
   )
 }

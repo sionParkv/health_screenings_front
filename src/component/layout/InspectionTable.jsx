@@ -49,10 +49,9 @@ const InspectionTable = (props) => {
       setLoadedData(resultData)
       resultData = setDataType(resultData)
       setDataSort(resultData)
-      console.log(resultData[0])
     })
   }
-
+  // 왼쪽 셀렉트 필터
   const setDataType = (data) => {
     let selectedType = types.find((item) =>
       item.where === type ? true : false
@@ -111,6 +110,7 @@ const InspectionTable = (props) => {
     loadData()
   }, [])
 
+  // 각각의 행 클릭마다 데이터 호출
   const handleNameClick = (room) => {
     const url = 'http://192.168.1.13:4000/api/inspection/click'
 
@@ -118,13 +118,13 @@ const InspectionTable = (props) => {
       .post(url, { room: room })
       .then((response) => {
         setRightData(response.data.data)
-        console.log(response.data.data[0])
+        // console.log(response.data.data)
       })
       .catch((error) => {
         console.log(error.message)
       })
   }
-
+  // 왼쪽 데이터
   const TabItem = (props) => {
     const { PKFGNAME, EXAMRMNM, P_CNT, W_CNT, N_CNT, F_CNT } = props
     return (
@@ -147,6 +147,7 @@ const InspectionTable = (props) => {
 
   const handleSelectChange = (event) => {
     setPersonName(event.target.value)
+    console.log(event.target.value)
   }
 
   const names = ['진행중', '대기', '미실행', '거부', '완료']
@@ -194,25 +195,22 @@ const InspectionTable = (props) => {
                   <Box></Box>
                 </TableCell>
                 <TableCell component="th" scope="row" className="select">
-                  <Box>
-                    <FormControl>
-                      <Select
-                        displayEmpty
-                        value={personName}
-                        onChange={handleSelectChange}
-                      >
-                        <MenuItem value="">
-                          <em>선택하세요</em>
+                  <FormControl>
+                    <Select
+                      displayEmpty
+                      value={personName}
+                      onChange={handleSelectChange}
+                    >
+                      <MenuItem value="">
+                        <em>선택하세요</em>
+                      </MenuItem>
+                      {names.map((name) => (
+                        <MenuItem key={name} value={name}>
+                          {name}
                         </MenuItem>
-                        {names.map((name) => (
-                          <MenuItem key={name} value={name}>
-                            {name}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Box>
-                  <Box></Box>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </TableCell>
               </TableRow>
             ))}
