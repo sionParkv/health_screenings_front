@@ -145,10 +145,10 @@ const VisitTable = (props) => {
                 <TableCell style={{ width: 160 }} align="center">
                   {row.PTNTINFO_BITH}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="center">
+                <TableCell style={{ width: 160 }} align="center" id="type">
                   {row.PKFGNAME}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="center">
+                <TableCell style={{ width: 160 }} align="center" id="ticket">
                   <Button onClick={handleClickOpen}>번호표발행</Button>
                 </TableCell>
               </TableRow>

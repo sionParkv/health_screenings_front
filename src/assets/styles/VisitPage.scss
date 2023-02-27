@@ -13,6 +13,13 @@
   #name {
     font-weight: bold;
   }
+  #type {
+    width: dp(200) !important;
+  }
+
+  button {
+    width: dp(110) !important;
+  }
 
   .MuiToolbar-root {
     height: dp(100);
