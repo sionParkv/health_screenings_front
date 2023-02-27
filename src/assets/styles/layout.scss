@@ -1,0 +1,146 @@
+@import 'common';
+
+.MainHeader {
+  .MuiPaper-root {
+    background-color: #e9852c !important;
+    .MuiToolbar-root {
+      display: flex;
+      height: dp(100);
+      justify-content: flex-end;
+      max-width: dp(1200);
+      background-image: url('../images/title_2.png');
+      background-size: cover;
+
+      .Exit {
+        padding-right: dp(10);
+        padding-top: dp(10);
+        img {
+          width: dp(35);
+        }
+      }
+    }
+  }
+}
+
+.Header {
+  .MuiPaper-root {
+    background-color: #e9852c !important;
+
+    .MuiToolbar-root {
+      display: flex;
+      width: dp(700);
+      height: dp(100);
+      align-items: center;
+      justify-content: space-between;
+      background-image: url('../images/title_2.png');
+      background-size: dp(1100);
+
+      .Home {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        border-right: 1px solid white;
+
+        img {
+          width: dp(50);
+          height: dp(50);
+          padding-right: dp(20);
+        }
+      }
+
+      .SecondBox {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 35%;
+        height: 100%;
+
+        .SelectBox {
+          display: flex;
+          justify-content: center;
+          width: dp(70);
+          padding-left: dp(30);
+
+          .MuiFormControl-root {
+            min-width: dp(100);
+            background-color: white;
+            border-radius: dp(10);
+
+            &:nth-child(1) {
+              width: dp(140);
+            }
+
+            em {
+              color: #e9852c;
+              font-size: dp(18);
+              font-weight: bold;
+              font-style: normal;
+            }
+
+            svg {
+              color: #e9852c;
+            }
+          }
+        }
+        .ImgBox {
+          display: flex;
+          align-items: center;
+          width: dp(20);
+          height: 100%;
+          border-left: 1px solid white;
+        }
+        img {
+          width: dp(33);
+          height: dp(53);
+          padding-left: dp(33);
+        }
+      }
+    }
+  }
+}
+
+.Ticket-dialog {
+  .MuiDialog-container {
+    .MuiPaper-root {
+      background-color: black;
+      width: dp(500);
+      height: dp(500);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 5px solid orange;
+
+      .MuiTypography-root {
+        padding-top: dp(50);
+        font-size: 3em;
+        color: white;
+
+        .WaitNum {
+          padding-left: dp(40);
+          color: #e9852c;
+        }
+      }
+
+      .MuiDialogContent-root {
+        color: white;
+        font-size: 1.5em;
+        padding-top: dp(20);
+        .WaitPerson {
+          padding-left: dp(50);
+        }
+      }
+
+      .MuiDialogActions-root {
+        padding-bottom: dp(50);
+
+        .MuiButtonBase-root {
+          width: dp(200);
+          height: dp(70);
+          background-color: #e9852c;
+          color: black;
+          font-size: 2em;
+        }
+      }
+    }
+  }
+}

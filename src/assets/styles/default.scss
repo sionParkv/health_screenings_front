@@ -1,0 +1,44 @@
+@import 'common';
+
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: $color-3;
+  font-family: $font-family-default;
+  user-select: none;
+  background-color: transparent;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+}
+
+td,
+th,
+button {
+  font-size: 1.125rem !important;
+}
+
+#root {
+  height: 100%;
+}
+
+.MuiMenu-list {
+  li {
+    font-size: 1.125rem;
+    padding: dp(5) dp(10) !important;
+  }
+}

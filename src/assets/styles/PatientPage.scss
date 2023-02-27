@@ -1,0 +1,82 @@
+@import 'common';
+
+.PatientPage {
+  padding: 0 !important;
+
+  .MuiTabs-vertical {
+    max-height: calc(100vh - 100px);
+    overflow-y: scroll;
+  }
+
+  .MuiToolbar-root {
+    height: dp(100);
+  }
+  .MuiBox-root {
+    display: flex;
+  }
+
+  .PatientLeft {
+    color: black;
+    padding-top: dp(10);
+    padding-bottom: dp(10);
+    border-bottom: 1px solid black;
+    background-color: #e2e2e2;
+
+    width: 90% !important;
+
+    .InfoTop {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-bottom: dp(10);
+      :nth-child(2) {
+        font-size: dp(15);
+      }
+      :nth-child(3) {
+        font-size: dp(15);
+      }
+      :nth-child(4) {
+        font-size: dp(15);
+        padding-right: dp(10);
+      }
+      :nth-child(5) {
+        font-size: dp(15);
+      }
+    }
+    .InfoBottom {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      :nth-child(5) {
+        color: #e9852b;
+      }
+    }
+  }
+
+  .PatientRight {
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+    #roomNum {
+      font-weight: bold;
+    }
+    #name {
+      font-size: dp(15);
+    }
+    #room {
+      width: dp(100);
+      padding-right: dp(80);
+    }
+  }
+
+  .MuiTabs-root {
+    width: 70% !important;
+    height: 100%;
+    .MuiTabs-indicator {
+      background-color: white;
+    }
+    .MuiButtonBase-root {
+      padding: 0 !important;
+      width: dp(600);
+    }
+  }
+}

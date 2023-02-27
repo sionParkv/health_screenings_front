@@ -1,0 +1,50 @@
+@import 'common';
+
+.MainPage {
+  display: flex !important;
+  flex-direction: column;
+  max-width: inherit !important;
+  height: 100%;
+  background-color: #f3f2f2;
+
+  .MuiBox-root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly !important;
+    :nth-child(2) {
+      font-size: dp(13);
+    }
+  }
+
+  .Main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+
+    button {
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%;
+      margin: 0 auto;
+      padding: dp(32);
+
+      img {
+        width: 100px;
+      }
+
+      p {
+        color: #333333;
+
+        &:nth-child(2) {
+          font-size: 2.3em;
+          font-weight: bold;
+        }
+      }
+
+      .MuiTouchRipple-root {
+        color: orange;
+      }
+    }
+  }
+}

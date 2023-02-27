@@ -1,0 +1,96 @@
+@import 'common';
+
+.InspectionPage {
+  padding: 0 !important;
+
+  .MuiTabs-vertical {
+    max-height: calc(100vh - 100px);
+    overflow-y: scroll;
+  }
+
+  .MuiToolbar-root {
+    height: dp(100);
+  }
+  .MuiBox-root {
+    display: flex;
+  }
+
+  .MuiTabs-hideScrollbar {
+    width: 100%;
+  }
+
+  .InspectionLeft {
+    color: black;
+    padding-bottom: dp(10);
+    border-bottom: 1px solid black;
+
+    .InfoTop {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      padding-bottom: dp(10);
+
+      :nth-child(1) {
+        color: #e9852b;
+      }
+
+      #room {
+        font-size: dp(18);
+      }
+    }
+    .InfoBottom {
+      display: flex;
+      flex-direction: row;
+      font-size: dp(13);
+      justify-content: space-between;
+    }
+  }
+
+  .InspectionRight {
+    width: 500px;
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+    background-color: #e2e2e2;
+    .MuiTableRow-root {
+      height: dp(70);
+    }
+    table {
+      min-width: 100%;
+    }
+    th {
+      padding: 0;
+
+      &:nth-child(5) {
+        width: 130px;
+      }
+    }
+    #index {
+      font-weight: bold;
+      padding-left: dp(15);
+    }
+    #name {
+      width: dp(50);
+    }
+    #idno {
+      width: dp(60);
+    }
+    #birth {
+      width: dp(30);
+      padding-left: dp(30);
+    }
+    #test {
+      color: #e9852b;
+      font-weight: bold;
+      padding-left: dp(15);
+    }
+  }
+
+  .MuiTabs-root {
+    // width: 70% !important;
+    width: 300px;
+    height: 100%;
+    .MuiTabs-indicator {
+      background-color: white;
+    }
+  }
+}
