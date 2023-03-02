@@ -20,6 +20,7 @@ import { useState } from 'react'
 import { selectors } from '../../data/selectors'
 import { useEffect } from 'react'
 import { useLayoutEffect } from 'react'
+import { async } from 'q'
 
 function a11yProps(index) {
   return {
@@ -111,7 +112,7 @@ const InspectionTable = (props) => {
   }, [])
 
   // 각각의 행 클릭마다 데이터 호출
-  const handleNameClick = (room) => {
+  const handleNameClick = async (room) => {
     const url = 'http://192.168.1.13:4000/api/inspection/click'
 
     axios
@@ -124,6 +125,7 @@ const InspectionTable = (props) => {
         console.log(error.message)
       })
   }
+
   // 왼쪽 데이터
   const TabItem = (props) => {
     const { PKFGNAME, EXAMRMNM, P_CNT, W_CNT, N_CNT, F_CNT } = props
@@ -173,47 +175,55 @@ const InspectionTable = (props) => {
       <TableContainer className="InspectionRight">
         <Table sx={{ minWidth: 600 }}>
           <TableBody>
-            {rightData.map((row, index) => (
-              <TableRow key={index}>
-                <TableCell component="th" scope="row">
-                  <T id="index">{index + 1}</T>
-                  <T id="test">V</T>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <T id="idno">{row.PTNTEXAM_IDNO}</T>
-                  <Box>{}</Box>
-                </TableCell>
-                <TableCell component="th" scope="row" id="name">
-                  <T>{row.PTNTINFO_NAME}</T>
-                  <T>
-                    {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
-                  </T>
-                </TableCell>
+            {!!rightData?.length &&
+              rightData.map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row">
+                    <T id="index">{index + 1}</T>
+                    <T id="test">V</T>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <T id="idno">{row.PTNTEXAM_IDNO}</T>
+                    <Box>{}</Box>
+                  </TableCell>
+                  <TableCell component="th" scope="row" id="name">
+                    <T>{row.PTNTINFO_NAME}</T>
+                    <T>
+                      {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
+                    </T>
+                  </TableCell>
 
-                <TableCell component="th" scope="row">
-                  <T id="birth">{row.PTNTINFO_BITH}</T>
-                  <Box></Box>
-                </TableCell>
-                <TableCell component="th" scope="row" className="select">
-                  <FormControl>
-                    <Select
-                      displayEmpty
-                      value={personName}
-                      onChange={handleSelectChange}
-                    >
-                      <MenuItem value="">
-                        <em>선택하세요</em>
-                      </MenuItem>
-                      {names.map((name) => (
-                        <MenuItem key={name} value={name}>
-                          {name}
+                  <TableCell component="th" scope="row">
+                    <T id="birth">{row.PTNTINFO_BITH}</T>
+                    <Box></Box>
+                  </TableCell>
+                  <TableCell component="th" scope="row" className="select">
+                    <FormControl>
+                      <Select
+                        displayEmpty
+                        value={personName}
+                        onChange={handleSelectChange}
+                      >
+                        <MenuItem value="">
+                          <em>선택하세요</em>
                         </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
+                        {names.map((name) => (
+                          <MenuItem key={name} value={name}>
+                            {name}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {!rightData?.length && (
+              <TableRow>
+                <TableCell className="NoData">
+                  로드된 데이터가 없습니다.
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
