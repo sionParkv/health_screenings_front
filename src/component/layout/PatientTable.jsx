@@ -39,7 +39,7 @@ const PatientTable = (props) => {
   }
 
   const loadData = () => {
-    const url = 'http://192.168.1.13:4000/api/patient'
+    const url = 'http://localhost:4000/api/patient'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -107,7 +107,7 @@ const PatientTable = (props) => {
   }, [])
 
   const handleNameClick = (patno) => {
-    const url = 'http://192.168.1.13:4000/api/patient/click'
+    const url = 'http://localhost:4000/api/patient/click'
 
     axios
       .post(url, { patno: patno })

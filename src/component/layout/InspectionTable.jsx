@@ -44,7 +44,7 @@ const InspectionTable = (props) => {
 
   // 탭 데이터 리스트 가져오기
   const loadData = () => {
-    const url = 'http://192.168.1.13:4000/api/inspection'
+    const url = 'http://localhost:4000/api/inspection'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -113,7 +113,7 @@ const InspectionTable = (props) => {
 
   // 각각의 행 클릭마다 데이터 호출
   const handleNameClick = async (room) => {
-    const url = 'http://192.168.1.13:4000/api/inspection/click'
+    const url = 'http://localhost:4000/api/inspection/click'
 
     axios
       .post(url, { room: room })
