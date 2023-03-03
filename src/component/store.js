@@ -6,8 +6,7 @@ import {
 import { createLogger } from 'redux-logger'
 import { createEpicMiddleware } from 'redux-observable'
 import thunkMiddleware from 'redux-thunk'
-
-import { rootReducer } from './'
+import { rootReducer } from '../redux/reducer'
 import { isDebug } from '../tools'
 
 // 함수 조합을 위한 compose(개발환경에서 크롬 확장 프로그램이 설치되어 있을 경우 해당 프로그램 사용)

@@ -2,7 +2,7 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { Router } from './'
 
-import { store } from '../redux'
+import { store } from './'
 
 /**
  * 최상위 React Component를 제공하는 컴포넌트.

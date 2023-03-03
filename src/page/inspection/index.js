@@ -1,1 +1,1 @@
-export * from './Inspection.page'
+export * from './inspection.page'

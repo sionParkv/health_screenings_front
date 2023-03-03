@@ -11,7 +11,7 @@ import { Button } from '@mui/material'
 import { ConfirmDialog } from './ConfirmDialog'
 import { selectors } from '../../data/selectors'
 
-const url = 'http://192.168.1.13:4000/api/visit'
+const url = 'http://localhost:4000/api/visit'
 
 const VisitTable = (props) => {
   const { sort, type } = props
@@ -145,10 +145,10 @@ const VisitTable = (props) => {
                 <TableCell style={{ width: 160 }} align="center">
                   {row.PTNTINFO_BITH}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="center">
+                <TableCell style={{ width: 160 }} align="center" id="type">
                   {row.PKFGNAME}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="center">
+                <TableCell style={{ width: 160 }} align="center" id="ticket">
                   <Button onClick={handleClickOpen}>번호표발행</Button>
                 </TableCell>
               </TableRow>

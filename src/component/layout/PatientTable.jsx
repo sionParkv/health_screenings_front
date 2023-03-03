@@ -39,7 +39,7 @@ const PatientTable = (props) => {
   }
 
   const loadData = () => {
-    const url = 'http://192.168.1.13:4000/api/patient'
+    const url = 'http://localhost:4000/api/patient'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -107,7 +107,7 @@ const PatientTable = (props) => {
   }, [])
 
   const handleNameClick = (patno) => {
-    const url = 'http://192.168.1.13:4000/api/patient/click'
+    const url = 'http://localhost:4000/api/patient/click'
 
     axios
       .post(url, { patno: patno })
@@ -180,50 +180,51 @@ const PatientTable = (props) => {
       <TableContainer className="PatientRight">
         <Table>
           <TableBody>
-            {rightData?.map((row, index) => (
-              <TableRow key={index}>
-                <TableCell component="th" scope="row">
-                  <T id="roomNum">{row.PTNTEXAM_RMCD}</T>
-                  <T id="name">{row.PTNTINFO_NAME}</T>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <T id="room">{row.PTNTEXAM_RMNM}</T>
-                  <T>{row.time}</T>
-                </TableCell>
-                <TableCell component="th" scope="row">
-                  <Box>
-                    <FormControl>
-                      <Select
-                        displayEmpty
-                        value={personName}
-                        onChange={handleSelectChange}
-                      >
-                        <MenuItem value="">
-                          <em>선택하세요</em>
-                        </MenuItem>
-                        {names.map((name) => (
-                          <MenuItem key={name} value={name}>
-                            {name}
+            {!!rightData?.length &&
+              rightData?.map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell component="th" scope="row">
+                    <T id="roomNum">{row.PTNTEXAM_RMCD}</T>
+                    <T id="name">{row.PTNTINFO_NAME}</T>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <T id="room">{row.PTNTEXAM_RMNM}</T>
+                    <T>{row.time}</T>
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Box>
+                      <FormControl>
+                        <Select
+                          displayEmpty
+                          value={personName}
+                          onChange={handleSelectChange}
+                        >
+                          <MenuItem value="">
+                            <em>선택하세요</em>
                           </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </Box>
+                          {names.map((name) => (
+                            <MenuItem key={name} value={name}>
+                              {name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {!rightData?.length && (
+              <TableRow>
+                <TableCell className="NoData">
+                  로드된 데이터가 없습니다.
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
     </Box>
   )
-  //   <Box sx={{ width: '100%' }}>
-  //     <Grid container rowSpacing={1} classname="PatientTable">
-  //       <PatientLeft />
-  //       <PatientRight />
-  //     </Grid>
-  //   </Box>
-  // )
 }
 
 export { PatientTable }
