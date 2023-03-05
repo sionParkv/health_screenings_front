@@ -66,6 +66,23 @@
       width: dp(100);
       padding-right: dp(80);
     }
+    .MuiFormControl-root {
+      &.D {
+        background-color: gray;
+      }
+      &.N {
+        background-color: white;
+      }
+      &.I {
+        background-color: pink;
+      }
+      &.F {
+        background-color: yellow;
+      }
+      &.W {
+        background-color: aqua;
+      }
+    }
   }
 
   .MuiTabs-root {

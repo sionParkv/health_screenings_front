@@ -39,7 +39,7 @@ const PatientTable = (props) => {
   }
 
   const loadData = () => {
-    const url = 'http://localhost:4000/api/patient'
+    const url = 'http://192.168.1.18:4000/api/patient'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -106,8 +106,31 @@ const PatientTable = (props) => {
     loadData()
   }, [])
 
+  const states = [
+    {
+      state: 'I',
+      label: '검사중',
+    },
+    {
+      state: 'W',
+      label: '대기',
+    },
+    {
+      state: 'N',
+      label: '미실행',
+    },
+    {
+      state: 'D',
+      label: '거부',
+    },
+    {
+      state: 'F',
+      label: '완료',
+    },
+  ]
+
   const handleNameClick = (patno) => {
-    const url = 'http://localhost:4000/api/patient/click'
+    const url = 'http://192.168.1.18:4000/api/patient/click'
 
     axios
       .post(url, { patno: patno })
@@ -152,13 +175,48 @@ const PatientTable = (props) => {
       </Container>
     )
   }
-  const [personName, setPersonName] = useState([])
+  // const [personName, setPersonName] = useState([])
 
-  const handleSelectChange = (event) => {
-    setPersonName(event.target.value)
+  const handleSelectChange = (event, index) => {
+    const oriData = [...rightData]
+
+    const url = 'http://192.168.1.18:4000/api/patient/change'
+    const { PTNTEXAM_RMCD, PTNTEXAM_IDNO, PTNTEXAM_RMNUM } = rightData[index]
+    console.log(
+      `[Patient.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
+        event?.target?.value
+      } RMNUM: ${PTNTEXAM_RMNUM} USERID: ${localStorage.getItem('ui')}`
+    )
+
+    axios
+      .post(url, {
+        RMCD: PTNTEXAM_RMCD,
+        IDNO: PTNTEXAM_IDNO,
+        STAT: event?.target?.value,
+        RMNUM: PTNTEXAM_RMNUM,
+        USERID: localStorage.getItem('ui'),
+      })
+      .then((response) => {
+        console.log(
+          `[Patient.handleSelectChange] response data - `,
+          response?.data
+        )
+
+        if (response?.data?.code === 'OK') {
+          oriData[index].PTNTEXAM_STAT = event?.target?.value
+        } else {
+          alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+        }
+      })
+      .catch((error) => {
+        console.log(error.message)
+        alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+      })
+      .finally(() => {
+        setRightData(oriData)
+      })
   }
 
-  const names = ['미실행', '대기', '완료', '검사중']
   return (
     <Box>
       <Tabs
@@ -189,27 +247,32 @@ const PatientTable = (props) => {
                   </TableCell>
                   <TableCell component="th" scope="row">
                     <T id="room">{row.PTNTEXAM_RMNM}</T>
-                    <T>{row.time}</T>
+                    <T>
+                      시작 : {row.PTNTEXAM_STTM} 완료 : {row.PTNTEXAM_EDTM}
+                    </T>
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    <Box>
-                      <FormControl>
-                        <Select
-                          displayEmpty
-                          value={personName}
-                          onChange={handleSelectChange}
-                        >
-                          <MenuItem value="">
-                            <em>선택하세요</em>
-                          </MenuItem>
-                          {names.map((name) => (
-                            <MenuItem key={name} value={name}>
-                              {name}
+                    <FormControl className={row.PTNTEXAM_STAT}>
+                      <Select
+                        displayEmpty
+                        value={row.PTNTEXAM_STAT}
+                        name="SelectState"
+                        onChange={(event) => {
+                          handleSelectChange(event, index)
+                        }}
+                      >
+                        <MenuItem value="">
+                          <em>선택하세요</em>
+                        </MenuItem>
+                        {states.map((state, s) => {
+                          return (
+                            <MenuItem key={s} value={state.state}>
+                              {state.label}
                             </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    </Box>
+                          )
+                        })}
+                      </Select>
+                    </FormControl>
                   </TableCell>
                 </TableRow>
               ))}

@@ -11,7 +11,7 @@ import { Button } from '@mui/material'
 import { ConfirmDialog } from './ConfirmDialog'
 import { selectors } from '../../data/selectors'
 
-const url = 'http://localhost:4000/api/visit'
+const url = 'http://192.168.1.18:4000/api/visit'
 
 const VisitTable = (props) => {
   const { sort, type } = props
@@ -25,6 +25,7 @@ const VisitTable = (props) => {
       setLoadedData(resultData)
       resultData = setDataType(resultData)
       setDataSort(resultData)
+      console.log(resultData)
     })
   }
 
@@ -32,7 +33,6 @@ const VisitTable = (props) => {
     let selectedType = types.find((item) =>
       item.where === type ? true : false
     )
-    // console.log('selected type: ', selectedType)
 
     if (selectedType.where === 'All') {
       return data
@@ -47,7 +47,6 @@ const VisitTable = (props) => {
     let selectedSort = sorts.find((item) =>
       item.order === sort ? true : false
     )
-    // console.log('selected sort: ', selectedSort, sort)
 
     let dataSort = []
     const orders = selectedSort.order.split('_')
@@ -89,7 +88,57 @@ const VisitTable = (props) => {
   })
   const closeDialog = () => setPropsDialog({ ...propsDialog, isOpen: false })
 
-  const handleClickOpen = () => {
+  // 번호표 발행 팝업
+  const handleClickOpen = (event, index) => {
+    const oriData = [...sortedData]
+
+    const url = 'http://192.168.1.18:4000/api/visit/ticket'
+    const {
+      HCAVBSNS_IDNO,
+      HCAVBSNS_NAME,
+      HCAVBSNS_ISID,
+      HCAVBSNS_ZONE,
+      HCAVBSNS_BSTP,
+      HCAVSUGI_NUMB,
+      HCAVISSUE_GB,
+      HCAVBSNS_TEMP,
+    } = sortedData[index]
+    // console.log(
+    //   `[Patient.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
+    //     event?.target?.value
+    //   } RMNUM: ${PTNTEXAM_RMNUM} USERID: ${localStorage.getItem('ui')}`
+    //)
+
+    axios
+      .post(url, {
+        IDNO: HCAVBSNS_IDNO,
+        NAME: HCAVBSNS_NAME,
+        ISID: HCAVBSNS_ISID,
+        ZONE: HCAVBSNS_ZONE,
+        BSTP: HCAVBSNS_BSTP,
+        NUMB: HCAVSUGI_NUMB,
+        GB: HCAVISSUE_GB,
+        TEMP: HCAVBSNS_TEMP,
+      })
+      .then((response) => {
+        console.log(
+          `[VisitTicket.handleSelectChange] response data - `,
+          response?.data
+        )
+
+        if (response?.data?.code === 'OK') {
+          oriData[index].PTNTEXAM_STAT = event?.target?.value
+        } else {
+          alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+        }
+      })
+      .catch((error) => {
+        console.log(error.message)
+        alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+      })
+      .finally(() => {
+        setSortedData(oriData)
+      })
     // setOpen(true)
     setPropsDialog({
       ...propsDialog,
@@ -118,7 +167,7 @@ const VisitTable = (props) => {
     })
   }
 
-  console.log('@@@@@ ', sortedData[0])
+  // console.log('@@@@@ ', sortedData[0])
   return (
     <TableContainer
       component={Paper}

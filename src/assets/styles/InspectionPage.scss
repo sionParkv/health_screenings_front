@@ -70,18 +70,34 @@
     }
     #name {
       width: dp(50);
+      padding-left: dp(10);
     }
     #idno {
       width: dp(60);
     }
-    #birth {
-      width: dp(30);
-      padding-left: dp(30);
-    }
+
     #test {
       color: #e9852b;
       font-weight: bold;
       padding-left: dp(15);
+    }
+
+    .MuiFormControl-root {
+      &.D {
+        background-color: gray;
+      }
+      &.N {
+        background-color: white;
+      }
+      &.I {
+        background-color: pink;
+      }
+      &.F {
+        background-color: yellow;
+      }
+      &.W {
+        background-color: aqua;
+      }
     }
   }
 

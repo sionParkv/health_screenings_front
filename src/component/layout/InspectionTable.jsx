@@ -44,7 +44,7 @@ const InspectionTable = (props) => {
 
   // 탭 데이터 리스트 가져오기
   const loadData = () => {
-    const url = 'http://localhost:4000/api/inspection'
+    const url = 'http://192.168.1.18:4000/api/inspection'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -111,15 +111,38 @@ const InspectionTable = (props) => {
     loadData()
   }, [])
 
+  const states = [
+    {
+      state: 'I',
+      label: '검사중',
+    },
+    {
+      state: 'W',
+      label: '대기',
+    },
+    {
+      state: 'N',
+      label: '미실행',
+    },
+    {
+      state: 'D',
+      label: '거부',
+    },
+    {
+      state: 'F',
+      label: '완료',
+    },
+  ]
+
   // 각각의 행 클릭마다 데이터 호출
   const handleNameClick = async (room) => {
-    const url = 'http://localhost:4000/api/inspection/click'
+    const url = 'http://192.168.1.18:4000/api/inspection/click'
 
     axios
       .post(url, { room: room })
       .then((response) => {
         setRightData(response.data.data)
-        // console.log(response.data.data)
+        console.log(response.data.data)
       })
       .catch((error) => {
         console.log(error.message)
@@ -145,14 +168,47 @@ const InspectionTable = (props) => {
     )
   }
 
-  const [personName, setPersonName] = useState([])
+  // const [personName, setPersonName] = useState([])
 
-  const handleSelectChange = (event) => {
-    setPersonName(event.target.value)
-    console.log(setPersonName)
+  const handleSelectChange = (event, index) => {
+    const oriData = [...rightData]
+
+    const url = 'http://192.168.1.18:4000/api/inspection/change'
+    const { PTNTEXAM_RMCD, PTNTEXAM_IDNO, PTNTEXAM_RMNUM } = rightData[index]
+    console.log(
+      `[Inspection.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
+        event?.target?.value
+      } RMNUM: ${PTNTEXAM_RMNUM} USERID: ${localStorage.getItem('ui')}`
+    )
+
+    axios
+      .post(url, {
+        RMCD: PTNTEXAM_RMCD,
+        IDNO: PTNTEXAM_IDNO,
+        STAT: event?.target?.value,
+        RMNUM: PTNTEXAM_RMNUM,
+        USERID: localStorage.getItem('ui'),
+      })
+      .then((response) => {
+        console.log(
+          `[Inspection.handleSelectChange] response data - `,
+          response?.data
+        )
+
+        if (response?.data?.code === 'OK') {
+          oriData[index].PTNTEXAM_STAT = event?.target?.value
+        } else {
+          alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+        }
+      })
+      .catch((error) => {
+        console.log(error.message)
+        alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+      })
+      .finally(() => {
+        setRightData(oriData)
+      })
   }
-
-  const names = ['진행중', '대기', '미실행', '거부', '완료']
 
   return (
     <Box>
@@ -176,47 +232,57 @@ const InspectionTable = (props) => {
         <Table sx={{ minWidth: 600 }}>
           <TableBody>
             {!!rightData?.length &&
-              rightData.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell component="th" scope="row">
-                    <T id="index">{index + 1}</T>
-                    <T id="test">V</T>
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    <T id="idno">{row.PTNTEXAM_IDNO}</T>
-                    <Box>{}</Box>
-                  </TableCell>
-                  <TableCell component="th" scope="row" id="name">
-                    <T>{row.PTNTINFO_NAME}</T>
-                    <T>
-                      {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
-                    </T>
-                  </TableCell>
-
-                  <TableCell component="th" scope="row">
-                    <T id="birth">{row.PTNTINFO_BITH}</T>
-                    <Box></Box>
-                  </TableCell>
-                  <TableCell component="th" scope="row" className="select">
-                    <FormControl>
-                      <Select
-                        displayEmpty
-                        value={personName}
-                        onChange={handleSelectChange}
-                      >
-                        <MenuItem value="">
-                          <em>선택하세요</em>
-                        </MenuItem>
-                        {names.map((name) => (
-                          <MenuItem key={name} value={name}>
-                            {name}
+              rightData.map((row, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableCell component="th" scope="row">
+                      <T id="index">{index + 1}</T>
+                      <T id="test">V</T>
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      <T id="idno">{row.PTNTEXAM_IDNO}</T>
+                      <Box>{}</Box>
+                    </TableCell>
+                    <TableCell component="th" scope="row" id="name">
+                      <T>{row.PTNTINFO_NAME}</T>
+                    </TableCell>
+                    <TableCell>
+                      <T>
+                        {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
+                      </T>
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      <T id="birth">{row.PTNTINFO_BITH}</T>
+                      <T>
+                        시작 : {row.PTNTEXAM_STTM} 완료 : {row.PTNTEXAM_EDTM}
+                      </T>
+                    </TableCell>
+                    <TableCell component="th" scope="row" className="select">
+                      <FormControl className={row.PTNTEXAM_STAT}>
+                        <Select
+                          displayEmpty
+                          value={row.PTNTEXAM_STAT}
+                          name="SelectState"
+                          onChange={(event) => {
+                            handleSelectChange(event, index)
+                          }}
+                        >
+                          <MenuItem value="">
+                            <em>선택하세요</em>
                           </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  </TableCell>
-                </TableRow>
-              ))}
+                          {states.map((state, s) => {
+                            return (
+                              <MenuItem key={s} value={state.state}>
+                                {state.label}
+                              </MenuItem>
+                            )
+                          })}
+                        </Select>
+                      </FormControl>
+                    </TableCell>
+                  </TableRow>
+                )
+              })}
             {!rightData?.length && (
               <TableRow>
                 <TableCell className="NoData">

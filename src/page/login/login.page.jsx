@@ -30,20 +30,23 @@ const LoginPgae = () => {
       // In the port of the server obviously
       const res = await axios({
         method: 'post',
-        url: 'http://localhost:4000/api/login',
+        url: 'http://192.168.1.18:4000/api/login',
         data: {
           account_id: id,
           account_pass: pwd,
         },
       })
 
-      console.log(res.data)
-      console.log(res.data?.code)
       if (res.data?.code === 'OK') {
         console.log('Logged succesfully!')
+
         setLoginStatus(
-          `Logged succesfully! Welcome back ${res.data.data.username}`
+          `Logged succesfully! Welcome back ${res?.data?.data[0].account_name}`
         )
+
+        localStorage.setItem('ui', id)
+        localStorage.setItem('un', res?.data?.data[0].account_name)
+
         window.location.replace('/main')
       } else {
         alert('아이디 혹은 비밀번호를 잘못 입력 하였습니다.')
