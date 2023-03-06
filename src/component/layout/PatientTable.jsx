@@ -39,7 +39,7 @@ const PatientTable = (props) => {
   }
 
   const loadData = () => {
-    const url = 'http://192.168.1.18:4000/api/patient'
+    const url = 'http://192.168.1.98:4000/api/patient'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -130,7 +130,7 @@ const PatientTable = (props) => {
   ]
 
   const handleNameClick = (patno) => {
-    const url = 'http://192.168.1.18:4000/api/patient/click'
+    const url = 'http://192.168.1.98:4000/api/patient/click'
 
     axios
       .post(url, { patno: patno })
@@ -180,7 +180,7 @@ const PatientTable = (props) => {
   const handleSelectChange = (event, index) => {
     const oriData = [...rightData]
 
-    const url = 'http://192.168.1.18:4000/api/patient/change'
+    const url = 'http://192.168.1.98:4000/api/patient/change'
     const { PTNTEXAM_RMCD, PTNTEXAM_IDNO, PTNTEXAM_RMNUM } = rightData[index]
     console.log(
       `[Patient.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${

@@ -4,7 +4,7 @@
 const isDebug = process.env.NODE_ENV !== 'production' ? true : false
 
 const h = window.location.href
-const l = h.indexOf('192.168.1.18') > -1 || h.indexOf('192.168.1.') > -1
+const l = h.indexOf('192.168.1.98') > -1 || h.indexOf('192.168.1.') > -1
 
 /**
  * 로컬 환경인지 여부

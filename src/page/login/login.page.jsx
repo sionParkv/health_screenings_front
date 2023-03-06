@@ -30,7 +30,7 @@ const LoginPgae = () => {
       // In the port of the server obviously
       const res = await axios({
         method: 'post',
-        url: 'http://192.168.1.18:4000/api/login',
+        url: 'http://192.168.1.98:4000/api/login',
         data: {
           account_id: id,
           account_pass: pwd,

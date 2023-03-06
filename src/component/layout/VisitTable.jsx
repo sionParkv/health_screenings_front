@@ -11,7 +11,7 @@ import { Button } from '@mui/material'
 import { ConfirmDialog } from './ConfirmDialog'
 import { selectors } from '../../data/selectors'
 
-const url = 'http://192.168.1.18:4000/api/visit'
+const url = 'http://192.168.1.98:4000/api/visit'
 
 const VisitTable = (props) => {
   const { sort, type } = props
@@ -92,7 +92,7 @@ const VisitTable = (props) => {
   const handleClickOpen = (event, index) => {
     const oriData = [...sortedData]
 
-    const url = 'http://192.168.1.18:4000/api/visit/ticket'
+    const url = 'http://192.168.1.98:4000/api/visit/ticket'
     const {
       HCAVBSNS_IDNO,
       HCAVBSNS_NAME,

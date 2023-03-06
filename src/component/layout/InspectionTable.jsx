@@ -44,7 +44,7 @@ const InspectionTable = (props) => {
 
   // 탭 데이터 리스트 가져오기
   const loadData = () => {
-    const url = 'http://192.168.1.18:4000/api/inspection'
+    const url = 'http://192.168.1.98:4000/api/inspection'
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
       setLoadedData(resultData)
@@ -136,7 +136,7 @@ const InspectionTable = (props) => {
 
   // 각각의 행 클릭마다 데이터 호출
   const handleNameClick = async (room) => {
-    const url = 'http://192.168.1.18:4000/api/inspection/click'
+    const url = 'http://192.168.1.98:4000/api/inspection/click'
 
     axios
       .post(url, { room: room })
@@ -173,7 +173,7 @@ const InspectionTable = (props) => {
   const handleSelectChange = (event, index) => {
     const oriData = [...rightData]
 
-    const url = 'http://192.168.1.18:4000/api/inspection/change'
+    const url = 'http://192.168.1.98:4000/api/inspection/change'
     const { PTNTEXAM_RMCD, PTNTEXAM_IDNO, PTNTEXAM_RMNUM } = rightData[index]
     console.log(
       `[Inspection.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
