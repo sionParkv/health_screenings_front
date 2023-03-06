@@ -39,7 +39,7 @@ const VisitTable = (props) => {
     }
 
     return data.filter((item) => {
-      return selectedType.label.includes(item.PKFGNAME) ? true : false
+      return selectedType.label.includes(item.GUBUN) ? true : false
     })
   }
 
@@ -52,9 +52,9 @@ const VisitTable = (props) => {
     const orders = selectedSort.order.split('_')
     if (orders[0].includes('NAME')) {
       dataSort = data.sort((a, b) => {
-        if (a.PTNTINFO_NAME < b.PTNTINFO_NAME) {
+        if (a.PMSSPTNAM < b.PMSSPTNAM) {
           return orders[1] === 'ASC' ? -1 : 1
-        } else if (a.PTNTINFO_NAME > b.PTNTINFO_NAME) {
+        } else if (a.PMSSPTNAM > b.PMSSPTNAM) {
           return orders[1] === 'ASC' ? 1 : -1
         } else {
           return 0
@@ -62,9 +62,9 @@ const VisitTable = (props) => {
       })
     } else if (orders[0].includes('NUMBER')) {
       dataSort = data.sort((a, b) => {
-        if (a.PTNTINFO_IDNO < b.PTNTINFO_IDNO) {
+        if (a.PMSSPTCNO < b.PMSSPTCNO) {
           return orders[1] === 'ASC' ? -1 : 1
-        } else if (a.PTNTINFO_IDNO > b.PTNTINFO_IDNO) {
+        } else if (a.PMSSPTCNO > b.PMSSPTCNO) {
           return orders[1] === 'ASC' ? 1 : -1
         } else {
           return 0
