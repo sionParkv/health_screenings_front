@@ -91,7 +91,7 @@ const VisitTable = (props) => {
   // 번호표 발행 팝업
   const handleClickOpen = (event, index) => {
     const oriData = [...sortedData]
-
+    console.log('>>>>> ', oriData[index])
     const url = 'http://192.168.1.98:4000/api/visit/ticket'
     const {
       HCAVBSNS_IDNO,
@@ -102,7 +102,7 @@ const VisitTable = (props) => {
       HCAVSUGI_NUMB,
       HCAVISSUE_GB,
       HCAVBSNS_TEMP,
-    } = sortedData[index]
+    } = oriData[index]
     // console.log(
     //   `[Patient.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
     //     event?.target?.value
@@ -198,7 +198,13 @@ const VisitTable = (props) => {
                   {row.PMSSBIRDT}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center" id="ticket">
-                  <Button onClick={handleClickOpen}>번호표발행</Button>
+                  <Button
+                    onClick={(event) => {
+                      handleClickOpen(event, index)
+                    }}
+                  >
+                    번호표발행
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
