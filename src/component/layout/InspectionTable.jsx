@@ -250,9 +250,9 @@ const InspectionTable = (props) => {
                       <T>
                         {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
                       </T>
+                      <T id="birth">{row.PTNTINFO_BITH}</T>
                     </TableCell>
                     <TableCell component="th" scope="row">
-                      <T id="birth">{row.PTNTINFO_BITH}</T>
                       <T>
                         시작 : {row.PTNTEXAM_STTM} 완료 : {row.PTNTEXAM_EDTM}
                       </T>
