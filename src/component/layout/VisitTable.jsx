@@ -129,12 +129,12 @@ const VisitTable = (props) => {
         if (response?.data?.code === 'OK') {
           oriData[index].PTNTEXAM_STAT = event?.target?.value
         } else {
-          alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+          // alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
         }
       })
       .catch((error) => {
         console.log(error.message)
-        alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+        // alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
       })
       .finally(() => {
         setSortedData(oriData)
