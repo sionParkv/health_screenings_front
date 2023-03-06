@@ -254,7 +254,8 @@ const InspectionTable = (props) => {
                     </TableCell>
                     <TableCell component="th" scope="row">
                       <T>
-                        시작 : {row.PTNTEXAM_STTM} 완료 : {row.PTNTEXAM_EDTM}
+                        시작 : {row.PTNTEXAM_STTM}
+                        완료 : {row.PTNTEXAM_EDTM}
                       </T>
                     </TableCell>
                     <TableCell component="th" scope="row" className="select">
