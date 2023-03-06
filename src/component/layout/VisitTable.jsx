@@ -186,16 +186,16 @@ const VisitTable = (props) => {
                   {index + 1}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center" id="name">
-                  {row.PTNTINFO_NAME}
+                  {row.GUBUN}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center">
-                  {row.PTNTINFO_SEX}/{row.PTNTINFO_AGE}
+                  {row.PMSSPTNAM}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center">
-                  {row.PTNTINFO_BITH}
+                  {row.PMSSPTCNO}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center" id="type">
-                  {row.PKFGNAME}
+                  {row.PMSSBIRDT}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="center" id="ticket">
                   <Button onClick={handleClickOpen}>번호표발행</Button>
