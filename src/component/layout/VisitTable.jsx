@@ -93,6 +93,12 @@ const VisitTable = (props) => {
     const oriData = [...sortedData]
     console.log('>>>>> ', oriData[index])
     const url = 'http://192.168.1.98:4000/api/visit/ticket'
+    let today = new Date()
+    let year = today.getFullYear() // 년도
+    let month = today.getMonth() + 1 // 월
+    let date = today.getDate() // 날짜
+    let hours = today.getHours() // 시
+    let minutes = today.getMinutes() // 분
     const {
       HCAVBSNS_IDNO,
       HCAVBSNS_NAME,
@@ -152,8 +158,7 @@ const VisitTable = (props) => {
       content: (
         <>
           <strong className="WaitPerson">대기인수 : 03 명</strong>
-          <br />
-          2023년 2월 17일 10시 10분
+          <br />${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분
         </>
       ),
       isOpen: true,

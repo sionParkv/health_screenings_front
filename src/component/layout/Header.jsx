@@ -30,7 +30,11 @@ const Header = (props) => {
       isOpen: true,
       ok: {
         label: '확인',
-        action: () => {},
+        action: () => {
+          sessionStorage.clear()
+          window.location.replace('/')
+          console.log('로그아웃')
+        },
       },
       cancel: {
         label: '취소',

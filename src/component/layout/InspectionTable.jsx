@@ -20,7 +20,6 @@ import { useState } from 'react'
 import { selectors } from '../../data/selectors'
 import { useEffect } from 'react'
 import { useLayoutEffect } from 'react'
-import { async } from 'q'
 
 function a11yProps(index) {
   return {
@@ -52,6 +51,7 @@ const InspectionTable = (props) => {
       setDataSort(resultData)
     })
   }
+
   // 왼쪽 셀렉트 필터
   const setDataType = (data) => {
     let selectedType = types.find((item) =>
@@ -113,24 +113,24 @@ const InspectionTable = (props) => {
 
   const states = [
     {
-      state: 'I',
-      label: '검사중',
+      state: 'N',
+      label: '미실행',
     },
     {
       state: 'W',
       label: '대기',
     },
     {
-      state: 'N',
-      label: '미실행',
-    },
-    {
-      state: 'D',
-      label: '거부',
+      state: 'I',
+      label: '검사중',
     },
     {
       state: 'F',
       label: '완료',
+    },
+    {
+      state: 'D',
+      label: '거부',
     },
   ]
 
@@ -142,6 +142,7 @@ const InspectionTable = (props) => {
       .post(url, { room: room })
       .then((response) => {
         setRightData(response.data.data)
+        // localStorage.setItem('cr', room)
         console.log(response.data.data)
       })
       .catch((error) => {
@@ -197,6 +198,9 @@ const InspectionTable = (props) => {
 
         if (response?.data?.code === 'OK') {
           oriData[index].PTNTEXAM_STAT = event?.target?.value
+          // window.location.href = '/inspection'
+          loadData()
+          // handleNameClick(localStorage.getItem('cr'))
         } else {
           alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
         }
