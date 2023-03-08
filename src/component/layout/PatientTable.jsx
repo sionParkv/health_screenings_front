@@ -34,10 +34,12 @@ const PatientTable = (props) => {
   const [rightData, setRightData] = useState([])
   const [value, setValue] = useState(0)
 
+  // 왼쪽 화면 클릭 이벤트
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
 
+  // 왼쪽 화면 데이터 리스트 가져오기
   const loadData = () => {
     const url = 'http://192.168.1.98:4000/api/patient'
     axios.get(url).then((response) => {
@@ -48,11 +50,21 @@ const PatientTable = (props) => {
     })
   }
 
+  useEffect(() => loadData(), [])
+  useLayoutEffect(() => {
+    let resultData = [...setDataType(loadedData)]
+    setDataSort(resultData)
+  }, [sort, type])
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  // 종합, 일반검진 필터
   const setDataType = (data) => {
     let selectedType = types.find((item) =>
       item.where === type ? true : false
     )
-    // console.log('selected type: ', selectedType)
 
     if (selectedType.where === 'All') {
       return data
@@ -63,7 +75,7 @@ const PatientTable = (props) => {
     })
   }
 
-  // 오른쪽 셀렉트 필터
+  // 이름별, 환자번호별 필터
   const setDataSort = (data) => {
     let selectedSort = sorts.find((item) =>
       item.order === sort ? true : false
@@ -96,39 +108,7 @@ const PatientTable = (props) => {
     setSortedData(dataSort)
   }
 
-  useEffect(() => loadData(), [])
-  useLayoutEffect(() => {
-    let resultData = [...setDataType(loadedData)]
-    setDataSort(resultData)
-  }, [sort, type])
-
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  const states = [
-    {
-      state: 'I',
-      label: '검사중',
-    },
-    {
-      state: 'W',
-      label: '대기',
-    },
-    {
-      state: 'N',
-      label: '미실행',
-    },
-    {
-      state: 'D',
-      label: '거부',
-    },
-    {
-      state: 'F',
-      label: '완료',
-    },
-  ]
-
+  // 각각의 행 클릭마다 데이터 호출
   const handleNameClick = (patno) => {
     const url = 'http://192.168.1.98:4000/api/patient/click'
 
@@ -143,6 +123,111 @@ const PatientTable = (props) => {
       })
   }
 
+  // 오른쪽 셀렉트 박스
+  const states = [
+    {
+      state: 'N',
+      label: '미실행',
+    },
+    {
+      state: 'W',
+      label: '대기',
+    },
+    {
+      state: 'I',
+      label: '검사중',
+    },
+    {
+      state: 'F',
+      label: '완료',
+    },
+    {
+      state: 'D',
+      label: '거부',
+    },
+  ]
+
+  // 오른쪽 셀렉트 박스 클릭 이벤트
+  const handleSelectChange = (event, index) => {
+    const oriData = [...rightData]
+
+    const url = 'http://192.168.1.98:4000/api/patient/change'
+    const { PTNTEXAM_RMCD, PTNTEXAM_IDNO, PTNTEXAM_RMNUM } = rightData[index]
+    console.log(
+      `[Patient.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
+        event?.target?.value
+      } RMNUM: ${PTNTEXAM_RMNUM} USERID: ${localStorage.getItem('ui')}`
+    )
+
+    // 현재값 curVal --> 선택한값 selVal
+    const curVal = oriData[index].PTNTEXAM_STAT
+    const selVal = event?.target?.value
+    if (curVal === 'N') {
+      if (selVal === 'W' || selVal === 'D') {
+      } else {
+        alert('미실행 상태에서는 대기 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+    if (curVal === 'W') {
+      if (selVal === 'I' || selVal === 'D') {
+      } else {
+        alert('대기 상태에서는 검사중 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+    if (curVal === 'I') {
+      if (selVal === 'F' || selVal === 'D') {
+      } else {
+        alert('검사중 상태에서는 완료 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+    if (curVal === 'F') {
+      if (selVal === 'N' || selVal === 'D') {
+      } else {
+        alert('완료 상태에서는 미실행 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+    if (curVal === 'D') {
+      if (selVal === 'N' || selVal === 'D') {
+      } else {
+        alert('거부 상태에서는 미실행 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+
+    axios
+      .post(url, {
+        RMCD: PTNTEXAM_RMCD,
+        IDNO: PTNTEXAM_IDNO,
+        STAT: event?.target?.value,
+        RMNUM: PTNTEXAM_RMNUM,
+        USERID: localStorage.getItem('ui'),
+      })
+      .then((response) => {
+        console.log(
+          `[Patient.handleSelectChange] response data - `,
+          response?.data
+        )
+
+        if (response?.data?.code === 'OK') {
+          oriData[index].PTNTEXAM_STAT = event?.target?.value
+        } else {
+          alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+        }
+      })
+      .catch((error) => {
+        console.log(error.message)
+        alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+      })
+      .finally(() => {
+        setRightData(oriData)
+      })
+  }
+
+  // 왼쪽 데이터
   const TabItem = (props) => {
     const {
       key,
@@ -174,47 +259,6 @@ const PatientTable = (props) => {
         </Box>
       </Container>
     )
-  }
-  // const [personName, setPersonName] = useState([])
-
-  const handleSelectChange = (event, index) => {
-    const oriData = [...rightData]
-
-    const url = 'http://192.168.1.98:4000/api/patient/change'
-    const { PTNTEXAM_RMCD, PTNTEXAM_IDNO, PTNTEXAM_RMNUM } = rightData[index]
-    console.log(
-      `[Patient.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
-        event?.target?.value
-      } RMNUM: ${PTNTEXAM_RMNUM} USERID: ${localStorage.getItem('ui')}`
-    )
-
-    axios
-      .post(url, {
-        RMCD: PTNTEXAM_RMCD,
-        IDNO: PTNTEXAM_IDNO,
-        STAT: event?.target?.value,
-        RMNUM: PTNTEXAM_RMNUM,
-        USERID: localStorage.getItem('ui'),
-      })
-      .then((response) => {
-        console.log(
-          `[Patient.handleSelectChange] response data - `,
-          response?.data
-        )
-
-        if (response?.data?.code === 'OK') {
-          oriData[index].PTNTEXAM_STAT = event?.target?.value
-        } else {
-          alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
-        }
-      })
-      .catch((error) => {
-        console.log(error.message)
-        alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
-      })
-      .finally(() => {
-        setRightData(oriData)
-      })
   }
 
   return (

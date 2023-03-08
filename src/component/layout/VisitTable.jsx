@@ -12,14 +12,14 @@ import { ConfirmDialog } from './ConfirmDialog'
 import { selectors } from '../../data/selectors'
 import moment from 'moment/moment'
 
-const url = 'http://192.168.1.98:4000/api/visit'
-
 const VisitTable = (props) => {
   const { sort, type } = props
   const { sorts, types } = selectors
   const [loadedData, setLoadedData] = useState([])
   const [sortedData, setSortedData] = useState([])
+  const url = 'http://192.168.1.98:4000/api/visit'
 
+  // 서버에서 데이터 가져오는 부분
   const loadData = () => {
     axios.get(url).then((response) => {
       let resultData = response?.data?.data || []
@@ -30,6 +30,7 @@ const VisitTable = (props) => {
     })
   }
 
+  // 종합, 일반 구분 필터
   const setDataType = (data) => {
     let selectedType = types.find((item) =>
       item.where === type ? true : false
@@ -44,6 +45,7 @@ const VisitTable = (props) => {
     })
   }
 
+  // 이름별, 환자구분별 필터
   const setDataSort = (data) => {
     let selectedSort = sorts.find((item) =>
       item.order === sort ? true : false
@@ -81,6 +83,7 @@ const VisitTable = (props) => {
     setDataSort(resultData)
   }, [sort, type])
 
+  // 번호표 발행 팝업
   const [propsDialog, setPropsDialog] = useState({
     content: '',
     isOpen: false,
@@ -89,8 +92,9 @@ const VisitTable = (props) => {
   })
   const closeDialog = () => setPropsDialog({ ...propsDialog, isOpen: false })
 
-  // 번호표 발행 팝업
-  const handleClickOpen = (event, index) => {
+  // 번호표 발행 클릭 이벤트
+  const handleClickOpen = (event, index, props) => {
+    const { Wait_Count, Issue_Count } = props
     const oriData = [...sortedData]
     console.log('>>>>> ', oriData[index])
     const url = 'http://192.168.1.98:4000/api/visit/ticket'
@@ -98,7 +102,7 @@ const VisitTable = (props) => {
     const requestData = {
       IDNO: PMSSPTCNO,
       NAME: PMSSPTNAM,
-      BSTP: GUBUN,
+      BSTP: GUBUN.label,
     }
     console.log(`[Patient.handleSelectChange] request data: `, requestData)
 
@@ -124,7 +128,17 @@ const VisitTable = (props) => {
         setSortedData(oriData)
       })
 
-    // setOpen(true)
+    GUBUN = [
+      {
+        state: '종합',
+        label: '100',
+      },
+      {
+        state: '일반',
+        label: '200',
+      },
+    ]
+
     const today = moment().format('YYYY년 M월 D일 H시 m분')
 
     setPropsDialog({
@@ -132,13 +146,13 @@ const VisitTable = (props) => {
       title: (
         <>
           <strong>대기번호</strong> <br />
-          <div className="WaitNum">003</div>
+          <div className="WaitNum">{Issue_Count}</div>
         </>
       ),
       className: 'Ticket-dialog',
       content: (
         <>
-          <strong className="WaitPerson">대기인수 : 03 명</strong>
+          <strong className="WaitPerson">대기인수 : {Wait_Count} 명</strong>
           <br />
           {today}
         </>
@@ -154,6 +168,8 @@ const VisitTable = (props) => {
   }
 
   // console.log('@@@@@ ', sortedData[0])
+
+  // 출력되는 테이블
   return (
     <TableContainer
       component={Paper}

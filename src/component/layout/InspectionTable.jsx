@@ -36,12 +36,12 @@ const InspectionTable = (props) => {
   const [rightData, setRightData] = useState([])
   const [value, setValue] = useState(0)
 
-  // 탭 화면 클릭 이벤트
+  // 왼쪽 화면 클릭 이벤트
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
 
-  // 탭 데이터 리스트 가져오기
+  // 왼쪽 데이터 리스트 가져오기
   const loadData = () => {
     const url = 'http://192.168.1.98:4000/api/inspection'
     axios.get(url).then((response) => {
@@ -52,7 +52,17 @@ const InspectionTable = (props) => {
     })
   }
 
-  // 왼쪽 셀렉트 필터
+  useEffect(() => loadData(), [])
+  useLayoutEffect(() => {
+    let resultData = [...setDataType(loadedData)]
+    setDataSort(resultData)
+  }, [sort, type])
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  // 종합, 일반검진 필터
   const setDataType = (data) => {
     let selectedType = types.find((item) =>
       item.where === type ? true : false
@@ -68,7 +78,7 @@ const InspectionTable = (props) => {
     })
   }
 
-  // 오른쪽 셀렉트 필터
+  // 이름별, 환자번호별 필터
   const setDataSort = (data) => {
     let selectedSort = sorts.find((item) =>
       item.order === sort ? true : false
@@ -101,16 +111,23 @@ const InspectionTable = (props) => {
     setSortedData(dataSort)
   }
 
-  useEffect(() => loadData(), [])
-  useLayoutEffect(() => {
-    let resultData = [...setDataType(loadedData)]
-    setDataSort(resultData)
-  }, [sort, type])
+  // 각각의 행 클릭마다 데이터 호출
+  const handleNameClick = async (room) => {
+    const url = 'http://192.168.1.98:4000/api/inspection/click'
 
-  useEffect(() => {
-    loadData()
-  }, [])
+    axios
+      .post(url, { room: room })
+      .then((response) => {
+        setRightData(response.data.data)
+        localStorage.setItem('cr', room)
+        console.log(response.data.data)
+      })
+      .catch((error) => {
+        console.log(error.message)
+      })
+  }
 
+  // 오른쪽 셀렉트 박스
   const states = [
     {
       state: 'N',
@@ -134,19 +151,86 @@ const InspectionTable = (props) => {
     },
   ]
 
-  // 각각의 행 클릭마다 데이터 호출
-  const handleNameClick = async (room) => {
-    const url = 'http://192.168.1.98:4000/api/inspection/click'
+  // 오른쪽 셀렉트 박스 클릭 이벤트
+  const handleSelectChange = (event, index) => {
+    const oriData = [...rightData]
+
+    const url = 'http://192.168.1.98:4000/api/inspection/change'
+    const { PTNTEXAM_RMCD, PTNTEXAM_IDNO, PTNTEXAM_RMNUM } = rightData[index]
+    console.log(
+      `[Inspection.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
+        event?.target?.value
+      } RMNUM: ${PTNTEXAM_RMNUM} USERID: ${localStorage.getItem('ui')}`
+    )
+
+    // 현재값 curVal --> 선택한값 selVal
+    const curVal = oriData[index].PTNTEXAM_STAT
+    const selVal = event?.target?.value
+    if (curVal === 'N') {
+      if (selVal === 'W' || selVal === 'D') {
+      } else {
+        alert('미실행 상태에서는 대기 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+    if (curVal === 'W') {
+      if (selVal === 'I' || selVal === 'D') {
+      } else {
+        alert('대기 상태에서는 검사중 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+    if (curVal === 'I') {
+      if (selVal === 'F' || selVal === 'D') {
+      } else {
+        alert('검사중 상태에서는 완료 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+    if (curVal === 'F') {
+      if (selVal === 'N' || selVal === 'D') {
+      } else {
+        alert('완료 상태에서는 미실행 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
+    if (curVal === 'D') {
+      if (selVal === 'N' || selVal === 'D') {
+      } else {
+        alert('거부 상태에서는 미실행 이외에는 변경할 수 없습니다!')
+        return
+      }
+    }
 
     axios
-      .post(url, { room: room })
+      .post(url, {
+        RMCD: PTNTEXAM_RMCD,
+        IDNO: PTNTEXAM_IDNO,
+        STAT: event?.target?.value,
+        RMNUM: PTNTEXAM_RMNUM,
+        USERID: localStorage.getItem('ui'),
+      })
       .then((response) => {
-        setRightData(response.data.data)
-        localStorage.setItem('cr', room)
-        console.log(response.data.data)
+        console.log(
+          `[Inspection.handleSelectChange] response data - `,
+          response?.data
+        )
+
+        if (response?.data?.code === 'OK') {
+          oriData[index].PTNTEXAM_STAT = event?.target?.value
+          loadData()
+          // 상태값 바꾸면 내려가도록
+          handleNameClick(localStorage.getItem('cr'))
+        } else {
+          alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+        }
       })
       .catch((error) => {
         console.log(error.message)
+        alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
+      })
+      .finally(() => {
+        setRightData(oriData)
       })
   }
 
@@ -168,58 +252,7 @@ const InspectionTable = (props) => {
       </Container>
     )
   }
-
-  // const [personName, setPersonName] = useState([])
-
-  const handleSelectChange = (event, index) => {
-    const oriData = [...rightData]
-
-    const url = 'http://192.168.1.98:4000/api/inspection/change'
-    const { PTNTEXAM_RMCD, PTNTEXAM_IDNO, PTNTEXAM_RMNUM } = rightData[index]
-    console.log(
-      `[Inspection.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
-        event?.target?.value
-      } RMNUM: ${PTNTEXAM_RMNUM} USERID: ${localStorage.getItem('ui')}`
-    )
-
-    axios
-      .post(url, {
-        RMCD: PTNTEXAM_RMCD,
-        IDNO: PTNTEXAM_IDNO,
-        STAT: event?.target?.value,
-        RMNUM: PTNTEXAM_RMNUM,
-        USERID: localStorage.getItem('ui'),
-      })
-      .then((response) => {
-        console.log(
-          `[Inspection.handleSelectChange] response data - `,
-          response?.data
-        )
-        if ((event.target.value = 'N')) {
-        } else if ((event.target.value = 'W')) {
-        } else if ((event.target.value = 'I')) {
-        } else if ((event.target.value = 'F')) {
-        } else if ((event.target.value = 'D')) {
-        }
-
-        if (response?.data?.code === 'OK') {
-          oriData[index].PTNTEXAM_STAT = event?.target?.value
-          loadData()
-          // 상태값 바꾸면 내려가도록
-          handleNameClick(localStorage.getItem('cr'))
-        } else {
-          alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
-        }
-      })
-      .catch((error) => {
-        console.log(error.message)
-        alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
-      })
-      .finally(() => {
-        setRightData(oriData)
-      })
-  }
-
+  // 데이터 출력 되는 부분
   return (
     <Box>
       <Tabs
