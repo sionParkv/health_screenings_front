@@ -93,16 +93,16 @@ const VisitTable = (props) => {
   const closeDialog = () => setPropsDialog({ ...propsDialog, isOpen: false })
 
   // 번호표 발행 클릭 이벤트
-  const handleClickOpen = (event, index, props) => {
-    const { Wait_Count, Issue_Count } = props
+  const handleClickOpen = (event, index) => {
     const oriData = [...sortedData]
     console.log('>>>>> ', oriData[index])
     const url = 'http://192.168.1.98:4000/api/visit/ticket'
     const { PMSSPTCNO, PMSSPTNAM, GUBUN } = oriData[index]
+
     const requestData = {
       IDNO: PMSSPTCNO,
       NAME: PMSSPTNAM,
-      BSTP: GUBUN.label,
+      BSTP: GUBUN === '종합' ? 100 : 200,
     }
     console.log(`[Patient.handleSelectChange] request data: `, requestData)
 
@@ -128,17 +128,6 @@ const VisitTable = (props) => {
         setSortedData(oriData)
       })
 
-    GUBUN = [
-      {
-        state: '종합',
-        label: '100',
-      },
-      {
-        state: '일반',
-        label: '200',
-      },
-    ]
-
     const today = moment().format('YYYY년 M월 D일 H시 m분')
 
     setPropsDialog({
@@ -146,13 +135,13 @@ const VisitTable = (props) => {
       title: (
         <>
           <strong>대기번호</strong> <br />
-          <div className="WaitNum">{Issue_Count}</div>
+          <div className="WaitNum">003</div>
         </>
       ),
       className: 'Ticket-dialog',
       content: (
         <>
-          <strong className="WaitPerson">대기인수 : {Wait_Count} 명</strong>
+          <strong className="WaitPerson">대기인수 : 01 명</strong>
           <br />
           {today}
         </>
