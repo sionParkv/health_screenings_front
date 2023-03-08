@@ -142,7 +142,7 @@ const InspectionTable = (props) => {
       .post(url, { room: room })
       .then((response) => {
         setRightData(response.data.data)
-        // localStorage.setItem('cr', room)
+        localStorage.setItem('cr', room)
         console.log(response.data.data)
       })
       .catch((error) => {
@@ -195,12 +195,18 @@ const InspectionTable = (props) => {
           `[Inspection.handleSelectChange] response data - `,
           response?.data
         )
+        if ((event.target.value = 'N')) {
+        } else if ((event.target.value = 'W')) {
+        } else if ((event.target.value = 'I')) {
+        } else if ((event.target.value = 'F')) {
+        } else if ((event.target.value = 'D')) {
+        }
 
         if (response?.data?.code === 'OK') {
           oriData[index].PTNTEXAM_STAT = event?.target?.value
-          // window.location.href = '/inspection'
           loadData()
-          // handleNameClick(localStorage.getItem('cr'))
+          // 상태값 바꾸면 내려가도록
+          handleNameClick(localStorage.getItem('cr'))
         } else {
           alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
         }

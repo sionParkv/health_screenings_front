@@ -10,6 +10,7 @@ import { Button } from '@mui/material'
 
 import { ConfirmDialog } from './ConfirmDialog'
 import { selectors } from '../../data/selectors'
+import moment from 'moment/moment'
 
 const url = 'http://192.168.1.98:4000/api/visit'
 
@@ -93,39 +94,16 @@ const VisitTable = (props) => {
     const oriData = [...sortedData]
     console.log('>>>>> ', oriData[index])
     const url = 'http://192.168.1.98:4000/api/visit/ticket'
-    let today = new Date()
-    let year = today.getFullYear() // 년도
-    let month = today.getMonth() + 1 // 월
-    let date = today.getDate() // 날짜
-    let hours = today.getHours() // 시
-    let minutes = today.getMinutes() // 분
-    const {
-      HCAVBSNS_IDNO,
-      HCAVBSNS_NAME,
-      HCAVBSNS_ISID,
-      HCAVBSNS_ZONE,
-      HCAVBSNS_BSTP,
-      HCAVSUGI_NUMB,
-      HCAVISSUE_GB,
-      HCAVBSNS_TEMP,
-    } = oriData[index]
-    // console.log(
-    //   `[Patient.handleSelectChange] request data - RMCD: ${PTNTEXAM_RMCD} IDNO: ${PTNTEXAM_IDNO} STAT: ${
-    //     event?.target?.value
-    //   } RMNUM: ${PTNTEXAM_RMNUM} USERID: ${localStorage.getItem('ui')}`
-    //)
+    const { HCAVBSNS_IDNO, HCAVBSNS_NAME, HCAVBSNS_BSTP } = oriData[index]
+    const requestData = {
+      IDNO: HCAVBSNS_IDNO,
+      NAME: HCAVBSNS_NAME,
+      BSTP: HCAVBSNS_BSTP,
+    }
+    console.log(`[Patient.handleSelectChange] request data: `, requestData)
 
     axios
-      .post(url, {
-        IDNO: HCAVBSNS_IDNO,
-        NAME: HCAVBSNS_NAME,
-        ISID: HCAVBSNS_ISID,
-        ZONE: HCAVBSNS_ZONE,
-        BSTP: HCAVBSNS_BSTP,
-        NUMB: HCAVSUGI_NUMB,
-        GB: HCAVISSUE_GB,
-        TEMP: HCAVBSNS_TEMP,
-      })
+      .post(url, requestData)
       .then((response) => {
         console.log(
           `[VisitTicket.handleSelectChange] response data - `,
@@ -145,7 +123,10 @@ const VisitTable = (props) => {
       .finally(() => {
         setSortedData(oriData)
       })
+
     // setOpen(true)
+    const today = moment().format('YYYY년 M월 D일 H시 m분')
+
     setPropsDialog({
       ...propsDialog,
       title: (
@@ -158,14 +139,14 @@ const VisitTable = (props) => {
       content: (
         <>
           <strong className="WaitPerson">대기인수 : 03 명</strong>
-          <br />${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분
+          <br />
+          {today}
         </>
       ),
       isOpen: true,
       ok: {
         label: '확인',
         action: () => {
-          // TODO 프로그램 종료 액션
           closeDialog()
         },
       },
