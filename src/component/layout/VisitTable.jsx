@@ -123,16 +123,14 @@ const VisitTable = (props) => {
           title: (
             <>
               <strong>대기번호</strong> <br />
-              <div className="WaitNum">
-                {response?.data?.Issue_Count?.Issue_Count}
-              </div>
+              <div className="WaitNum">{response?.data?.Issue_Count}</div>
             </>
           ),
           className: 'Ticket-dialog',
           content: (
             <>
               <strong className="WaitPerson">
-                대기인수 : {response?.data?.Wait_Count?.Wait_Count} 명
+                대기인수 : {response?.data?.Wait_Count} 명
               </strong>
               <br />
               {today}
