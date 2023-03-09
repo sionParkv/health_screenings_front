@@ -116,6 +116,35 @@ const VisitTable = (props) => {
           response?.data
         )
 
+        const today = moment().format('YYYY년 M월 D일 H시 m분')
+
+        setPropsDialog({
+          ...propsDialog,
+          title: (
+            <>
+              <strong>대기번호</strong> <br />
+              <div className="WaitNum">{response?.data?.code?.Issue_Count}</div>
+            </>
+          ),
+          className: 'Ticket-dialog',
+          content: (
+            <>
+              <strong className="WaitPerson">
+                대기인수 : {response?.data?.code?.Wait_Count} 명
+              </strong>
+              <br />
+              {today}
+            </>
+          ),
+          isOpen: true,
+          ok: {
+            label: '확인',
+            action: () => {
+              closeDialog()
+            },
+          },
+        })
+
         if (response?.data?.code === 'OK') {
           oriData[index].PTNTEXAM_STAT = event?.target?.value
         } else {
@@ -129,33 +158,6 @@ const VisitTable = (props) => {
       .finally(() => {
         setSortedData(oriData)
       })
-
-    const today = moment().format('YYYY년 M월 D일 H시 m분')
-
-    setPropsDialog({
-      ...propsDialog,
-      title: (
-        <>
-          <strong>대기번호</strong> <br />
-          <div className="WaitNum">003</div>
-        </>
-      ),
-      className: 'Ticket-dialog',
-      content: (
-        <>
-          <strong className="WaitPerson">대기인수 : 01 명</strong>
-          <br />
-          {today}
-        </>
-      ),
-      isOpen: true,
-      ok: {
-        label: '확인',
-        action: () => {
-          closeDialog()
-        },
-      },
-    })
   }
 
   // console.log('@@@@@ ', sortedData[0])
