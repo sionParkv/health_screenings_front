@@ -103,6 +103,7 @@ const VisitTable = (props) => {
       IDNO: PMSSPTCNO,
       NAME: PMSSPTNAM,
       BSTP: GUBUN === '종합' ? 100 : 200,
+      ZONE: GUBUN === '종합' ? 'Z1000' : 'Z1001',
     }
     console.log(`[Patient.handleSelectChange] request data: `, requestData)
 
