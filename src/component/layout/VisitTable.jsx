@@ -97,13 +97,14 @@ const VisitTable = (props) => {
     const oriData = [...sortedData]
     console.log('>>>>> ', oriData[index])
     const url = 'http://192.168.1.98:4000/api/visit/ticket'
-    const { PMSSPTCNO, PMSSPTNAM, GUBUN } = oriData[index]
+    const { PMSSPTCNO, PMSSPTNAM, GUBUN, PMSSFTIME } = oriData[index]
 
     const requestData = {
       IDNO: PMSSPTCNO,
       NAME: PMSSPTNAM,
       BSTP: GUBUN === '종합' ? 100 : 200,
       ZONE: GUBUN === '종합' ? 'Z1000' : 'Z1001',
+      TEMP: PMSSFTIME,
     }
     console.log(`[Patient.handleSelectChange] request data: `, requestData)
 
