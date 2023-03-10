@@ -15,10 +15,6 @@
     display: flex;
   }
 
-  .MuiTabs-hideScrollbar {
-    width: 100%;
-  }
-
   .NoDataBox {
     display: flex;
     flex-direction: column;
@@ -115,11 +111,21 @@
   }
 
   .MuiTabs-root {
-    // width: 70% !important;
     width: 300px;
     height: 100%;
+
+    .MuiSvgIcon-root {
+      width: dp(50);
+      height: dp(50);
+      color: #e9852b;
+    }
+
     .MuiTabs-indicator {
       background-color: white;
     }
+  }
+  .MuiTabs-hideScrollbar {
+    width: 100%;
+    border: 1px solid gray;
   }
 }

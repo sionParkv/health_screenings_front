@@ -232,7 +232,6 @@ const PatientTable = (props) => {
   // 왼쪽 데이터
   const TabItem = (props) => {
     const {
-      key,
       PTNTINFO_IDNO,
       PTNTINFO_NAME,
       PTNTINFO_SEX,
@@ -293,7 +292,8 @@ const PatientTable = (props) => {
                   <TableCell component="th" scope="row">
                     <T id="room">{row.PTNTEXAM_RMNM}</T>
                     <T>
-                      시작 : {row.PTNTEXAM_STTM} 완료 : {row.PTNTEXAM_EDTM}
+                      시작 : {row.PTNTEXAM_STTM}&nbsp; &nbsp; 완료 :{' '}
+                      {row.PTNTEXAM_EDTM}
                     </T>
                   </TableCell>
                   <TableCell component="th" scope="row">

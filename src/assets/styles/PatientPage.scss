@@ -105,14 +105,21 @@
   }
 
   .MuiTabs-root {
-    width: 70% !important;
+    width: 600px;
     height: 100%;
+
+    .MuiSvgIcon-root {
+      width: dp(50);
+      height: dp(50);
+      color: #e9852b;
+    }
+
     .MuiTabs-indicator {
       background-color: white;
     }
     .MuiButtonBase-root {
       padding: 0 !important;
-      width: dp(600);
+      width: 100%;
     }
   }
 }
