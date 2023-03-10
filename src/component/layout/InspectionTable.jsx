@@ -332,11 +332,14 @@ const InspectionTable = (props) => {
               })}
             {!rightData?.length && (
               <TableRow className="NoDataBox">
-                <TableCell
-                  className="NoDataIcon"
-                  component="img"
-                  src={circleAlert}
-                />
+                <td>
+                  <TableCell
+                    className="NoDataIcon"
+                    component="img"
+                    src={circleAlert}
+                  />
+                </td>
+
                 <TableCell className="NoData">
                   로드된 데이터가 없습니다
                 </TableCell>
