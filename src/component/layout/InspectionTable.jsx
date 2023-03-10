@@ -252,6 +252,7 @@ const InspectionTable = (props) => {
       </Container>
     )
   }
+
   // 데이터 출력 되는 부분
   return (
     <Box>
@@ -280,7 +281,6 @@ const InspectionTable = (props) => {
                   <TableRow key={index}>
                     <TableCell component="th" scope="row">
                       <T id="index">{index + 1}</T>
-                      <T id="test">V</T>
                     </TableCell>
                     <TableCell component="th" scope="row">
                       <T id="idno">{row.PTNTEXAM_IDNO}</T>

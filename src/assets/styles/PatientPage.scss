@@ -15,6 +15,17 @@
     display: flex;
   }
 
+  .MuiTableRow-root {
+    border-bottom: 1.5px solid gray;
+  }
+
+  .NoData {
+    text-align: center;
+    font-size: dp(30) !important;
+    height: dp(1000);
+    border-bottom: 3px solid white;
+  }
+
   .PatientLeft {
     color: black;
     padding-top: dp(10);
@@ -29,7 +40,7 @@
       flex-direction: row;
       justify-content: space-between;
       padding-bottom: dp(10);
-      :nth-child(2) {
+      :nth-child(1) {
         font-size: dp(15);
       }
       :nth-child(3) {
@@ -38,9 +49,6 @@
       :nth-child(4) {
         font-size: dp(15);
         padding-right: dp(10);
-      }
-      :nth-child(5) {
-        font-size: dp(15);
       }
     }
     .InfoBottom {

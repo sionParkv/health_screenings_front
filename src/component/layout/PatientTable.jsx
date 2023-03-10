@@ -242,7 +242,6 @@ const PatientTable = (props) => {
     return (
       <Container className="PatientLeft">
         <Box className="InfoTop">
-          <Box>{key}</Box>
           <Box>{PTNTINFO_IDNO}</Box>
           <Box>{PTNTINFO_NAME}</Box>
           <Box>
@@ -251,7 +250,7 @@ const PatientTable = (props) => {
           <Box>{PTNTINFO_BITH}</Box>
         </Box>
         <Box className="InfoBottom">
-          <Box id="vr">V</Box>
+          <Box id="vr"></Box>
           <Box></Box>
           <Box></Box>
           <Box></Box>

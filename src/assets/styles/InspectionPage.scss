@@ -19,10 +19,17 @@
     width: 100%;
   }
 
+  .NoData {
+    text-align: center;
+    font-size: dp(30) !important;
+    height: dp(1000);
+    border-bottom: 3px solid #e2e2e2;
+  }
+
   .InspectionLeft {
     color: black;
     padding-bottom: dp(10);
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid gray;
 
     .InfoTop {
       display: flex;
@@ -51,8 +58,10 @@
     height: calc(100vh - 100px);
     overflow-y: scroll;
     background-color: #e2e2e2;
+
     .MuiTableRow-root {
       height: dp(70);
+      border-bottom: 1.5px solid black;
     }
     table {
       min-width: 100%;
@@ -66,7 +75,7 @@
     }
     #index {
       font-weight: bold;
-      padding-left: dp(15);
+      padding-left: dp(10);
     }
     #name {
       width: dp(50);
@@ -74,12 +83,7 @@
     }
     #idno {
       width: dp(60);
-    }
-
-    #test {
-      color: #e9852b;
-      font-weight: bold;
-      padding-left: dp(15);
+      padding-left: dp(10);
     }
 
     .MuiFormControl-root {

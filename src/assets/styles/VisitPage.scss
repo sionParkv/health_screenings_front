@@ -38,4 +38,11 @@
     height: dp(40);
     border-radius: dp(5);
   }
+
+  .NoData {
+    text-align: center;
+    font-size: dp(30) !important;
+    height: dp(1000);
+    border-bottom: 100px solid white;
+  }
 }
