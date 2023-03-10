@@ -10,6 +10,7 @@ import { Button } from '@mui/material'
 
 import { ConfirmDialog } from './ConfirmDialog'
 import { selectors } from '../../data/selectors'
+import { images } from '../../assets/images'
 import moment from 'moment/moment'
 
 const VisitTable = (props) => {
@@ -18,6 +19,7 @@ const VisitTable = (props) => {
   const [loadedData, setLoadedData] = useState([])
   const [sortedData, setSortedData] = useState([])
   const url = 'http://192.168.1.98:4000/api/visit'
+  const circleAlert = images.alertCircle
 
   // 서버에서 데이터 가져오는 부분
   const loadData = () => {
@@ -204,10 +206,13 @@ const VisitTable = (props) => {
               </TableRow>
             ))}
           {!sortedData?.length && (
-            <TableRow>
-              <TableCell className="NoData">
-                로드된 데이터가 없습니다.
-              </TableCell>
+            <TableRow className="NoDataBox">
+              <TableCell
+                className="NoDataIcon"
+                component="img"
+                src={circleAlert}
+              />
+              <TableCell className="NoData">로드된 데이터가 없습니다</TableCell>
             </TableRow>
           )}
         </TableBody>

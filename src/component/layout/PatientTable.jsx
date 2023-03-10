@@ -17,6 +17,7 @@ import { Container } from '@mui/system'
 import axios from 'axios'
 
 import { selectors } from '../../data/selectors'
+import { images } from '../../assets/images'
 import { useLayoutEffect } from 'react'
 
 function a11yProps(index) {
@@ -33,6 +34,7 @@ const PatientTable = (props) => {
   const [sortedData, setSortedData] = useState([])
   const [rightData, setRightData] = useState([])
   const [value, setValue] = useState(0)
+  const circleAlert = images.alertCircle
 
   // 왼쪽 화면 클릭 이벤트
   const handleChange = (event, newValue) => {
@@ -320,9 +322,14 @@ const PatientTable = (props) => {
                 </TableRow>
               ))}
             {!rightData?.length && (
-              <TableRow>
+              <TableRow className="NoDataBox">
+                <TableCell
+                  className="NoDataIcon"
+                  component="img"
+                  src={circleAlert}
+                />
                 <TableCell className="NoData">
-                  로드된 데이터가 없습니다.
+                  로드된 데이터가 없습니다
                 </TableCell>
               </TableRow>
             )}

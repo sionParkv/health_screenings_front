@@ -9,8 +9,10 @@ import btnStart2 from './btnStart2.png'
 import pic from './pic.png'
 import pofile from './pofile.png'
 import key from './key.png'
+import alertCircle from './alert-circle-outline.svg'
 
 const images = {
+  alertCircle,
   icon1,
   icon2,
   icon3,
