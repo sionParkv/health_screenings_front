@@ -222,7 +222,7 @@ const InspectionTable = (props) => {
           oriData[index].PTNTEXAM_STAT = event?.target?.value
           loadData()
           // 상태값 바꾸면 내려가도록
-          handleNameClick(localStorage.getItem('cr'))
+          // handleNameClick(localStorage.getItem('cr'))
         } else {
           alert('오류가 발생하였습니다.\n잠시 후 다시 시도해주세요!')
         }
