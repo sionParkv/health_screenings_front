@@ -1,0 +1,125 @@
+@import 'common';
+
+.PatientPage {
+  padding: 0 !important;
+
+  .MuiTabs-vertical {
+    max-height: calc(100vh - 100px);
+    overflow-y: scroll;
+  }
+
+  .MuiToolbar-root {
+    height: dp(100);
+  }
+  .MuiBox-root {
+    display: flex;
+  }
+
+  .NoDataBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: dp(1200) !important;
+    .MuiTableCell-root {
+      border-bottom: 2px solid white;
+    }
+    .NoDataIcon {
+      padding-top: dp(400);
+      width: dp(80);
+      height: dp(80);
+    }
+    .NoData {
+      text-align: center;
+      font-size: dp(30) !important;
+    }
+  }
+
+  .PatientLeft {
+    color: black;
+    padding-top: dp(10);
+    padding-bottom: dp(10);
+    border-bottom: 1px solid black;
+    background-color: #e2e2e2;
+
+    width: 90% !important;
+
+    .InfoTop {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding-bottom: dp(10);
+      :nth-child(1) {
+        font-size: dp(15);
+      }
+      :nth-child(3) {
+        font-size: dp(15);
+      }
+      :nth-child(4) {
+        font-size: dp(15);
+        padding-right: dp(10);
+      }
+    }
+    .InfoBottom {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      :nth-child(5) {
+        color: #e9852b;
+      }
+    }
+  }
+
+  .PatientRight {
+    height: calc(100vh - 100px);
+    overflow-y: scroll;
+    #roomNum {
+      font-weight: bold;
+    }
+    #name {
+      font-size: dp(15);
+    }
+    #room {
+      width: dp(100);
+      padding-right: dp(80);
+    }
+    .MuiFormControl-root {
+      &.D {
+        background-color: gray;
+      }
+      &.N {
+        background-color: white;
+      }
+      &.I {
+        background-color: pink;
+      }
+      &.F {
+        background-color: yellow;
+      }
+      &.W {
+        background-color: aqua;
+      }
+    }
+    .MuiTableRow-root {
+      border-bottom: 1.5px solid gray;
+    }
+  }
+
+  .MuiTabs-root {
+    width: 600px;
+    height: 100%;
+
+    .MuiSvgIcon-root {
+      width: dp(50);
+      height: dp(50);
+      color: #e9852b;
+    }
+
+    .MuiTabs-indicator {
+      background-color: white;
+    }
+    .MuiButtonBase-root {
+      padding: 0 !important;
+      width: 100%;
+    }
+  }
+}

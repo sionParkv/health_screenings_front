@@ -1,0 +1,76 @@
+@import 'common';
+
+.LoginPage {
+  max-width: inherit !important;
+  min-height: 100%;
+  padding-top: dp(300);
+  padding-left: 0 !important;
+  background-color: #f3f2f2;
+
+  .LoginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: dp(800);
+    height: dp(550);
+    padding: 0;
+    border: 1px solid #d8d8d8;
+    border-radius: 10px;
+    background-color: white;
+
+    .MuiBox-root {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .InfoBottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: dp(800);
+      height: dp(530);
+
+      .TextBox {
+        padding-top: dp(80);
+      }
+      .LoginBtn {
+        width: dp(200);
+        height: dp(60);
+        border-radius: dp(60);
+        background-image: url(../../assets/images/btnStart2.png);
+        background-size: cover;
+      }
+
+      .MuiFormControl-root {
+        display: flex;
+        flex-direction: column;
+        width: dp(500);
+        padding-bottom: dp(30);
+
+        .MuiInputBase-root {
+          .MuiInput-input {
+            padding-bottom: dp(10);
+            font-size: dp(20);
+          }
+          &::before {
+            border-bottom: 3px solid #d8d8d8;
+          }
+        }
+
+        ::placeholder {
+          padding-left: dp(16);
+          font-size: dp(26);
+          font-weight: 400;
+          font-style: italic;
+          color: rgb(0, 0, 0);
+        }
+      }
+    }
+
+    .MainImage {
+      width: dp(800);
+      height: fit-content;
+    }
+  }
+}

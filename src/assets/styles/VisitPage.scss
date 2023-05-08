@@ -1,0 +1,61 @@
+@import 'common';
+
+.VisitPage {
+  width: 100% !important;
+  // max-width: inherit !important;
+  padding: 0 !important;
+  max-height: none !important;
+
+  #test {
+    padding-left: dp(30);
+    color: #e9852b;
+  }
+  #name {
+    font-weight: bold;
+  }
+  #type {
+    width: dp(300) !important;
+  }
+
+  button {
+    width: dp(110) !important;
+  }
+
+  .MuiToolbar-root {
+    height: dp(100);
+  }
+
+  .MuiTableRow-root {
+    #id {
+      color: orange;
+    }
+  }
+
+  .MuiButtonBase-root {
+    background-color: #8bbded;
+    color: white;
+    width: dp(100);
+    height: dp(40);
+    border-radius: dp(5);
+  }
+
+  .NoDataBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: dp(1200) !important;
+    .MuiTableCell-root {
+      border-bottom: 2px solid white;
+    }
+    .NoDataIcon {
+      padding-top: dp(400);
+      width: dp(80);
+      height: dp(80);
+    }
+    .NoData {
+      text-align: center;
+      font-size: dp(30) !important;
+      padding-left: dp(20);
+    }
+  }
+}

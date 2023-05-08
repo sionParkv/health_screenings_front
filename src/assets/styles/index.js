@@ -1,0 +1,7 @@
+import './MainPage.scss'
+import './LoginPage.scss'
+import './layout.scss'
+import './default.scss'
+import './InspectionPage.scss'
+import './PatientPage.scss'
+import './VisitPage.scss'
