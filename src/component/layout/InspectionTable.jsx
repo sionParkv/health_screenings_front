@@ -127,6 +127,7 @@ const InspectionTable = (props) => {
       .catch((error) => {
         console.log(error.message)
       })
+      loadData()
   }
 
   // 오른쪽 셀렉트 박스
